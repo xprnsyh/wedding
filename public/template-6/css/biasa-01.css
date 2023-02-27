@@ -1,0 +1,2020 @@
+:root {
+  --fs-cover: clamp(30px, 3.75vw, 46px);
+  /* Ukuran Font di Sampul */
+  --fs-greeting: clamp(28px, 3.5vw, 42px);
+  /*  */
+  --fs-couple: clamp(44px, 5vw, 55px);
+  /* Ukuran Font Nama Mempelai Opsi-01 */
+  --fs-couple-lg: clamp();
+  /* Ukuran Font Nama Mempelai Opsi-02 */
+  --fs-date: clamp(30px, 3.75vw, 42px);
+  --fs-title: clamp(24px, 3.25vw, 30px);
+  /* Ukuran Font Judul */
+  --fs-sub-title: clamp(17px, 1.75vw, 18px);
+  /* Ukuran Font Sub Judul */
+  --fs-content: clamp(15px, 2vw, 16px);
+  /* Ukuran Font Konten (isi) */
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  --cover-height: 100vh;
+  overflow: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body font {
+  font-family: inherit;
+}
+
+/* Top Cover */
+
+.top-cover {
+  background-color: var(--secondary-clr);
+  width: 100%;
+  /* height: 100vh; */
+  height: var(--cover-height);
+  /* position: relative; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  overflow: hidden;
+  opacity: 1;
+  transition: all 1s ease-in-out;
+}
+
+.top-cover.hide {
+  top: -120%;
+  bottom: 120%;
+  pointer-events: none;
+}
+
+.top-cover .inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.top-cover .inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.7)
+  );
+}
+
+.top-cover .inner .details {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px 10px;
+  position: relative;
+  /* background-color: lightgreen; */
+  /* margin-top: auto;
+    margin-bottom: min(17vh, 170px); */
+  /* margin-top: auto;
+    margin-bottom: 25%; */
+}
+
+.top-cover .inner .details > div {
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 10px;
+  /* background-color: lightseagreen; */
+}
+
+.top-cover .inner .details .text-01 {
+  /* font-family: var(--ff-03);
+    font-size: calc(var(--fs-cover) + 20px);
+    line-height: calc(var(--fs-cover) + 27px);
+    color: var(--primary-clr);
+    color: #fff; */
+  font-size: calc(var(--fs-cover) + 30px);
+  line-height: clamp(60px, 5.25vw, 95px);
+  margin: 0;
+  margin-bottom: 0.25em;
+  font-family: var(--ff-02);
+  font-weight: 900;
+  color: #fff;
+  /* background-color: lightslategray; */
+}
+
+.top-cover .inner .details .text-01 > br {
+  content: "";
+}
+
+.top-cover .inner .details .text-01 > br::after {
+  content: " ";
+}
+
+@media only screen and (max-width: 600px) {
+  .top-cover .inner .details > div {
+    text-align: left;
+  }
+  .top-cover .inner .details .text-01 {
+    font-size: calc(var(--fs-cover) + 40px);
+    line-height: clamp(80px, 5.75vw, 115px);
+  }
+  .top-cover .inner .details .text-01 > br {
+    display: block;
+  }
+  .top-cover .inner .details .text-01 > br::after {
+    content: "";
+  }
+}
+
+.top-cover .inner .details .text-02 {
+  /* font-family: var(--ff-01); */
+  /* font-size: var(--fs-sub-title); */
+  font-family: var(--ff-02);
+  font-size: calc(var(--fs-sub-title) + 15px);
+  letter-spacing: 0px;
+  line-height: calc(var(--fs-sub-title) + 10px);
+  font-weight: 400;
+  color: var(--white-clr);
+  margin-bottom: 0.5em;
+  /* background-color: lightsalmon; */
+}
+
+.top-cover .inner .details .text-03{
+    color: var(--white-clr);
+}
+
+.top-cover .inner .details .text-04{
+    color: var(--white-clr);
+}
+
+.top-cover .inner .details .link-01 {
+  font-family: var(--ff-02);
+  /* font-size: 20px; */
+  font-size: var(--fs-sub-title);
+  line-height: calc(var(--fs-sub-title) + 5px);
+  text-decoration: none;
+  background-color: var(--primary-clr);
+  display: inline-block;
+  padding: 0.4em 1em;
+  border-radius: 4px;
+  margin: 0;
+  color: var(--white-clr);
+  box-shadow: -1px 1px 5px rgba(var(--rgb-primary-clr), 0.3);
+  transition: all 0.35s ease-in-out;
+}
+
+.top-cover .inner .details .link-01:hover {
+  background-color: var(--wood-clr);
+  /* color: var(--secondary-clr); */
+}
+
+.top-cover > .cover-show {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+.top-cover > .cover-show .slick-list {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.top-cover > .cover-show .slick-track {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.top-cover > .cover-show .picture-outer {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+.top-cover > .cover-show .picture-outer img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  -o-object-fit: cover;
+  object-position: center;
+  /* animation: zoom-out 40s infinite; */
+}
+
+@keyframes zoom-out {
+  0% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* COVER */
+
+.cover {
+  width: 100%;
+  background: var(--white-clr);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover .cover-inner {
+  background: transparent;
+  width: 100%;
+  min-height: var(--cover-height);
+  padding: 20px 0;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover .cover-inner::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(var(--rgb-secondary-clr), 0.9);
+}
+
+.cover .cover-greet {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  color: var(--white-clr);
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+.cover .cover-greet .logo {
+  width: clamp(55px, 3%, 80px);
+  max-height: 50px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  margin: 0 auto;
+}
+
+.cover .cover-picture {
+  margin: 10px auto;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.cover .cover-picture > .cover-show {
+  max-width: 1024px;
+  max-height: calc(1024px / 2);
+  width: calc(((var(--cover-height) * 55) / 100) * 2);
+  height: calc((var(--cover-height) * 55) / 100);
+  overflow: hidden;
+  display: block;
+  margin: 0 auto;
+}
+
+.cover .cover-picture > .cover-show .slick-list {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.cover .cover-picture > .cover-show .slick-track {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.cover .cover-picture > .cover-show .picture-outer {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  position: absolute !important;
+}
+
+.cover .cover-picture > .cover-show .picture-outer .picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.cover .cover-bridegroom {
+  display: block;
+  text-align: center;
+  padding: 5px 10px;
+  color: var(--white-clr);
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  /* background-color: lightgreen; */
+}
+
+.cover .cover-bridegroom h1 {
+  font-size: var(--fs-cover);
+  line-height: clamp(30px, 3.75vw, 55px);
+  margin: 0.15em 0 0.25em 0;
+  font-family: var(--ff-02);
+  font-weight: 900;
+}
+
+.cover .cover-bridegroom p {
+  font-size: var(--fs-sub-title);
+  letter-spacing: 1px;
+}
+
+.cover .cover-bridegroom p.text-01 {
+  font-family: var(--ff-02);
+}
+
+.cover .cover-bridegroom p.text-02 {
+  margin-bottom: 1em;
+  font-family: var(--ff-02);
+}
+
+.cover .cover-bridegroom p.text-03 {
+  font-size: var(--fs-sub-title);
+  margin-bottom: 0;
+  letter-spacing: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transform: scaleY(1.1);
+  font-family: var(--ff-02);
+  /* background-color: lightsalmon; */
+}
+
+.cover .cover-inner > .cover-show {
+  position: absolute;
+  overflow: hidden;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.cover .cover-inner > .cover-show .slick-list {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.cover .cover-inner > .cover-show .slick-track {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.cover .cover-inner > .cover-show .picture-outer {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  position: absolute !important;
+}
+
+.cover .cover-inner > .cover-show .picture-outer .picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background-attachment: fixed;
+  filter: blur(2px);
+}
+
+/* GREETINGS */
+
+.greetings {
+  width: 100%;
+  background: var(--primary-clr);
+}
+
+.greetings,
+.greetings > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.greetings > div {
+  padding: 20px;
+  text-align: center;
+  color: var(--white-clr);
+}
+
+.greetings p {
+  font-size: var(--fs-content);
+  margin-bottom: 0.5em;
+  font-family: var(--ff-02);
+  letter-spacing: 2px;
+}
+
+.greetings h1 {
+  font-size: var(--fs-greeting);
+  /* line-height: clamp(25px, 4.5vw, 45px); */
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 0.2em;
+  font-family: var(--ff-02);
+}
+
+/* BRIDE GROOM */
+
+.bridegroom {
+  width: 100%;
+  /* min-height: 100vh; */
+  background: var(--white-clr);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bridegroom .bridegroom-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.bridegroom .bridegroom-inner .head {
+  width: 960px;
+  padding: 10px;
+  text-align: center;
+}
+
+.bridegroom .bridegroom-inner .head h1 {
+  color: var(--primary-clr);
+  /* font-size: clamp(20px, 4.25vw, 40px);
+    line-height: clamp(20px, 4.25vw, 40px); */
+  font-size: var(--fs-title);
+  margin-bottom: 0.5em;
+  font-weight: 700;
+  font-family: var(--ff-02);
+}
+
+.bridegroom .bridegroom-inner .head p {
+  /* font-size: clamp(14px, 2vw, 20px);
+    line-height: clamp(14px, 2.75vw, 30px); */
+  font-size: var(--fs-sub-title);
+  color: var(--primary-clr);
+  font-family: var(--ff-02);
+  font-style: italic;
+}
+
+.bridegroom .bridegroom-inner .body {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  padding: 20px;
+  position: relative;
+}
+
+.bridegroom .bridegroom-inner .body.bride-first {
+  flex-direction: row-reverse;
+}
+
+.bridegroom .bridegroom-inner .body .bride,
+.bridegroom .bridegroom-inner .body .groom {
+  /* width: 640px; */
+  width: min(42.5%, 720px);
+  overflow: hidden;
+}
+
+.bridegroom .bridegroom-inner .body .bridegroom-border {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+  position: relative;
+  padding: 10px;
+  width: clamp(200px, 20vw, 280px);
+  height: clamp(250px, 25vw, 350px);
+}
+
+.bridegroom .bridegroom-inner .body .bridegroom-border::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bridegroom
+  .bridegroom-inner
+  .body
+  > div:nth-of-type(1)
+  .bridegroom-border::before,
+.bridegroom
+  .bridegroom-inner
+  .body.bride-first
+  > div:nth-of-type(3)
+  .bridegroom-border::before {
+  top: 5%;
+  left: -22%;
+  background-image: var(--flower-01);
+  width: 100%;
+  height: 60%;
+}
+
+.bridegroom
+  .bridegroom-inner
+  .body
+  > div:nth-of-type(3)
+  .bridegroom-border::before,
+.bridegroom
+  .bridegroom-inner
+  .body.bride-first
+  > div:nth-of-type(1)
+  .bridegroom-border::before {
+  top: 5%;
+  right: -38%;
+  /* transform: translate(-50%, -50%); */
+  background-image: var(--flower-02);
+  width: 100%;
+  height: 90%;
+}
+
+.bridegroom
+  .bridegroom-inner
+  .body.bride-first
+  > div:nth-of-type(1)
+  .bridegroom-border::before {
+  left: auto;
+}
+
+.bridegroom
+  .bridegroom-inner
+  .body.bride-first
+  > div:nth-of-type(3)
+  .bridegroom-border::before {
+  right: auto;
+}
+
+.bridegroom .bridegroom-inner .body .bridegroom-border .bridegroom-picture {
+  width: 100%;
+  height: 100%;
+  background: var(--secondary-clr);
+  border-top-left-radius: 180px;
+  border-top-right-radius: 180px;
+  object-fit: cover;
+  position: relative;
+  z-index: 3;
+}
+
+.bridegroom .bridegroom-inner .body .bridegroom-separator {
+  padding: 10px;
+  font-size: 120px;
+  font-size: clamp(80px, 8vw, 120px);
+  font-weight: 500;
+  color: var(--primary-clr);
+  font-family: var(--ff-02);
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -50%);
+}
+
+.bridegroom .bridegroom-inner .body .bridegroom-details {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.bridegroom .bridegroom-inner .body .bridegroom-details h1 {
+  /* font-size: clamp(30px, 5vw, 70px);
+    line-height: clamp(30px, 5vw, 70px); */
+  font-size: var(--fs-couple);
+  margin-bottom: 0.1em;
+  color: var(--primary-clr);
+  font-family: var(--ff-01);
+  font-weight: 500;
+}
+
+.bridegroom .bridegroom-inner .body .bridegroom-details p {
+  /* font-size: clamp(12px, 2vw, 16px);
+    line-height: clamp(12px, 2.75vw, 26px); */
+  font-size: var(--fs-content);
+  margin-bottom: 0.35em;
+  font-family: var(--ff-02);
+  color: #000;
+}
+
+.bridegroom .bridegroom-inner .body .bridegroom-details p.bio {
+  /* font-size: clamp(12px, 2vw, 16px);
+    line-height: clamp(12px, 2.75vw, 26px); */
+  font-style: italic;
+}
+
+.bridegroom .bridegroom-inner .body .bridegroom-details a {
+  /* font-size: clamp(11px, 2vw, 15px);
+    line-height: clamp(11px, 2.75vw, 25px); */
+  font-size: var(--fs-content);
+  text-decoration: none;
+  font-family: var(--ff-02);
+  color: #000;
+}
+
+.bridegroom .bridegroom-inner .body .bridegroom-details a em {
+  font-family: var(--ff-02);
+}
+
+.bridegroom .bridegroom-inner .body .bridegroom-details a:hover {
+  text-decoration: underline;
+  color: var(--sea-clr);
+}
+
+/* SAVE DATE */
+
+.save-date {
+  width: 100%;
+  min-height: 200px;
+  background: var(--wood-clr);
+  overflow: hidden;
+}
+
+.save-date .save-date-inner {
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--bg-sm-01);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.save-date .save-date-inner .schedule {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  width: 100%;
+  max-width: 640px;
+}
+
+.save-date .save-date-inner .schedule .title {
+  position: relative;
+  text-align: center;
+}
+
+.save-date .save-date-inner .schedule .title::before {
+  content: "";
+  width: 500%;
+  height: 100%;
+  background-image: var(--line-01);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right;
+  position: absolute;
+  right: 110%;
+  top: 0;
+}
+
+.save-date .save-date-inner .schedule .title::after {
+  content: "";
+  width: 500%;
+  height: 100%;
+  background-image: var(--line-02);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left;
+  position: absolute;
+  left: 110%;
+  top: 0;
+}
+
+.save-date .save-date-inner .schedule .title h1 {
+  /* font-size: 28px; */
+  font-size: var(--fs-title);
+  font-weight: 500;
+  margin-bottom: 0.35em;
+  color: var(--primary-clr);
+  font-family: var(--ff-02);
+  text-transform: uppercase;
+  position: relative;
+  transform: scaleY(0.9);
+}
+
+.save-date .save-date-inner .schedule .title h1 > span {
+  font-family: var(--ff-01);
+  text-transform: capitalize;
+  position: relative;
+  bottom: 0px;
+  /* font-size: 60px; */
+  font-size: var(--fs-couple);
+  margin-right: 10px;
+  font-weight: 500;
+  transform: scaleY(1);
+}
+
+.save-date .save-date-inner .schedule .countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  column-gap: 40px;
+  row-gap: 10px;
+}
+
+.save-date .save-date-inner .schedule .countdown > div {
+  flex-direction: column;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.save-date .save-date-inner .schedule .countdown > div h1 {
+  /* font-size: 36px; */
+  font-size: var(--fs-title);
+  font-family: var(--ff-02);
+  margin-bottom: 0.15em;
+  color: var(--primary-clr);
+}
+
+.save-date .save-date-inner .schedule .countdown > div small {
+  /* font-size: 16px; */
+  font-size: var(--fs-content);
+  font-family: var(--ff-02);
+  color: var(--primary-clr);
+}
+
+/* GALLERY */
+
+.gallery,
+.video-gallery {
+  background-color: var(--primary-clr);
+}
+
+.gallery > .title {
+  color: var(--white-clr);
+}
+
+.video-gallery .inner > .title {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.gallery > .title h1,
+.video-gallery .inner > .title h1 {
+  /* font-size: 30px; */
+  font-size: var(--fs-title);
+  margin-bottom: 0.35em;
+  font-weight: 700;
+  font-family: var(--ff-02);
+  color: var(--white-clr);
+}
+
+.gallery > .title p,
+.video-gallery .inner > .title p {
+  /* font-size: 20px;
+    line-height: 22px; */
+  font-size: var(--fs-sub-title);
+  font-family: var(--ff-02);
+  color: var(--white-clr);
+  font-style: italic;
+}
+
+.video-gallery .inner .video-outer .video > .title h2 {
+  /* font-size: 24px; */
+  font-size: var(--fs-sub-title);
+  text-align: center;
+  font-family: var(--ff-02);
+  font-weight: 600;
+  color: var(--white-clr);
+}
+
+/* EVENT */
+
+.event-outer {
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+}
+
+.event-outer .event-inner {
+  background: #fff;
+}
+
+.event-outer .event-inner .head {
+  padding: 10px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.event-outer .event-inner .head::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 2;
+  background: rgba(var(--rgb-primary-clr), 0.7);
+}
+
+.event-outer .event-inner .head > .title {
+  width: 960px;
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+  position: relative;
+  z-index: 3;
+}
+
+.event-outer .event-inner .head > .title h1 {
+  /* font-size: 34px; */
+  font-size: var(--fs-title);
+  color: var(--white-clr);
+  margin-bottom: 0.25em;
+  font-weight: 700;
+  font-family: var(--ff-02);
+}
+
+.event-outer .event-inner .head > .title p {
+  /* font-size: 20px;
+    line-height: 24px; */
+  font-size: var(--fs-sub-title);
+  color: var(--white-clr);
+  font-family: var(--ff-02);
+}
+
+.event-outer .event-inner .head .cover-show {
+  width: 100%;
+  /* height: 100%; */
+  height: var(--cover-height);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.event-outer .event-inner .head .cover-show .slick-list {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.event-outer .event-inner .head .cover-show .slick-track {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.event-outer .event-inner .head .cover-show .picture-outer {
+  width: 100% !important;
+  /* height: 100%!important; */
+  height: var(--cover-height) !important;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  position: absolute !important;
+}
+
+.event-outer .event-inner .head .cover-show .picture-outer .picture {
+  width: 100%;
+  height: 100%;
+  background-image: var(--cover);
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  animation: cover-top-to-bottom 10s infinite;
+}
+
+.event-outer .event-inner .body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  /* background-color: lightgreen; */
+}
+
+.event-outer .event-inner .body .event {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+  /* background-color: lightblue; */
+}
+
+.event-outer .event-inner .body .event > .title {
+  width: 640px;
+  padding: 12px 20px 20px 20px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  background: var(--wood-clr);
+  width: 100%;
+  text-align: center;
+  /* background-color: lightblue; */
+}
+
+.event-outer .event-inner .body .event > .title > h1 {
+  /* font-size: 34px; */
+  /* uhuy */
+  font-size: var(--fs-date);
+  color: var(--white-clr);
+  font-weight: 600;
+  margin-bottom: 0.25em;
+  font-family: var(--ff-02);
+  /* background-color: lightgreen; */
+}
+
+.event-outer .event-inner .body .event > .title > p {
+  /* font-size: 20px;
+    line-height: 22px; */
+  font-size: var(--fs-sub-title);
+  margin-bottom: 0.25em;
+  color: var(--white-clr);
+  font-style: italic;
+  font-family: var(--ff-02);
+  /* background-color: lightcoral; */
+}
+
+.event-outer .event-inner .body .event > .details {
+  width: 640px;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.event-outer .event-inner .body .event > .details .address {
+  text-align: center;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.event-outer .event-inner .body .event > .details .address p,
+.event-outer .event-inner .body .event > .details .address p strong {
+  /* font-size: 16px; */
+  font-size: var(--fs-content);
+  margin-bottom: 0.35em;
+  font-family: var(--ff-02);
+  color: var(--font-clr);
+}
+
+.event-outer .event-inner .body .event > .details a {
+  /* font-size: 14px; */
+  font-size: var(--fs-sub-title);
+  display: inline-block;
+  border: 1px solid var(--primary-clr);
+  color: var(--primary-clr);
+  padding: 7px 18px;
+  margin: 0 auto;
+  text-decoration: none;
+  border-radius: 7px;
+  transition: all 0.2s ease-in-out;
+  font-family: var(--ff-02);
+}
+
+.event-outer .event-inner .body .event > .details a:hover {
+  background: var(--primary-clr);
+  color: var(--white-clr);
+}
+
+.event-outer .event-inner .body .event .activities {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  /* background-color: lightcoral; */
+}
+
+.event-outer .event-inner .body .event .activities::before {
+  content: "";
+  top: 20px;
+  right: -110px;
+  position: absolute;
+  width: 270px;
+  height: 360px;
+  transform: scaleX(-1) rotate(10deg);
+  background-image: var(--flower-02);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.event-outer .event-inner .body .event .activities::after {
+  content: "";
+  bottom: 20px;
+  left: -160px;
+  position: absolute;
+  width: 270px;
+  height: 360px;
+  transform: rotate(120deg);
+  background-image: var(--flower-01);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.event-outer .event-inner .body .event .activities .activity {
+  border-radius: 12px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 30px;
+  padding: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.event-outer .event-inner .body .event .activities .activity span {
+  font-size: 44px;
+  margin-bottom: 0.2em;
+  color: var(--wood-clr);
+}
+
+.event-outer .event-inner .body .event .activities .activity > .title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.event-outer .event-inner .body .event .activities .activity > .title h1 {
+  /* font-size: 50px; */
+  font-size: var(--fs-couple);
+  font-weight: 500;
+  margin-bottom: 0.25em;
+  color: var(--primary-clr);
+  font-family: var(--ff-01);
+  font-weight: 500;
+}
+
+.event-inner .event .activities .activity .title .orn.orn-party {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 15px auto;
+}
+
+.event-outer .event-inner .body .event .activities .activity > .title p {
+  /* font-size: 16px; */
+  font-size: var(--fs-sub-title);
+  margin-bottom: 0.75em;
+  font-family: var(--ff-02);
+  color: var(--font-clr);
+}
+
+.event-outer .event-inner .body .event .activities .activity > .title p em {
+  font-family: var(--ff-02);
+}
+
+.event-outer .event-inner .body .event .activities .activity .address {
+  text-align: center;
+}
+
+.event-outer .event-inner .body .event .activities .activity p,
+.event-outer .event-inner .body .event .activities .activity p strong {
+  /* font-size: 16px; */
+  font-size: var(--fs-content);
+  margin-bottom: 0.35em;
+  font-family: var(--ff-02);
+  color: var(--font-clr);
+}
+
+.event-outer .event-inner .body .event .activities .activity a {
+  /* font-size: 14px; */
+  font-size: var(--fs-sub-title);
+  background: #fff;
+  border: 1px solid var(--primary-clr);
+  color: var(--primary-clr);
+  padding: 7px 18px;
+  text-decoration: none;
+  border-radius: 7px;
+  margin: 10px auto 10px auto;
+  transition: all 0.2s ease-in-out;
+  font-family: var(--ff-02);
+}
+
+.event-outer .event-inner .body .event .activities .activity a:hover {
+  background: var(--primary-clr);
+  color: var(--white-clr);
+}
+
+/* RESERVATION */
+
+.rsvp {
+  background-image: var(--bg-lg-01);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.rsvp p {
+  font-family: var(--ff-02);
+}
+
+.rsvp .rsvp-orn {
+  background-image: var(--orn-01);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 640px;
+  height: 50px;
+  display: flex;
+  margin: 10px auto;
+}
+
+.rsvp .rsvp-form h1,
+.rsvp .rsvp-confirm h1,
+.rsvp .rsvp-full h1 {
+  /* font-size: 34px; */
+  font-size: var(--fs-title);
+  font-family: var(--ff-02);
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.rsvp .rsvp-full h1 {
+  margin-bottom: 0.45em;
+}
+
+.rsvp .rsvp-full p {
+  /* font-size: 18px; */
+  font-size: var(--fs-content);
+  font-weight: 600;
+  font-family: var(--ff-02);
+  margin-bottom: 0.75em;
+}
+
+/*  ===================================
+    Live Streaming
+=================================== */
+
+section.live-streaming {
+  background-color: #ffffff;
+  padding-bottom: 60px;
+}
+
+section.live-streaming > .inner > .head > h1 {
+  font-size: var(--fs-title);
+  font-family: var(--ff-02);
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: var(--primary-clr);
+}
+
+section.live-streaming > .inner > .head > p {
+  font-size: var(--fs-sub-title);
+  font-family: var(--ff-02);
+}
+
+.live-streaming .inner .body p {
+  font-family: var(--ff-02);
+  font-size: var(--fs-content);
+}
+
+.live-streaming .inner .body p.meeting-text {
+  font-size: calc(var(--fs-content) + 3px);
+}
+
+.live-streaming .inner .body > .streaming-info > div.link > a {
+  font-family: var(--ff-02);
+  font-size: var(--fs-content);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* PROTOCOL */
+
+.protocol.protocol-01 .inner .head h1,
+.protocol.protocol-03 .inner .head h1 {
+  /* font-size: 48px; */
+  font-size: var(--fs-date);
+  text-transform: uppercase;
+  font-family: var(--ff-02);
+}
+
+.protocol.protocol-01 .inner .head p,
+.protocol.protocol-03 .inner .head p {
+  /* font-size: 20px; */
+  font-size: var(--fs-sub-title);
+  margin-bottom: 0.15em;
+  font-family: var(--ff-02);
+}
+
+@media only screen and (max-width: 600px) {
+  /* .protocol.protocol-01 .inner .head h1 {
+        font-size: 9vw;
+        line-height: 10.5vw;
+    }
+    .protocol.protocol-01 .inner .head p {
+        font-size: 4vw;
+        margin-bottom: 0.5em;
+    } */
+  .protocol.protocol-01 .inner .head p > br,
+  .protocol.protocol-03 .inner .head p > br {
+    display: block;
+  }
+}
+
+/* Protocol 03 */
+
+.protocol.protocol-03 .inner .body .slider .content .text-01 {
+  font-family: var(--ff-02);
+  font-size: var(--fs-sub-title) !important;
+  color: var(--font-clr);
+}
+
+.protocol.protocol-03 .inner .body .slider .slick-center .content .text-01 {
+  color: var(--primary-dark-clr);
+}
+
+.protocol.protocol-03 .inner .body .slider_dots::before {
+  border-color: var(--wood-clr) !important;
+}
+
+.protocol.protocol-03 .inner .body .slider_dots .slider_navigator {
+  background-color: var(--tertiary-clr);
+}
+
+.protocol.protocol-03
+  .inner
+  .body
+  .slider_dots
+  .slider_navigator.slick-current.slick-center {
+  background-color: var(--primary-clr) !important;
+}
+
+/* COMMENT */
+
+.comment-outer .comment-inner h1 {
+  /* font-size: 34px; */
+  font-size: var(--fs-title);
+  font-family: var(--ff-02);
+  font-weight: 900;
+}
+
+.comment-outer .comment-inner .head p {
+  /* font-size: 18px; */
+  font-size: var(--fs-sub-title);
+  font-family: var(--ff-02);
+}
+
+.comment-outer .comment-inner .more-comment,
+.comment-form button,
+.comment-form input,
+.comment .comment-head p,
+.comment .comment-head p strong,
+.comment .comment-body p {
+  font-size: var(--fs-content);
+  font-family: var(--ff-02);
+}
+
+.comment .comment-foot small,
+.comment .comment-foot a {
+  font-size: clamp(12px, 1.5vw, 13px);
+  font-family: var(--ff-02);
+}
+
+#comment-form * {
+  font-family: var(--ff-02);
+}
+
+/* Quote */
+
+.quote-end .quote-end-inner p {
+  /* font-size: 18px;
+    line-height: 26px; */
+  font-size: var(--fs-sub-title);
+  font-weight: 500;
+  color: var(--font-clr);
+  font-family: var(--ff-02);
+}
+
+/* FOOTNOTE */
+
+.footnote {
+  background: #fff;
+  width: 100%;
+}
+
+.footnote .footnote-inner {
+  max-width: 640px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 40px 20px;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+}
+
+.footnote .footnote-inner h1 {
+  font-size: var(--fs-couple);
+  margin-bottom: 0.5em;
+  color: var(--primary-clr);
+  font-family: var(--ff-01);
+  font-weight: 500;
+  text-align: center;
+}
+
+.footnote .footnote-inner p {
+  /* font-size: 18px; */
+  font-size: var(--fs-sub-title);
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--font-clr);
+  font-family: var(--ff-02);
+  text-transform: uppercase;
+}
+
+/* Footer */
+
+.footer .footer-inner p {
+  font-family: var(--ff-02);
+  font-size: var(--fs-content);
+  /* font-size: 18px; */
+}
+
+.footer .footer-inner img {
+  width: 80px;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Desktop 1350px */
+
+@media only screen and (max-width: 1350px) {
+  /* PROTOCOL */
+  /* .protocol .protocol-inner .body {
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 10px 20px;
+    }
+    .protocol .protocol-inner .body .picture-outer {
+        width: 370px;
+        margin: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    } */
+}
+
+/* DESKTOP MINIMUM SCREEN SIZE */
+
+@media only screen and (max-width: 1024px) {
+  /* COVER */
+  .cover .cover-picture > .cover-show {
+    /* width: 80%; */
+    /* max-width: 1024px; */
+    /* height: 50vh; */
+    /* width: 780px; */
+    /* width: min(90%, 1024px); */
+    /* height: 420px; */
+    /* height: clamp(420px, 57.5vh, 560px); */
+    /* width: 640px;
+        height: calc(640px / 2); */
+    max-width: 600px;
+    max-height: calc(600px / 2);
+  }
+  /* .cover .cover-greet {
+        margin-bottom: 10px;
+    } */
+  .cover .cover-greet .logo {
+    /* width: 70px;
+        height: 70px; */
+  }
+  .cover .cover-picture > .cover-show {
+    /* width: 80vw;
+        height: 440px; */
+  }
+  .cover .cover-bridegroom h1 {
+    /* font-size: 46px; */
+  }
+  /* GREETINGS */
+  .greetings {
+    width: 100%;
+    padding: 10px;
+  }
+  .greetings > div {
+    width: 100%;
+    padding: 10px;
+  }
+  .greetings p {
+    /* font-size: 15px; */
+  }
+  .greetings h1 {
+    /* font-size: 30px; */
+  }
+  /* BRIDE GROOM */
+  .bridegroom {
+    background: var(--white-clr);
+    padding: 30px 10px;
+  }
+  .bridegroom .bridegroom-inner .head {
+    width: 100%;
+    padding: 20px;
+  }
+  .bridegroom .bridegroom-inner .head h1 {
+    /* font-size: 30px;
+        margin-bottom: .25em; */
+  }
+  .bridegroom .bridegroom-inner .head p {
+    /* font-size: 15px;
+        line-height: 18px; */
+  }
+  .bridegroom .bridegroom-inner .body {
+    width: 100%;
+    padding: 10px;
+  }
+  .bridegroom .bridegroom-inner .body .bridegroom-border {
+    margin: 10px auto;
+    padding: 10px;
+  }
+  .bridegroom .bridegroom-inner .body .bride .bridegroom-border::before {
+    /* top: 35%;
+        left: 35%;
+        width: 240px;
+        height: 160px; */
+  }
+  .bridegroom .bridegroom-inner .body .groom .bridegroom-border::before {
+    /* top: 45%;
+        left: 72%;
+        width: 340px;
+        height: 240px; */
+  }
+  .bridegroom .bridegroom-inner .body .bridegroom-border .bridegroom-picture {
+    /* width: 220px;
+        height: 280px; */
+  }
+  .bridegroom .bridegroom-inner .body .bridegroom-separator {
+    /* font-size: 80px; */
+  }
+  .bridegroom .bridegroom-inner .body .bridegroom-details {
+    padding: 10px;
+  }
+  .bridegroom .bridegroom-inner .body .bridegroom-details h1 {
+    /* font-size: 50px;
+        line-height: 50px;
+        margin-bottom: .15em; */
+  }
+  .bridegroom .bridegroom-inner .body .bridegroom-details p,
+  .bridegroom .bridegroom-inner .body .bridegroom-details a {
+    /* font-size: 15px; */
+  }
+  /* EVENT */
+  .event-outer .event-inner .head::before {
+    background: rgba(var(--rgb-primary-clr), 0.7);
+  }
+  .event-outer .event-inner .head > .title {
+    width: 100%;
+  }
+}
+
+/* 920px */
+
+@media only screen and (max-width: 920px) {
+  /* Bride Groom */
+  .bridegroom .bridegroom-inner .body .bride .bridegroom-border::before {
+    /* width: 190px;
+        height: 240px; */
+  }
+  .bridegroom .bridegroom-inner .body .groom .bridegroom-border::before {
+    /* width: 170px;
+        height: 230px; */
+  }
+  .bridegroom .bridegroom-inner .body .bridegroom-border .bridegroom-picture {
+    /* width: 190px;
+        height: 245px; */
+  }
+}
+
+/* 835 px */
+
+@media only screen and (max-width: 835px) {
+  /* Event */
+  .event-outer .event-inner .body .event .activities .activity {
+    width: 100%;
+    margin: 15px 0px;
+  }
+  .event-outer .event-inner .body .event > .details {
+    width: 100%;
+  }
+  .event-outer .event-inner .body .event .activities::before {
+    content: "";
+    top: 20px;
+    right: -80px;
+    width: 180px;
+    height: 240px;
+  }
+  .event-outer .event-inner .body .event .activities::after {
+    left: -75px;
+    width: 180px;
+    height: 240px;
+  }
+  /* Protocol */
+  /* .protocol .protocol-inner .body .picture-outer {
+        margin: 0;
+    } */
+}
+
+/* 820px */
+
+@media only screen and (max-width: 820px) {
+  /* Bride Groom */
+  /* .bridegroom .bridegroom-inner .body {
+        flex-direction: column;
+    }
+    .bridegroom .bridegroom-inner .body.bride-first {
+        flex-direction: column-reverse;
+    } */
+  /* .bridegroom .bridegroom-inner .body .bride,
+    .bridegroom .bridegroom-inner .body .groom {
+        width: 100%;
+    } */
+  .bridegroom .bridegroom-inner .body .bride .bridegroom-border::before {
+    /* left: 42%; */
+  }
+  .bridegroom .bridegroom-inner .body .groom .bridegroom-border::before {
+    /* left: 62%; */
+  }
+}
+
+/* 680px */
+
+@media only screen and (max-width: 680px) {
+  /* Cover */
+  .cover .cover-inner {
+    /* padding: 0 0 30px 0; */
+  }
+  .cover .cover-picture > .cover-show {
+    max-width: 80vw;
+    max-height: calc((var(--cover-height) * 60) / 100);
+    /* var(--cover-height) */
+    width: calc(((var(--cover-height) * 100) / 100) / 2);
+    height: calc((var(--cover-height) * 60) / 100);
+  }
+  /* Couple */
+  .bridegroom .bridegroom-inner .body {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .bridegroom .bridegroom-inner .body.bride-first {
+    flex-direction: column-reverse;
+  }
+  .bridegroom .bridegroom-inner .body .bride,
+  .bridegroom .bridegroom-inner .body .groom {
+    width: 100%;
+  }
+  .bridegroom .bridegroom-inner .body .bridegroom-separator {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: translate(0, 0);
+  }
+}
+
+/* 600px */
+
+@media only screen and (max-width: 600px) {
+  /* Cover */
+  .cover .cover-bridegroom p {
+    /* font-size: 16px;
+        line-height: 16px;
+        margin-bottom: 0; */
+  }
+  .cover .cover-bridegroom h1 {
+    /* font-size: 34px; */
+  }
+  /* Greetings */
+  .greetings p {
+    /* font-size: 14px;
+        line-height: 22px; */
+  }
+  .greetings h1 {
+    /* font-size: 30px; */
+  }
+  /* Bride and Groom */
+  .bridegroom .bridegroom-inner .head h1 {
+    /* font-size: 24px;
+        margin-bottom: .25em; */
+  }
+  .bridegroom .bridegroom-inner .head p {
+    /* font-size: 16px;
+        line-height: 16px; */
+  }
+  .bridegroom .bridegroom-inner .body .bridegroom-details h1 {
+    /* font-size: 36px;
+        line-height: 36px; */
+  }
+  .bridegroom .bridegroom-inner .body .bridegroom-details p,
+  .bridegroom .bridegroom-inner .body .bridegroom-details p.bio {
+    /* font-size: 14px;
+        line-height: 22px; */
+  }
+  .bridegroom .bridegroom-inner .body .bridegroom-details a {
+    /* font-size: 12px; */
+  }
+  .bridegroom .bridegroom-inner .body .bride .bridegroom-border::before {
+    /* top: 35%;
+        left: 38%; */
+  }
+  .bridegroom .bridegroom-inner .body .groom .bridegroom-border::before {
+    /* top: 45%;
+        left: 66%; */
+  }
+  /* Save date */
+  .save-date .save-date-inner .schedule .title h1 {
+    /* font-size: 28px; */
+  }
+  .save-date .save-date-inner .schedule .title h1 > span {
+    /* font-size: 50px; */
+  }
+  .save-date .save-date-inner .schedule .countdown > div h1 {
+    /* font-size: 24px; */
+  }
+  .save-date .save-date-inner .schedule .countdown > div small {
+    /* font-size: 14px;
+        line-height: 22px; */
+  }
+  /* Gallery */
+  .gallery > .title h1,
+  .video-gallery .inner > .title h1 {
+    /* font-size: 24px;
+        font-weight: 700; */
+  }
+  .gallery > .title p,
+  .video-gallery .inner > .title p {
+    /* font-size: 14px;
+        line-height: 22px; */
+  }
+  .video-gallery .inner .video-outer .video > .title h2 {
+    /* font-size: 18px;
+        font-weight: 700; */
+  }
+  /* Event */
+  .event-outer .event-inner .head > .title h1 {
+    /* font-size: 24px; */
+  }
+  .event-outer .event-inner .head > .title p {
+    /* font-size: 16px;
+        line-height: 22px; */
+  }
+  .event-outer .event-inner .body .event > .title > h1 {
+    /* font-size: 24px; */
+  }
+  .event-outer .event-inner .body .event > .title > p {
+    /* font-size: 16px;
+        line-height: 22px; */
+  }
+  .event-outer .event-inner .body .event > .details .address p,
+  .event-outer .event-inner .body .event > .details .address p strong {
+    /* font-size: 14px;
+        line-height: 22px; */
+  }
+  .event-outer .event-inner .body .event > .details a {
+    /* font-size: 14px;
+        line-height: 22px; */
+  }
+  .event-outer .event-inner .body .event .activities .activity > .title h1 {
+    /* font-size: 46px;
+        margin-bottom: 0px; */
+  }
+  .event-outer .event-inner .body .event .activities .activity > .title p {
+    /* font-size: 16px;
+        line-height: 22px; */
+  }
+  .event-outer .event-inner .body .event .activities .activity p,
+  .event-outer .event-inner .body .event .activities .activity p strong {
+    /* font-size: 14px;
+        line-height: 22px; */
+  }
+  .event-outer .event-inner .body .event .activities .activity a {
+    /* font-size: 14px;
+        line-height: 22px; */
+  }
+  /* RSVP */
+  .rsvp .rsvp-form h1,
+  .rsvp .rsvp-confirm h1 {
+    /* font-size: 24px; */
+  }
+  /* Protocol */
+  /* .protocol .protocol-inner .head h1 {
+        font-size: 32px;
+    }
+    .protocol .protocol-inner .head p {
+        font-size: 14px;
+        line-height: 22px;
+    } */
+  /* COMMENT */
+  .comment-outer .comment-inner h1 {
+    /* font-size: 24px; */
+    margin-bottom: 0;
+  }
+  .comment-outer .comment-inner .head p {
+    /* font-size: 14px;
+        line-height: 22px; */
+  }
+  /* Quote */
+  .quote-end .quote-end-inner p {
+    /* font-size: 14px;
+        line-height: 22px; */
+  }
+  /* Footnote */
+  .footnote .footnote-inner {
+    width: 100%;
+  }
+  .footnote .footnote-inner h1 {
+    /* font-size: 52px; */
+    /* margin-bottom: .25em; */
+  }
+  .footnote .footnote-inner p {
+    /* font-size: 14px; */
+  }
+  /* Footer */
+  .footer .footer-inner p {
+    font-family: var(--ff-02);
+    /* font-size: 14px; */
+  }
+  .footer .footer-inner img {
+    width: 60px;
+  }
+}
+
+/* TABLET MINIMUM SCREEN SIZE */
+
+@media only screen and (max-width: 600px) {
+  /* COVER */
+  /* .cover .cover-picture > .cover-show {
+        height: 480px;
+    } */
+  /* BRIDE GROOM */
+  .bridegroom .bridegroom-inner .body {
+    padding: 10px;
+    margin-bottom: 50px;
+  }
+  /* SAVE DATE */
+  .save-date .save-date-inner .schedule {
+    width: 100%;
+  }
+  .save-date .save-date-inner .schedule .title::before {
+    background-image: var(--line-01-md);
+    right: 110%;
+    width: 150%;
+  }
+  .save-date .save-date-inner .schedule .title::after {
+    background-image: var(--line-02-md);
+    left: 110%;
+    width: 150%;
+  }
+  .save-date .save-date-inner .schedule .countdown {
+    width: 100%;
+    column-gap: 20px;
+    row-gap: 10px;
+  }
+}
+
+/* 420px */
+
+@media only screen and (max-width: 420px) {
+  .bridegroom .bridegroom-inner .body .bride .bridegroom-border::before {
+    /* top: 35%;
+        left: 38%; */
+  }
+  .bridegroom .bridegroom-inner .body .groom .bridegroom-border::before {
+    /* top: 45%;
+        left: 71%; */
+  }
+}
+
+/* PHONE MINIMUM SCREEN SIZE */
+
+@media only screen and (max-width: 360px) {
+  /* COVER */
+  .cover .cover-inner {
+    /* padding: 0; */
+  }
+  .cover .cover-greet {
+    /* margin-bottom: 0; */
+  }
+  .cover .cover-greet .logo {
+    /* width: 50px;
+        height: 50px; */
+  }
+  .cover .cover-picture > .cover-show {
+    /* height: 420px; */
+  }
+  .cover .cover-bridegroom {
+    /* padding: 10px; */
+  }
+  .cover .cover-bridegroom h1 {
+    /* font-size: 8vw;
+        margin-bottom: .2em; */
+  }
+  .cover .cover-bridegroom p {
+    /* font-size: 3.5vw; */
+  }
+}
+
+/* ANIMTAION(S) */
+
+@keyframes cover-top-to-bottom {
+  0% {
+    background-position: top;
+    transform: scale(1);
+  }
+  80% {
+    background-position: bottom;
+    transform: scale(1.2);
+  }
+  100% {
+    background-position: center;
+  }
+}
+
+@-webkit-keyframes cover-top-to-bottom {
+  0% {
+    background-position: top;
+    transform: scale(1);
+  }
+  80% {
+    background-position: bottom;
+    transform: scale(1.2);
+  }
+  100% {
+    background-position: center;
+  }
+}
+
+/* OTHERS MINIMUM SCREEN SIZE */
+
+@media only screen and (max-width: 720px) {
+  .rsvp .rsvp-orn {
+    width: 90%;
+  }
+  .event-outer .event-inner .body .event > .title {
+    width: 100%;
+  }
+}
+
+/* @media only screen and (max-width: 1350px) {
+
+    .bridegroom .bridegroom-inner .body {
+        flex-direction: column;
+    }
+
+}
+
+@media only screen and (max-width: 1080px) {
+
+    .bridegroom .bridegroom-inner .head {
+        width: 100%;
+    }
+
+    .event-outer .event-inner .head > .title {
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width: 670px) {
+
+    .bridegroom {
+        padding: 20px 10px;
+    }
+
+    .bridegroom .bridegroom-inner .body {
+        padding: 20px 10px;
+    }
+
+    .bridegroom .bridegroom-inner .body .bride .bridegroom-border::before {
+        left: 38%;
+    }
+    .bridegroom .bridegroom-inner .body .groom .bridegroom-border::before {
+        left: 78%;
+    }
+
+    .bridegroom .bridegroom-inner .body .bridegroom-separator {
+        font-size: 60px;
+    }
+
+    .bridegroom .bridegroom-inner .body .bridegroom-details h1 {
+        font-size: 28px;
+    }
+
+    .bridegroom .bridegroom-inner .body .bridegroom-details p {
+        font-size: 15px;
+    }
+
+    .bridegroom .bridegroom-inner .body .bridegroom-details a {
+        font-size: 15px;
+    }
+
+    .event-outer .event-inner .body .event > .title {
+        width: 100%;
+    }
+
+    .event-outer .event-inner .body .event .activities {
+        padding: 20px 10px;
+    }
+
+    .save-date .save-date-inner {
+        padding: 20px 10px;
+    }
+
+    .save-date .save-date-inner .schedule {
+        width: 100%;
+    }
+
+    .save-date .save-date-inner .schedule .title h1 {
+        font-size: 24px;
+    }
+
+    .save-date .save-date-inner .schedule .title h1 > span {
+        font-size: 34px;
+    }
+
+    .save-date .save-date-inner .schedule .countdown {
+        column-gap: 10px;
+    }
+
+    .save-date .save-date-inner .schedule .countdown > div h1 {
+        font-size: 24px;
+        font-weight: 500;
+    }
+    .save-date .save-date-inner .schedule .countdown > div small {
+        font-size: 14px;
+    }
+
+    .save-date .save-date-inner .schedule .title::before {
+        right: 98%;
+    }
+    .save-date .save-date-inner .schedule .title::after {
+        left: 98%;
+    }
+
+    .rsvp .rsvp-orn {
+        width: 90%;
+    }
+
+    .footnote .footnote-inner {
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width: 420px) {
+
+    .event-outer .event-inner .body .event .activities .activity {
+        margin: 10px;
+        width: 100%;
+    }
+
+} */

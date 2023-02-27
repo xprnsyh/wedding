@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css?family=Grand+Hotel|PT+Sans:400,400i,700,700i|Parisienne');
+
+.font{
+    &--1{
+        font-family: 'PT Sans', sans-serif;
+    }
+    &--2{
+        font-family: 'Parisienne', cursive;
+    }
+    &--3{
+        font-family: 'Grand Hotel', cursive;
+    }
+    &--4{
+        font-family: 'Petit Formal Script', cursive;
+    }
+}
+
+.italic{
+    font-style: italic;
+}
+.bold{
+    font-weight: bold;
+}
+
+.spacing--{
+    &1{
+        letter-spacing: .3em;
+    }
+    &2{
+        letter-spacing: .5em;
+    }
+    
+}
+h1{
+    font-size: 80px;
+    @media screen and(max-width: $breakpoint--sm){
+        font-size: 60px;
+    }
+    @media screen and(max-width: $breakpoint--xs){
+        font-size: 40px;
+    }
+}
+h2{
+    font-size: 60px;
+    @media screen and(max-width: $breakpoint--sm){
+        font-size: 40px;
+    }
+    @media screen and(max-width: $breakpoint--xs){
+        font-size: 30px;
+    }
+}
+h3{
+    font-size: 40px;
+    @media screen and(max-width: $breakpoint--sm){
+        font-size: 30px;
+    }
+    @media screen and(max-width: $breakpoint--xs){
+        font-size: 20px;
+    }
+}
+h4{
+    font-size: 25px;
+    @media screen and(max-width: $breakpoint--sm){
+        font-size: 20px;
+    }
+    @media screen and(max-width: $breakpoint--xs){
+        font-size: 18px;
+    }
+}
+h5{
+    font-size: 18px;
+    line-height: 1.7em;
+    @media screen and(max-width: $breakpoint--sm){
+        font-size: 16px;
+    }
+    @media screen and(max-width: $breakpoint--xs){
+        font-size: 14px;
+    }
+}
+h6{
+    line-height: 1.7em;
+}
+
+.text--{
+    &xs{
+        font-size: 10px;
+    }
+    &sm{
+        font-size: 12px;
+    }
+}

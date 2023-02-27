@@ -1,0 +1,215 @@
+img{
+    max-width: 100%;
+}
+
+.photo{
+    position: relative;
+    @include circle(160px);
+    &.left{
+        text-align: right;
+        float: right;
+    }
+    img.bride{
+        width: 100%;
+        height: 160px;
+        @extend .fit-center;
+        @include circle();
+        @media screen and(max-width: $breakpoint--md){
+            width: 100px;
+            height: 100px;
+        }
+        @media screen and(max-width: $breakpoint--sm){
+            margin-top: 30px;
+            width: 80px;
+            height: 80px;
+        }
+    }
+    .love{
+        background-color: color('softgreen');
+        border: 5px solid color('softwhite');
+        position: absolute;
+        top: 60px;
+        text-align: center;
+        line-height: 37px;
+        left: -25px;
+        @include circle(50px);
+        @media screen and(max-width: $breakpoint--md){
+            top: 40px;
+            line-height: 29px;
+            @include circle(40px);
+        }
+        @media screen and(max-width: $breakpoint--sm){
+            top: 42px;
+            left: -15px;
+            border-width: 3px;
+            display: none;
+            @include circle(35px);
+        }
+        img{
+            width: 20px;
+            @media screen and(max-width: $breakpoint--md){
+                width: 16px;
+            }
+        }
+    }
+}
+.social-media{
+    opacity: .5;
+    @extend .fade;
+    &:hover{
+        opacity: 1;
+    }
+}
+.title{
+    margin-bottom: 30px;
+    @media screen and(max-width: $breakpoint--xs){
+        margin-bottom: 15px;
+    }
+    &--xlg{
+        margin-bottom: 50px;
+        @media screen and(max-width: $breakpoint--xs){
+            margin-bottom: 20px;
+        }
+    }
+}
+.divider{
+    height: 40px;
+    &--lg{
+        height: 60px;
+        @media screen and(max-width: $breakpoint--lg){
+            height: 30px;
+        }
+    }
+}
+
+.md--{
+    &show{
+        display: none;
+        @media screen and(max-width: $breakpoint--md){
+            display: block!important;
+        }
+    }
+    &center{
+        @media screen and(max-width: $breakpoint--md){
+            text-align: center!important;
+        }
+    }
+}
+
+.sm--{
+    &center{
+        @media screen and(max-width: $breakpoint--sm){
+            text-align: center!important;
+        }
+    }
+}
+
+.xs--{
+    &show{
+        display: none;
+        @media screen and(max-width: $breakpoint--xs){
+            display: block;
+        }
+    }
+    &none{
+        @media screen and(max-width: $breakpoint--xs){
+            display: none;
+        }
+    }
+}
+
+.soft{
+    opacity: .6;
+}
+
+// Input
+.form-control{
+    border: 1px solid transparent;
+    padding: 15px;
+    color: color('white');
+    background: transparentize($color: color('white'), $amount: .8);
+    @include transition(0.3s all ease-out);
+    @include border-radius(0);
+    &:focus{
+        outline: none;
+        border: 1px solid transparentize($color: color('white'), $amount: .3);
+        background: transparentize($color: color('white'), $amount: .95);
+        @include transition(0.3s all ease-in);
+        @include box-shadow(none);
+    }
+}
+.btn--attending{
+    padding: 15px;
+    border: 1px solid transparent;
+    font-weight: bold;
+    font-style: italic;
+    color: color('gold');
+    @include border-radius(0);
+    &:focus, &:active{
+        color: color('white');
+        background-color: transparent;
+        border: 1px solid transparentize($color: color('white'), $amount: .3);
+        @include box-shadow(none);
+    }
+}
+
+// Extensible class
+.fit-center{
+    object-fit: cover;
+    object-position: center;
+}
+.fade{
+    @include transition(0.3s all ease);
+    &:hover{
+        @include transition(0.3s all ease);
+    }
+}
+
+.gutter {
+    &--sm {
+        &.row {
+            margin-right: -8px;
+            margin-left: -8px;
+        }
+
+        > {
+
+            [class^=col-],
+            [class^=" col-"] {
+                padding-right: 8px;
+                padding-left: 8px;
+            }
+        }
+    }
+}
+
+// Placeholder
+::-webkit-input-placeholder {
+    font-style: italic;
+    color: color('white')!important;
+}
+::-moz-placeholder {
+    font-style: italic;
+    color: color('white')!important;
+}
+:-ms-input-placeholder {
+    font-style: italic;
+    color: color('white')!important;
+}
+:-moz-placeholder {
+    font-style: italic;
+    color: color('white')!important;
+}
+
+// Functions
+@each $name, $value in $colors {
+    .color--#{$name} {
+        color: $value !important;
+    }
+}
+
+@each $name, $value in $colors {
+    .bg--#{$name} {
+        background-color: $value;
+    }
+}

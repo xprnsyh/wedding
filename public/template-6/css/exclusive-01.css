@@ -1,0 +1,2584 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+
+body {
+    /* Body Height */
+    --body-height: 100vh;
+    overflow: hidden;
+
+    --top-cover-clr: #f0b98b;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body font {
+    font-family: inherit;
+}
+
+
+/* Exclusive 03 (JUWITA) */
+body.juwita {
+
+    /* Fonts */
+    --ff-01 : 'Alex Brush', cursive;
+    --ff-02 : 'Playfair Display', serif;
+
+}
+
+/* JUWITA - NAVY */
+body.juwita.navy {
+    /* Hex Color */
+    --primary-clr: #081023;
+    --secondary-clr: #ffd0a8;
+    --secondary-dark-clr: #aa5e1f;
+
+    /* RGB Color */
+    --rgb-primary-clr: 8, 18, 40;
+    --rgb-secondary-clr: 240, 185, 139;
+    --rgb-secondary-dark-clr: 170, 94, 31;
+
+    /* ORNAMENT */
+    --orn-01: url("../images/template/navy/orn-01.png");
+    --orn-02: url("../images/template/navy/orn-02.png");
+    --orn-03: url("../images/template/navy/orn-03.png");
+    --orn-04: url("../images/template/navy/orn-04.png");
+    --orn-05: url("../images/template/navy/orn-05.png");
+    --orn-06: url("../images/template/navy/orn-06.png");
+
+    /* BACKGROUND IMAGE */
+    --bg-cover-01: url("../images/template/navy/bg-cover-01.png");
+    --bg-cover-02: url("../images/template/navy/bg-cover-02.png");
+
+    --bg-cover-lg-01: url("../images/template/navy/bg-cover-lg-01.png");
+    --bg-cover-lg-02: url("../images/template/navy/bg-cover-lg-02.png");
+
+    --bg-combine-01: url("../images/template/navy/bg-combine-01.jpg");
+    --bg-couple: url("../images/template/navy/bg-couple.jpg");
+    --bg-event: url("../images/template/navy/bg-event.png");
+    --bg-gift: url("../images/template/navy/bg-gift.jpg");
+    --bg-rsvp: url("../images/template/navy/bg-rsvp.jpg");
+    --bg-greet: url("../images/template/navy/bg-greet.jpg");
+    --bg-photo: url("../images/template/navy/bg-photo.jpg");
+    --bg-wish: url("../images/template/navy/bg-wish.jpg");
+
+    --wrapper-01: url("../images/template/navy/wrapper-01.png");
+    --wrapper-01-lg: url("../images/template/navy/wrapper-01-lg.jpeg");
+
+}
+
+/* JUWITA - MAROON */
+body.juwita.maroon {
+    /* Hex Color */
+    --primary-clr: #2c070e;
+    --secondary-clr: #f0b98b;
+    --secondary-dark-clr: #aa5e1f;
+    --wood-clr: #671726;
+
+    /* RGB Color */
+    --rgb-primary-clr: 44, 7, 14;
+    --rgb-secondary-clr: 240, 185, 139;
+    --rgb-secondary-dark-clr: 170, 94, 31;
+    --rgb-wood-clr: 103, 23, 38;
+
+    /* ORNAMENT */
+    --orn-01: url("../images/template/navy/orn-01.png");
+    --orn-02: url("../images/template/navy/orn-02.png");
+    --orn-03: url("../images/template/navy/orn-03.png");
+    --orn-04: url("../images/template/navy/orn-04.png");
+    --orn-05: url("../images/template/navy/orn-05.png");
+    --orn-06: url("../images/template/navy/orn-06.png");
+
+    /* BACKGROUND IMAGE */
+    --bg-cover-01: url("../images/template/navy/bg-cover-01.png");
+    --bg-cover-02: url("../images/template/navy/bg-cover-02.png");
+
+    --bg-cover-lg-01: url("../images/template/navy/bg-cover-lg-01.png");
+    --bg-cover-lg-02: url("../images/template/navy/bg-cover-lg-02.png");
+
+    --bg-combine-01: url("../images/template/navy/bg-combine-01.jpg");
+    --bg-couple: url("../images/template/navy/bg-couple.jpg");
+    --bg-event: url("../images/template/navy/bg-event.png");
+    --bg-gift: url("../images/template/navy/bg-gift.jpg");
+    --bg-rsvp: url("../images/template/navy/bg-rsvp.jpg");
+    --bg-greet: url("../images/template/navy/bg-greet.jpg");
+    --bg-photo: url("../images/template/navy/bg-photo.jpg");
+    --bg-wish: url("../images/template/navy/bg-wish.jpg");
+
+    --wrapper-01: url("../images/template/navy/wrapper-01.png");
+    --wrapper-01-lg: url("../images/template/navy/wrapper-01-lg.jpg");
+
+}
+
+
+/* JUWITA - LAVENDER */
+body.juwita.lavender {
+    /* Hex Color */
+    /* --primary-clr: #c69dd5;    */
+    --primary-clr: #c8a8d9;
+    /* --secondary-clr: #2a0040; */
+    --secondary-clr: #613379;
+    --secondary-dark-clr: #2a0040;
+    --wood-clr: #5a4d81;
+
+    /* --haha: #c8a8d9;
+    --font-clr: #613379; */
+
+    /* RGB Color */
+    --rgb-primary-clr: 192, 157, 213;
+    --rgb-secondary-clr: 42, 0, 64;
+    --rgb-secondary-dark-clr: 170, 94, 31;
+    --rgb-wood-clr: 90, 77, 129;
+
+    /* ORNAMENT */
+    --orn-01: url("../images/template/navy/orn-01.png");
+    --orn-02: url("../images/template/navy/orn-02.png");
+    --orn-03: url("../images/template/navy/orn-03.png");
+    --orn-04: url("../images/template/navy/orn-04.png");
+    --orn-05: url("../images/template/navy/orn-05.png");
+    --orn-06: url("../images/template/navy/orn-06.png");
+
+    /* BACKGROUND IMAGE */
+    --bg-cover-01: url("../images/template/navy/bg-cover-01.png");
+    --bg-cover-02: url("../images/template/navy/bg-cover-02.png");
+
+    --bg-cover-lg-01: url("../images/template/navy/bg-cover-lg-01.png");
+    --bg-cover-lg-02: url("../images/template/navy/bg-cover-lg-02.png");
+
+    --bg-combine-01: url("../images/template/navy/bg-combine-01.jpg");
+    --bg-couple: url("../images/template/navy/bg-couple.jpg");
+    --bg-event: url("../images/template/navy/bg-event.png");
+    --bg-gift: url("../images/template/navy/bg-gift.jpg");
+    --bg-rsvp: url("../images/template/navy/bg-rsvp.jpg");
+    --bg-greet: url("../images/template/navy/bg-greet.jpg");
+    --bg-photo: url("../images/template/navy/bg-photo.jpg");
+    --bg-wish: url("../images/template/navy/bg-wish.jpg");
+
+    --wrapper-01: url("../images/template/navy/wrapper-01.png");
+    --wrapper-01-lg: url("../images/template/navy/wrapper-01-lg.jpg");
+
+}
+
+/* JUWITA - BABY BLUE */
+body.juwita.baby_blue {
+
+    /* Hex Color */
+    --primary-clr: #a9c6cc;
+    /* --primary-clr: #aacacf; */
+    --secondary-clr: #304555;
+    --secondary-dark-clr: #182834;
+    --wood-clr: #a9c6cc;
+
+    /* RGB Color */
+    --rgb-primary-clr: 169, 198, 204;
+    /* --rgb-primary-clr: 170,202,207; */
+    --rgb-secondary-clr: 48, 69, 85;
+    --rgb-secondary-dark-clr: 24, 40, 52;
+    --rgb-wood-clr: 169, 198, 204;
+
+    /* ORNAMENT */
+    --orn-01: url("../images/template/navy/orn-01.png");
+    --orn-02: url("../images/template/navy/orn-02.png");
+    --orn-03: url("../images/template/navy/orn-03.png");
+    --orn-04: url("../images/template/navy/orn-04.png");
+    --orn-05: url("../images/template/navy/orn-05.png");
+    --orn-06: url("../images/template/navy/orn-06.png");
+
+    /* BACKGROUND IMAGE */
+    --bg-cover-01: url("../images/template/navy/bg-cover-01.png");
+    --bg-cover-02: url("../images/template/navy/bg-cover-02.png");
+
+    --bg-cover-lg-01: url("../images/template/navy/bg-cover-lg-01.png");
+    --bg-cover-lg-02: url("../images/template/navy/bg-cover-lg-02.png");
+
+    /* Eliminate bg combine */
+    --bg-combine-01: url("../images/template/navy/bg-combine-01.webp");
+
+    --bg-couple: url("../images/template/navy/bg-couple.jpg");
+    --bg-event: url("../images/template/navy/bg-event.png");
+    --bg-gift: url("../images/template/navy/bg-gift.jpg");
+    --bg-rsvp: url("../images/template/navy/bg-rsvp.jpg");
+    --bg-greet: url("../images/template/navy/bg-greet.jpg");
+    --bg-photo: url("../images/template/navy/bg-photo.jpg");
+    --bg-wish: url("../images/template/navy/bg-wish.jpg");
+
+    --wrapper-01: url("../images/template/navy/wrapper-01.jpg");
+    --wrapper-01-lg: url("../images/template/navy/wrapper-01-lg.jpg");
+
+}
+
+
+
+/* Top Cover */
+.top-cover {
+    background-color: var(--secondary-clr);
+    width: 100%;
+    /* height: 100vh; */
+    height: var(--body-height);
+    /* position: relative; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    overflow: hidden;
+    opacity: 1;
+    transition: all 1s ease-in-out;
+}
+.top-cover.hide {
+    top: -120%;
+    bottom: 120%;
+    pointer-events: none;
+}
+.top-cover .inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+.top-cover .inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* background-image: linear-gradient(
+                            to bottom,
+                            rgba(0, 0, 0, 0.5),
+                            rgba(0, 0, 0, 0.7),
+                            rgba(0, 0, 0, 0.9)
+                        ); */
+}
+.top-cover .inner .details {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px 0px;
+    position: relative;
+    margin-top: auto;
+    margin-bottom: min(calc(var(--body-height) * 15 / 100), 170px);
+    /* margin-bottom: min(17vh, 170px); */
+    /* margin-top: auto;
+    margin-bottom: 25%; */
+}
+.top-cover .inner .details > div {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 10px;
+}
+.top-cover .inner .details .text-01 {
+    font-size: clamp(55px, 8.5vw, 100px);
+    line-height: 110%;
+    font-family: var(--ff-01);
+    font-weight: 500;
+    color: var(--top-cover-clr);
+    word-wrap: break-word;
+}
+body.juwita.light .top-cover .inner .details .text-01 {
+    color: var(--white-clr);
+}
+.top-cover .inner .details .text-02 {
+    font-size: clamp(14px, 2vw, 16px);
+    line-height: clamp(24px, 2.4vw, 26px);
+    margin-bottom: 0.15em;
+    font-family: var(--ff-02);
+    letter-spacing: 0px;
+    color: var(--white-clr);
+}
+.top-cover .inner .details .link-01 {
+    text-decoration: none;
+    padding: 0.25em 1em;
+    border-radius: 7px;
+    background: var(--top-cover-clr);
+    border: 1px solid var(--top-cover-clr);
+    /* color: var(--white-clr); */
+    color: var(--primary-clr);
+    /* font-size: clamp(16px, 1.75vw, 20px);
+    line-height: clamp(26px, 2vw, 30px); */
+    font-size: clamp(14px, 2vw, 16px);
+    line-height: clamp(24px, 2.4vw, 26px);
+    font-family: var(--ff-02);
+    font-weight: 600;
+    letter-spacing: 0px;
+    display: inline-block;
+    transition: all 0.35s ease-in-out;
+}
+.top-cover .inner .details .link-01:hover {
+    border-color: var(--white-clr);
+    background: var(--white-clr);
+    color: var(--primary-clr);
+    /* color: var(--top-cover-clr); */
+}
+body.juwita.light .top-cover .inner .details .link-01 {
+    border-color: var(--secondary-clr);
+    background: var(--secondary-clr);
+    color: var(--white-clr);
+}
+body.juwita.light .top-cover .inner .details .link-01:hover {
+    border-color: var(--secondary-dark-clr);
+    background: var(--secondary-dark-clr);
+}
+.top-cover > .cover-show {
+    width: 100%!important;
+    height: 100%!important;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+.top-cover > .cover-show .slick-list {
+    width: 100%!important;
+    height: 100%!important;
+}
+.top-cover > .cover-show .slick-track {
+    width: 100%!important;
+    height: 100%!important;
+    position: relative!important;
+}
+.top-cover > .cover-show .picture-outer {
+    width: 100%!important;
+    height: 100%!important;
+    position: absolute!important;
+    top: 0!important;
+    left: 0!important;
+}
+.top-cover > .cover-show .picture-outer img {
+    width: 100%!important;
+    height: 100%!important;
+    object-fit: cover;
+    -o-object-fit: cover;
+    object-position: center;
+    /* animation: zoom-out 40s infinite; */
+}
+
+@keyframes zoom-out {
+    0% {
+        transform: scale(1);
+    }
+    70% {
+        transform: scale(1.4);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
+
+
+
+/* COVER */
+.cover {
+    width: 100%;
+    height: auto;
+    background: var(--primary-clr);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+.cover .cover-inner {
+    position: relative;
+    width: 100%;
+    /* min-height: 100vh; */
+    /* height: 100vh; */
+    height: var(--body-height);
+    padding: 10px 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.cover .cover-inner.covers {
+    justify-content: flex-end;
+}
+.cover .cover-inner::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--rgb-primary-clr), 0.5);
+    background-image: none;
+}
+.cover .cover-inner.covers.desktop::before {
+    height: 50%;
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, rgba(var(--rgb-primary-clr),0), rgba(var(--rgb-primary-clr),0.8), rgba(var(--rgb-primary-clr),1));
+}
+.cover .cover-inner .cover-greet {
+    width: 100%;
+    margin-bottom: 0;
+    color: var(--primary-clr);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 5;
+    padding: 15px 10px;
+    /* background-color: lightblue; */
+}
+/* .cover .cover-inner.covers.desktop .cover-greet {
+    height: 20%;
+} */
+.cover .cover-greet > div {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    position: relative;
+}
+
+.cover .cover-greet > div .logo {
+    width: clamp(55px, 3%, 80px);
+    max-height: 55px;
+    object-fit: contain;
+    margin: 0;
+    object-position: center;
+    display: block;
+}
+.cover .cover-greet > div p {
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    font-weight: 500;
+    font-family: var(--ff-02);
+    letter-spacing: 3px;
+    color: var(--white-clr);
+    margin-bottom: .25em;
+}
+.cover .cover-greet > div p:last-child {
+    font-size: clamp(18px, 1.75vw, 20px);
+    font-weight: 500;
+    margin-bottom: 0;
+}
+.cover .cover-wrapper {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    /* background-color: lightsalmon; */
+}
+.cover .cover-inner.covers .cover-wrapper {
+    height: 80%;
+    /* background-color: lightsalmon; */
+}
+.cover .cover-picture {
+    margin-top: auto;
+    position: relative;
+    display: none;
+    height: 100%;
+    width: 100%;
+}
+.cover .cover-inner.covers .cover-picture {
+    display: block;
+}
+.cover .cover-picture > .cover-show {
+    position: relative;
+    z-index: 4;
+    width: 70%!important;
+    max-width: 1366px!important;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 44px;
+    margin: 0 auto;
+}
+.cover .cover-picture > .cover-show .slick-list {
+    width: 100%!important;
+    height: 100%!important;
+}
+.cover .cover-picture > .cover-show .slick-track {
+    width: 100%!important;
+    height: 100%!important;
+    position: relative!important;
+}
+.cover .cover-picture > .cover-show .picture-outer {
+    width: 100%!important;
+    height: 100%!important;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    position: absolute!important;
+}
+.cover .cover-picture > .cover-show .picture-outer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(var(--rgb-primary-clr),0), rgba(var(--rgb-primary-clr),0), rgba(var(--rgb-primary-clr),0.8), rgba(var(--rgb-primary-clr),1));
+    z-index: 1;
+}
+.cover .cover-picture > .cover-show .picture-outer .picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: inline-block;
+}
+.cover .cover-bridegroom {
+    position: relative;
+    z-index: 5;
+    padding: 10px;
+    z-index: 40;
+    width: 75%;
+    max-width: 1366px;
+    margin-top: 20px;
+    /* background-color: lightcoral; */
+    /* background-color: lightblue; */
+    /* border-bottom: 1px solid lightblue; */
+}
+.cover .cover-inner.covers .cover-bridegroom {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: clamp(20px, 2.5%, 75px);
+}
+.cover .cover-bridegroom > div {
+    text-align: center;
+    padding: 5px;
+}
+.cover .cover-bridegroom > div h1 {
+    font-size: clamp(42px, 5.5vw, 85px);
+    line-height: 110%;
+    font-family: var(--ff-01);
+    font-weight: 500;
+    color: var(--secondary-clr);
+    word-wrap: break-word;
+}
+body.juwita.light .cover .cover-bridegroom > div h1 {
+    color: var(--white-clr);
+}
+.cover .cover-bridegroom > div p {
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    margin-bottom: 1em;
+    font-family: var(--ff-02);
+    letter-spacing: 4px;
+    color: var(--white-clr);
+}
+.cover .cover-inner.with-covers .cover-bridegroom > div p {
+    margin-bottom: 1em;
+}
+.cover .cover-bridegroom > div p.date {
+    text-transform: uppercase;
+}
+.cover .cover-bridegroom > div p.date sup {
+    font-family: var(--ff-02);
+    font-size: clamp(8px, 1.1vw, 10px);
+}
+.cover .cover-bridegroom > div a {
+    text-decoration: none;
+    padding: 0.25em 1em;
+    border-radius: 7px;
+    background: transparent;
+    border: 1px solid var(--secondary-clr);
+    color: var(--secondary-clr);
+    /* font-size: 1.5vw; */
+    font-size: clamp(16px, 1.75vw, 20px);
+    line-height: clamp(26px, 2vw, 30px);
+    font-family: var(--ff-02);
+    font-weight: 700;
+    letter-spacing: 3px;
+    display: inline-block;
+    transition: all 0.25s ease-in-out;
+}
+body.juwita.light .cover .cover-bridegroom > div a {
+    border-color: var(--white-clr);
+    color: var(--white-clr);
+}
+.cover .cover-bridegroom > div a:hover {
+    background: var(--secondary-clr);
+    color: var(--primary-clr);
+}
+body.juwita.light .cover .cover-bridegroom > div a:hover {
+    border-color: var(--secondary-dark-clr);
+    background: var(--secondary-dark-clr);
+}
+/* Cover Show (Cover Banner) */
+.cover .cover-inner > .cover-show {
+    width: 100%!important;
+    height: 100%!important;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+.cover .cover-inner > .cover-show .slick-list {
+    width: 100%!important;
+    height: 100%!important;
+}
+.cover .cover-inner > .cover-show .slick-track {
+    width: 100%!important;
+    height: 100%!important;
+    position: relative!important;
+}
+.cover .cover-inner > .cover-show .picture-outer {
+    width: 100%!important;
+    height: 100%!important;
+    position: absolute!important;
+    top: 0!important;
+    left: 0!important;
+}
+.cover .cover-inner > .cover-show .picture-outer img {
+    width: 100%!important;
+    height: 100%!important;
+    object-fit: cover;
+    object-position: center;
+    filter: blur(2px);
+}
+
+body.juwita.baby_blue .cover .cover-greet > div p,
+body.juwita.baby_blue .cover .cover-bridegroom > div h1,
+body.juwita.baby_blue .cover .cover-bridegroom > div p {
+    color: var(--secondary-clr);
+}
+body.juwita.baby_blue .cover .cover-bridegroom > div a {
+    border-color: var(--secondary-clr);
+    background-color: var(--secondary-clr);
+    color: var(--white-clr);
+}
+body.juwita.baby_blue .cover .cover-bridegroom > div a:hover {
+    border-color: var(--secondary-dark-clr);
+    background-color: var(--secondary-dark-clr);
+    color: var(--white-clr);
+}
+
+
+
+.cover .orn {
+    position: absolute;
+}
+.cover .orn.orn-02 {
+    bottom: 0;
+    right: 0;
+    width: 40%;
+    height: min(28%, 250px);
+    /* height: min(28%, 250px); */
+    z-index: 30;
+    background: var(--orn-02);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom 0 right 0;
+    /* background-color: lightsalmon; */
+    pointer-events: none;
+}
+.cover .orn.bg-cover-01 {
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* height: 220px; */
+    /* height: clamp(420px, 72.5%, 780px); */
+    /* height: clamp(420px, 80%, 760px); */
+    height: clamp(630px, 80%, 680px);
+    z-index: 1;
+    background: var(--bg-cover-lg-01);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom 0 right 0;
+    pointer-events: none;
+    /* background-color: lightblue; */
+}
+.cover .orn.bg-cover-02 {
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    /* height: min(22%, 210px); */
+    height: clamp(175px, 21.5%, 210px);
+    /* height: min(25%, 250px); */
+    z-index: 20;
+    background-image: var(--bg-cover-lg-02);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top 0 left -75px;
+    pointer-events: none;
+    /* background-color: lightcoral; */
+}
+
+
+/* GREETINGS */
+.greetings {
+    width: 100%;
+    background-image: var(--bg-greet);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 10px 20px;
+    overflow: hidden;
+}
+.greetings, .greetings > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.greetings > div {
+    padding: 20px;
+    text-align: center;
+    color: var(--white-clr);
+}
+.greetings p {
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+    font-family: var(--ff-02);
+    color: var(--primary-clr);
+    margin: 0;
+}
+body.juwita.light .greetings > div {
+    color: var(--font-clr);
+}
+.greetings h1 {
+    text-transform: capitalize;
+    font-size: clamp(40px, 4vw, 75px);
+    line-height: clamp(45px, 4.25vw, 80px);
+    letter-spacing: 2px;
+    font-weight: 500;
+    font-family: var(--ff-01);
+    margin: .325em 0 .1em 0;
+    color: var(--primary-clr);
+}
+body.juwita.light .greetings p,
+body.juwita.light .greetings h1 {
+    color: var(--secondary-clr);
+}
+
+
+
+
+/* BRIDE GROOM */
+.bridegroom {
+    width: 100%;
+    /* min-height: 100vh; */
+    background-color: var(--primary-clr);
+    background-image: var(--bg-couple);
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.bridegroom .bridegroom-inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 20px;
+}
+.bridegroom .bridegroom-inner .head {
+    width: 960px;
+    padding: 10px;
+    text-align: center;
+}
+.bridegroom .bridegroom-inner .head h1 {
+    color: var(--white-clr);
+    font-size: clamp(22px, 5vw, 30px);
+    margin-bottom: .25em;
+    font-family: var(--ff-02);
+    font-weight: 700;
+}
+.bridegroom .bridegroom-inner .head p {
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    color: var(--white-clr);
+    font-family: var(--ff-02);
+    font-style: italic;
+}
+.bridegroom .bridegroom-inner .body {
+    padding: 20px 0;
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    position: relative;
+}
+.bridegroom .bridegroom-inner .body.bride-first {
+    flex-direction: row-reverse;
+}
+.bridegroom .bridegroom-inner .body .bride,
+.bridegroom .bridegroom-inner .body .groom {
+    width: min(40%, 720px);
+    overflow: hidden;
+}
+.bridegroom .bridegroom-inner .body .bridegroom-border {
+    width: clamp(180px, 18vw, 320px);
+    height: clamp(180px, 18vw, 320px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 5px;
+    margin: 10px auto;
+}
+.bridegroom .bridegroom-inner .body .bridegroom-border .bridegroom-picture {
+    width: 100%;
+    height: 100%;
+    border-radius: 22px;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    background: var(--secondary-clr);
+}
+.bridegroom .bridegroom-inner .body .bridegroom-border::before {
+    content: '';
+    position: absolute;
+    z-index: 9999;
+    width: clamp(70px, 45%, 110px);;
+    height: clamp(70px, 45%, 110px);;
+    background-image: var(--orn-01);
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: 0;
+}
+.bridegroom .bridegroom-inner .body > div:nth-of-type(1) .bridegroom-border::before {
+    left: 0;
+    background-position: left 0 bottom 0;
+}
+.bridegroom .bridegroom-inner .body > div:nth-of-type(3) .bridegroom-border::before {
+    right: 0;
+    background-position: right 0 bottom 0;
+    transform: scaleX(-1);
+}
+.bridegroom .bridegroom-inner .body.bride-first > div:nth-of-type(1) .bridegroom-border::before {
+    left: auto;
+    right: 0;
+    background-position: right 0 bottom 0;
+    transform: scaleX(-1);
+}
+.bridegroom .bridegroom-inner .body.bride-first > div:nth-of-type(3) .bridegroom-border::before {
+    left: 0;
+    background-position: left 0 bottom 0;
+    transform: scaleX(1);
+}
+.bridegroom .bridegroom-inner .body .bridegroom-separator {
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    font-size: clamp(70px, 10vw, 140px);
+    line-height: clamp(68px, 9.8vw, 136px);
+    font-weight: 500;
+    color: var(--secondary-clr);
+    font-family: var(--ff-01);
+}
+.bridegroom .bridegroom-inner .body .bridegroom-details {
+    text-align: center;
+    padding: 20px;
+}
+.bridegroom .bridegroom-inner .body .bridegroom-details h1 {
+    font-size: clamp(40px, 4vw, 75px);
+    line-height: clamp(45px, 4.25vw, 80px);
+    margin-bottom: .25em;
+    color: var(--secondary-clr);
+    font-family: var(--ff-01);
+    font-weight: 500;
+}
+.bridegroom .bridegroom-inner .body .bridegroom-details p {
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+    margin-bottom: .5em;
+    font-family: var(--ff-02);
+    color: var(--white-clr);
+}
+.bridegroom .bridegroom-inner .body .bridegroom-details a,
+.bridegroom .bridegroom-inner .body .bridegroom-details a em {
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+    font-family: var(--ff-02);
+    color: var(--white-clr);
+    text-decoration: none;
+}
+.bridegroom .bridegroom-inner .body .bridegroom-details a:hover {
+    text-decoration: underline;
+}
+body.juwita.light .bridegroom .bridegroom-inner .body .bridegroom-separator {
+    color: var(--white-clr);
+}
+body.juwita.light .bridegroom .bridegroom-inner .head h1,
+body.juwita.light .bridegroom .bridegroom-inner .head p,
+body.juwita.light .bridegroom .bridegroom-inner .body .bridegroom-details h1,
+body.juwita.light .bridegroom .bridegroom-inner .body .bridegroom-details p,
+body.juwita.light .bridegroom .bridegroom-inner .body .bridegroom-details a,
+body.juwita.light .bridegroom .bridegroom-inner .body .bridegroom-details a em {
+    color: var(--secondary-clr);
+}
+
+
+
+
+/* SAVE DATE */
+.save-date {
+    width: 100%;
+    min-height: 200px;
+    background: var(--white-clr);
+    overflow: hidden;
+}
+.save-date .save-date-inner {
+    width: 640px;
+    padding: 20px 0 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.save-date-inner .save-date-title {
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+.save-date-inner .save-date-title h1 {
+    font-size: clamp(40px, 4vw, 75px);
+    line-height: clamp(45px, 4.25vw, 80px);
+    font-family: var(--ff-01);
+    text-transform: capitalize;
+    font-weight: 500;
+    color: var(--primary-clr);
+}
+.save-date-inner .save-date-title p {
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    font-family: var(--ff-02);
+    letter-spacing: 2px;
+    color: var(--primary-clr);
+    text-transform: uppercase;
+}
+.save-date-inner .save-date-title p sup {
+    font-family: var(--ff-02);
+    font-size: 14px;
+    font-size: clamp(8px, 1.1vw, 10px);
+}
+.save-date-inner .separator {
+    padding: 0 10px;
+    width: 100%;
+}
+.save-date-inner .separator .orn.orn-03 {
+    width: 100%;
+    height: clamp(40px, 5vw, 70px);
+    background-image: var(--orn-03);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    /* margin: -17px 0; */
+}
+.save-date .save-date-inner .schedule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-clr);
+    width: 100%;
+}
+.save-date .save-date-inner .schedule > h1 {
+    font-size: 30px;
+    margin-bottom: 0.35em;
+    color: var(--primary-clr);
+}
+.save-date .save-date-inner .schedule .countdown {
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+.save-date .save-date-inner .schedule .countdown > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+}
+.save-date .save-date-inner .schedule .countdown h1 {
+    font-size: clamp(26px, 4vw, 50px);
+    margin-bottom: 0.15em;
+    font-family: var(--ff-02);
+    color: var(--primary-clr);
+}
+.save-date .save-date-inner .schedule .countdown small {
+    font-size: clamp(14px, 2vw, 19px);
+    line-height: clamp(20px, 2.3vw, 25px);
+    font-family: var(--ff-02);
+    color: var(--primary-clr);
+}
+.save-date .save-date-inner .foot {
+    padding: 10px 10px;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    display: block;
+}
+.save-date .save-date-inner .foot .link-01 {
+    outline: none;
+    border: 1px solid var(--primary-clr);
+    padding: 8px 22px;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    color: var(--primary-clr);
+    font-family: var(--ff-02);
+    font-weight: 600;
+    margin: 0 auto;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    background: var(--white-clr);
+}
+.save-date .save-date-inner .foot .link-01:hover {
+    background: var(--primary-clr);
+    color: var(--white-clr);
+}
+body.juwita.light .save-date .save-date-inner .foot .link-01 {
+    border-color: var(--secondary-clr);
+    color: var(--secondary-clr);
+}
+body.juwita.light .save-date .save-date-inner .foot .link-01:hover {
+    color: var(--white-clr);
+}
+body.juwita.light .save-date-inner .save-date-title h1,
+body.juwita.light .save-date-inner .save-date-title p ,
+body.juwita.light .save-date-inner .save-date-title p sup,
+body.juwita.light .save-date .save-date-inner .schedule .countdown h1,
+body.juwita.light .save-date .save-date-inner .schedule .countdown small {
+    color: var(--secondary-clr);
+}
+
+
+
+/* LOVE STORY */
+.love-story {
+    padding: 40px 20px;
+    background: var(--primary-clr);
+}
+.love-story .inner {
+    width: 1200px;
+    margin: 0 auto;
+    display: block;
+}
+.love-story .inner .title {
+    padding: 10px;
+    text-align: center;
+}
+.love-story .inner .title h1 {
+    font-size: clamp(40px, 4vw, 75px);
+    line-height: clamp(45px, 4.25vw, 80px);
+    color: var(--primary-clr);
+    font-family: var(--ff-01);
+    font-weight: 500;
+    margin-bottom: 0;
+    color: var(--secondary-clr);
+}
+body.juwita.light .love-story .inner .title h1 {
+    color: var(--white-clr);
+}
+.love-story .inner .title p {
+    font-family: var(--ff-02);
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    color: var(--white-clr);
+}
+.love-story .inner .timeline {
+    position: relative;
+    margin: 20px auto;
+}
+.love-story .inner .timeline .story {
+    line-height: normal;
+    position: relative;
+    padding: 20px 40px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.love-story .inner .timeline .story:nth-child(odd) {
+    flex-direction: row;
+    text-align: left;
+}
+.love-story .inner .timeline .story:nth-child(even) {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+.love-story .inner .timeline .story .picture {
+    height: clamp(200px, 27.5vw, 320px);
+    width: 48%;
+    border-radius: 22px;
+    overflow: hidden;
+    /* background-color: lightsalmon; */
+}
+.love-story .inner .timeline .story .picture img {
+    width: 100%;
+    height: 100%;
+    border-radius: 22px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    object-position: center;
+    background-color: var(--secondary-clr);
+}
+.love-story .inner .timeline .story .content {
+    width: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.love-story .inner .timeline .story .content .content-inner {
+    padding: 10px 15px 25px 15px;
+    border-bottom: 2px solid var(--secondary-clr);
+}
+.love-story .inner .timeline .story .content .content-inner h2 {
+    margin-bottom: .5em;
+    font-size: clamp(22px, 5vw, 30px);
+    font-weight: 550;
+    font-family: var(--ff-02);
+    color: var(--white-clr);
+}
+.love-story .inner .timeline .story .content .content-inner p {
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+    font-weight: normal;
+    font-family: var(--ff-02);
+    color: var(--white-clr);
+}
+body.juwita.baby_blue .love-story .inner .title h1,
+body.juwita.baby_blue .love-story .inner .title p,
+body.juwita.baby_blue .love-story .inner .timeline .story .content .content-inner h2,
+body.juwita.baby_blue .love-story .inner .timeline .story .content .content-inner p {
+    color: var(--secondary-clr);
+}
+body.juwita.baby_blue .love-story .inner .timeline .story .content .content-inner {
+    border-color: var(--white-clr);
+}
+
+
+
+
+
+/* GAALLERY WRAPPER */
+.gallery-wrapper {
+    background-image: var(--bg-photo);
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+/* GALLERY */
+.gallery-wrapper .gallery {
+    background: transparent;
+}
+.gallery > .title {
+    background-color: transparent;
+    margin: 0;
+    margin-top: 20px;
+}
+.gallery > .title h1,
+.video-gallery .inner > .title h1 {
+    font-size: clamp(22px, 5vw, 30px);
+    margin-bottom: .35em;
+    font-weight: 700;
+    font-family: var(--ff-02);
+    color: var(--primary-clr);
+}
+.gallery > .title p,
+.video-gallery .inner > .title p {
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    font-family: var(--ff-02);
+    color: var(--primary-clr);
+    font-style: italic;
+}
+.video-gallery .inner .video-outer .video > .title h2 {
+    text-align: center;
+    font-family: var(--ff-02);
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+}
+body.juwita.light .gallery > .title h1,
+body.juwita.light .video-gallery .inner > .title h1,
+body.juwita.light .gallery > .title p,
+body.juwita.light .video-gallery .inner > .title p,
+body.juwita.light .video-gallery .inner .video-outer .video > .title h2 {
+    color: var(--secondary-clr);
+}
+
+
+
+
+
+/* EVENT */
+.event-outer {
+    position: relative;
+    background: var(--white-clr);
+    overflow: hidden;
+}
+.event-outer .event-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.event-outer .event-inner .head {
+    padding: 20px;
+    padding-top: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 250px;
+    margin-bottom: -80px;
+}
+.event-outer .event-inner .head::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--bg-event);
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.event-outer .event-inner .head > .title {
+    width: 960px;
+    text-align: center;
+    padding: 20px;
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+    margin-bottom: -10px;
+}
+.event-outer .event-inner .head > .title h1 {
+    color: var(--white-clr);
+    font-size: clamp(22px, 5vw, 30px);
+    margin-bottom: .25em;
+    font-family: var(--ff-02);
+    font-weight: 700;
+}
+.event-outer .event-inner .head > .title p {
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    color: var(--white-clr);
+    font-family: var(--ff-02);
+    font-style: italic;
+}
+.event-inner .body {
+    width: 100%;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    background-color: var(--primary-clr);
+}
+.event-inner .event {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.event-inner .event > .title {
+    padding: 10px 20px 20px 20px;
+    width: 640px;
+    margin: 0 auto 20px auto;
+    position: relative;
+    text-align: center;
+}
+.event-inner .event > .title h1 {
+    color: var(--primary-clr);
+    font-size: clamp(30px, 5vw, 38px);
+    font-weight: 700;
+    font-family: var(--ff-02);
+    /* margin-bottom: .25em; */
+    color: var(--white-clr);
+}
+.event-inner .event > .title h1 sup {
+    font-family: var(--ff-02);
+}
+.event-inner .event > .title p {
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    margin-top: 0.25em;
+    font-family: var(--ff-02);
+    font-style: italic;
+    color: var(--white-clr);
+}
+.event-inner .event > .title::before,
+.event-inner .event > .title::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 80%;
+    background: var(--secondary-clr);
+    left: 50%;
+    transform: translateX(-50%);
+}
+body.baby_blue .event-inner .event > .title::before,
+body.baby_blue .event-inner .event > .title::after {
+    background-color: var(--white-clr);
+}
+.event-inner .event > .title::before {
+    top: 0;
+}
+.event-inner .event > .title::after {
+    bottom: 0;
+}
+.event-outer .event-inner .body .event > .details {
+    width: 640px;
+    padding: 10px;
+    text-align: center;
+}
+.event-outer .event-inner .body .event > .details .address {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.event-outer .event-inner .body .event > .details .address p {
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+    margin-bottom: .35em;
+    font-family: var(--ff-02);
+    color: var(--white-clr);
+}
+.event-outer .event-inner .body .event > .details .address p strong {
+    font-family: var(--ff-02);
+}
+.event-outer .event-inner .body .event > .details a {
+    display: inline-block;
+    border: 1px solid var(--secondary-clr);
+    color: var(--secondary-clr);
+    font-family: var(--ff-02);
+    padding: 7px 18px;
+    margin: 0 auto;
+    text-decoration: none;
+    border-radius: 7px;
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    transition: all 0.2s ease-in-out;
+    font-family: "Ebrima Regular";
+}
+.event-outer .event-inner .body .event > .details a:hover {
+    background: var(--secondary-clr);
+    color: var(--primary-clr);
+}
+.event-inner .event .activities {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+.event-inner .event .activities .activity {
+    border-radius: 7px;
+    /* width: clamp(250px, 50%, 350px); */
+    width: clamp(20%, 50%, 350px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+}
+.event-inner .event .activities .activity span {
+    font-size: 44px;
+    margin-bottom: 0.2em;
+    color: var(--wood-clr);
+}
+.event-inner .event .activities .activity .title {
+    text-align: center;
+    width: 100%;
+}
+.event-inner .event .activities .activity .title h1 {
+    font-size: clamp(40px, 3.5vw, 50px);
+    line-height: clamp(45px, 3.75vw, 55px);
+    font-weight: 500;
+    font-family: var(--ff-01);
+    color: var(--secondary-clr);
+    /* margin-bottom: 0.05em;     */
+}
+body.juwita.light .event-inner .event .activities .activity .title h1 {
+    color: var(--white-clr);
+}
+.event-inner .event .activities .activity .title .orn.orn-party {
+    width: clamp(55px, 7.5vw, 65px);
+    height: clamp(55px, 7.5vw, 65px);
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 15px auto;
+}
+.event-inner .event .activities .activity .title p {
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    margin-bottom: 1.25em;
+    font-family: var(--ff-02);
+    color: var(--white-clr);
+}
+.event-inner .event .activities .activity .title p.time {
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+}
+.event-inner .event .activities .activity .title p em {
+    font-family: var(--ff-02);
+}
+.event-inner .event .activities .activity .address {
+    text-align: center;
+    width: 100%;
+}
+.event-inner .event .activities .activity .address p {
+    /* margin-bottom: .2em; */
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+    font-family: var(--ff-02);
+    color: var(--white-clr);
+}
+.event-inner .event .activities .activity .address p.hall {
+    font-weight: 700;
+}
+.event-inner .event .activities .activity .address p:first-child {
+    /* margin-bottom: .6em; */
+}
+.event-inner .event .activities .activity > div:last-of-type {
+    padding: 10px;
+    display: inline-block;
+}
+.event-inner .event .activities .activity a {
+    border: 1px solid var(--secondary-clr);
+    color: var(--secondary-clr);
+    padding: .35em 1em;
+    text-decoration: none;
+    border-radius: 7px;
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    font-family: var(--ff-02);
+    margin: 15px auto 0 auto;
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+}
+.event-inner .event .activities .activity a:hover {
+    background: var(--secondary-clr);
+    color: var(--primary-clr);
+}
+body.juwita.light .event-inner .event .activities .activity a:hover,
+body.juwita.light .event-outer .event-inner .body .event > .details a:hover {
+    color: var(--secondary-clr);
+    border-color: var(--white-clr);
+    background: var(--white-clr);
+}
+
+body.baby_blue .event-outer .event-inner .head > .title p,
+body.baby_blue .event-outer .event-inner .head > .title h1,
+body.baby_blue .event-outer .event-inner .body .event > .details .address p,
+body.baby_blue .event-inner .event > .title p,
+body.baby_blue .event-inner .event > .title h1,
+body.baby_blue .event-inner .event .activities .activity .title h1,
+body.baby_blue .event-inner .event .activities .activity .title p,
+body.baby_blue .event-inner .event .activities .activity .title h1,
+body.baby_blue .event-inner .event .activities .activity .address p {
+    color: var(--secondary-clr)!important;
+}
+body.baby_blue .event-outer .event-inner .body .event > .details a,
+body.baby_blue .event-inner .event .activities .activity a {
+    background-color: var(--white-clr);
+    border-color: var(--white-clr);
+    color: var(--secondary-clr);
+    font-family: var(--ff-02);
+}
+body.baby_blue .event-outer .event-inner .body .event > .details a:hover,
+body.baby_blue .event-inner .event .activities .activity a:hover {
+    background-color: var(--secondary-clr)!important;
+    border-color: var(--secondary-clr)!important;
+    color: var(--white-clr)!important;
+}
+
+
+/* Link inside P (tag) */
+.event-inner .event .activities .activity p > a,
+body.baby_blue .event-inner .event .activities .activity p > a {
+    border: none!important;
+    outline: none!important;
+    padding: 0!important;
+    margin: 0!important;
+    border-radius: 0!important;
+    font-size: inherit!important;
+    line-height: inherit!important;
+    color: #4455aa!important;
+    text-decoration: none!important;
+    font-style: italic!important;
+    font-family: inherit!important;
+    background-color: transparent!important;
+    display: inline-block!important;
+}
+.event-inner .event .activities .activity p > a:hover,
+body.baby_blue .event-inner .event .activities .activity p > a:hover {
+    text-decoration: underline!important;
+    background-color: transparent!important;
+    color: #4455aa!important;
+}
+
+
+
+
+
+
+/* FORM LABEL => CENTER */
+.form-label.center {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+.form-control {
+    border-color: var(--primary-clr);
+}
+
+
+/* wrapper 01 */
+.wrapper-01 {
+    background-image: var(--wrapper-01-lg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+
+
+/* RESERVATION */
+.rsvp {
+    background-color: transparent;
+    overflow: hidden;
+}
+.rsvp p {
+    font-family: var(--ff-02);
+    color: var(--white-clr);
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+}
+.rsvp-form .head {
+    background: transparent;
+}
+.rsvp .rsvp-form .head h1,
+.rsvp .rsvp-confirm h1,
+.rsvp .rsvp-full h1 {
+    font-family: var(--ff-02);
+    font-size: calc(clamp(22px, 5vw, 30px) + 8px);
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+    color: var(--white-clr);
+    font-weight: 700;
+}
+body.baby_blue .rsvp .rsvp-form .head h1,
+body.baby_blue .rsvp .rsvp-confirm h1,
+body.baby_blue .rsvp .rsvp-full h1 {
+    color: var(--secondary-clr);
+}
+.rsvp .rsvp-form .head h1::before,
+.rsvp .rsvp-form .head h1::after,
+.rsvp .rsvp-confirm h1::before,
+.rsvp .rsvp-confirm h1::after,
+.rsvp .rsvp-full h1::before,
+.rsvp .rsvp-full h1::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 150px;
+    height: 110%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: var(--orn-04);
+}
+.rsvp .rsvp-form .head h1::before,
+.rsvp .rsvp-confirm h1::before,
+.rsvp .rsvp-full h1::before {
+    transform: translateY(-50%) scaleX(-1);
+    right: 100%;
+}
+.rsvp .rsvp-form .head h1::after,
+.rsvp .rsvp-confirm h1::after,
+.rsvp .rsvp-full h1::after {
+    transform: translateY(-50%);
+    left: 100%;
+}
+.rsvp-form .form-label {
+    font-family: var(--ff-02);
+    font-size: 18px;
+    color: var(--white-clr);
+}
+.rsvp-form div {
+    font-family: var(--ff-02);
+}
+.rsvp-form .rsvp-submit,
+.rsvp .rsvp-confirm .change-confirmation {
+    font-family: var(--ff-02);
+    background: var(--secondary-clr);
+    color: var(--primary-clr);
+}
+body.juwita.light .rsvp-form .rsvp-submit,
+body.juwita.light .rsvp .rsvp-confirm .change-confirmation {
+    color: var(--white-clr);
+}
+.rsvp-form .rsvp-submit:hover,
+.rsvp .rsvp-confirm .change-confirmation:hover {
+    background: var(--secondary-dark-clr);
+    color: var(--white-clr);
+}
+.rsvp .rsvp-confirm .body p {
+    color: var(--white-clr);
+}
+.rsvp-full > div {
+    margin-bottom: 0.75em;
+    padding: 10px 0 20px 0;
+}
+.rsvp-full .head h1 {
+    color: var(--white-clr)!important;
+}
+.rsvp-full .body p {
+    font-family: var(--ff-02);
+    color: var(--white-clr)!important;
+    font-size: 18px!important;
+}
+
+
+
+/* PLUS MINUS */
+.plus-minus-toggle.plus button {
+    background: var(--secondary-clr);
+    color: var(--primary-clr);
+}
+.plus-minus-toggle.plus button:hover {
+    background: var(--secondary-dark-clr);
+    color: var(--white-clr);
+}
+
+
+
+
+/* LIVE STREAMING */
+.live-streaming {
+    background-color: transparent;
+}
+.live-streaming > .inner > .head > h1 {
+    font-family: var(--ff-01);
+    font-size: clamp(40px, 4vw, 75px);
+    line-height: clamp(45px, 4.25vw, 80px);
+    font-weight: 500;
+    color: var(--white-clr);
+}
+body.baby_blue .live-streaming > .inner > .title h1 {
+    color: var(--secondary-clr);
+}
+.live-streaming > .inner > .head > p {
+    font-family: var(--ff-02);
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+    color: var(--white-clr);
+    font-style: italic;
+}
+.live-streaming .inner .body p {
+    font-family: var(--ff-02);
+    font-size: clamp(14px, 2vw, 17px);
+    line-height: clamp(20px, 2.3vw, 25px);
+    color: var(--white-clr);
+}
+.live-streaming .inner .body p.meeting-text {
+    font-size: clamp(16px, 2vw, 19px);
+    line-height: clamp(22px, 2.3vw, 27px);
+}
+.live-streaming .inner .body > .streaming-info > div.link > a {
+    font-family: var(--ff-02);
+    background: var(--secondary-clr);
+    color: var(--primary-clr);
+    font-weight: 700;
+}
+body.juwita.light .live-streaming .inner .body > .streaming-info > div.link > a {
+    color: var(--white-clr);
+}
+.live-streaming .inner .body > .streaming-info > div.link > a:hover {
+    background: var(--secondary-dark-clr);
+    color: var(--white-clr);
+}
+
+.live-streaming .inner .orn.orn-05 {
+    width: 640px;
+    height: 85px;
+    background-image: var(--orn-05);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+
+
+/* GIFT */
+.gift {
+    background-color: var(--primary-clr);
+    padding: 30px 20px 80px 20px;
+}
+.gift .gift-inner .gift-title h1 {
+    font-size: clamp(22px, 5vw, 30px);
+    font-weight: 700;
+    font-family: var(--ff-02);
+    color: var(--white-clr);
+}
+.gift .gift-inner .gift-title p {
+    font-family: var(--ff-02);
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+    color: var(--white-clr);
+    font-style: italic;
+}
+body.baby_blue .gift .gift-inner .gift-title h1,
+body.baby_blue .gift .gift-inner .gift-title p {
+    color: var(--secondary-clr);
+}
+.gift-inner .gift-form {
+    font-family: var(--ff-02);
+}
+
+/* GIFT DETAILS */
+#gift-form p,
+#gift-form span,
+#gift-form label,
+#gift-form input,
+#gift-form textarea,
+#gift-form div,
+#gift-form button {
+    font-family: var(--ff-02);
+    font-size: clamp(14px, 2vw, 17px);
+    line-height: clamp(20px, 2.3vw, 25px);
+}
+body.juwita.light #gift-form p,
+body.juwita.light #gift-form span,
+body.juwita.light #gift-form label,
+body.juwita.light #gift-form input,
+body.juwita.light #gift-form textarea,
+body.juwita.light #gift-form div {
+    color: var(--secondary-clr);
+}
+body.juwita.light #gift-form button {
+    color: var(--white-clr);
+}
+.gift-form .gift-details {
+    background: transparent;
+}
+.gift-form .gift-picture {
+    background: transparent;
+    display: none;
+}
+.gift-form .gift-picture .picture-detail {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.gift-form .gift-picture .picture-detail .gift-back {
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: clamp(14px, 2vw, 17px);
+    line-height: clamp(20px, 2.3vw, 25px);
+    margin: 10px 0;
+}
+.gift-form .gift-picture .picture-detail .gift-back:hover {
+    text-decoration: underline;
+}
+.gift-form .gift-picture .picture-detail .head {
+    padding: 10px;
+    text-align: center;
+}
+.gift-form .gift-picture .picture-detail .head h2 {
+    font-size: clamp(15px, 2vw, 19px);
+    line-height: clamp(20px, 2.3vw, 25px);
+    margin-bottom: .25em;
+    font-weight: 600;
+    color: var(--primary-clr);
+    font-family: var(--ff-02);
+}
+.gift-form .gift-picture .picture-detail .head p {
+    font-size: clamp(14px, 2vw, 17px);
+    line-height: clamp(20px, 2.3vw, 25px);
+    color: var(--font-clr);
+}
+.gift-form .gift-picture .picture-detail .body {
+    padding: 20px;
+    width: 100%;
+}
+.gift-form .gift-picture .picture-detail .body div[data-upload="gift-picture"] {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px auto;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+}
+.gift-form .gift-picture .picture-detail .body div[data-upload="gift-picture"]:hover {
+    background: #eee;
+}
+.gift-form .gift-picture .picture-detail .body div[data-upload="gift-picture"]::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    border: 1px dashed var(--primary-clr);
+}
+.gift-form .gift-picture .picture-detail .body div[data-upload="gift-picture"] > i {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--primary-clr);
+}
+.gift-form .gift-picture .picture-detail .body div[data-upload="gift-picture"] > img[data-image] {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: relative;
+    display: none;
+}
+.gift-form .gift-picture .gift-submit {
+    margin-top: auto;
+}
+.gift-form .gift-submit:hover,
+.gift-form .gift-next:hover {
+    background: var(--secondary-dark-clr);
+}
+.gift-form [name="nominal"]:checked + .nominal {
+    background: var(--secondary-clr);
+    border-color: var(--secondary-clr);
+    color: var(--primary-clr);
+}
+body.juwita.light .gift-form [name="nominal"]:checked + .nominal {
+    color: var(--white-clr)!important;
+}
+
+
+
+
+
+/* PROTOCOL */
+body.baby_blue .protocol .inner .head {
+    background-color: var(--secondary-clr);
+}
+body.baby_blue .protocol.protocol-02 .inner .head .step-outer {
+    background-color: transparent;
+}
+.protocol.protocol-01 .inner .head h1,
+.protocol.protocol-03 .inner .head h1 {
+    font-size: 48px;
+    text-transform: uppercase;
+    font-family: var(--ff-02);
+    font-size: clamp(22px, 5vw, 30px);
+}
+.protocol.protocol-01 .inner .head p,
+.protocol.protocol-03 .inner .head p {
+    font-size: 20px;
+    margin-bottom: .15em;
+    font-family: var(--ff-02);
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+}
+body.baby_blue .protocol.protocol-01 .inner .head h1,
+body.baby_blue .protocol.protocol-01 .inner .head p,
+body.baby_blue .protocol.protocol-03 .inner .head h1,
+body.baby_blue .protocol.protocol-03 .inner .head p {
+    color: var(--white-clr);
+}
+@media only screen and (max-width: 600px) {
+
+    .protocol.protocol-01 .inner .head p > br,
+    .protocol.protocol-03 .inner .head p > br {
+        display: block;
+    }
+
+}
+
+/* Protocol 03 */
+.protocol.protocol-03 .inner .body .slider .content .text-01 {
+    font-family: var(--ff-02);
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    color: var(--font-clr);
+}
+.protocol.protocol-03 .inner .body .slider .slick-center .content .text-01 {
+    color: var(--primary-dark-clr);
+}
+.protocol.protocol-03 .inner .body .slider_dots::before {
+    border-color: var(--wood-clr)!important;
+}
+.protocol.protocol-03 .inner .body .slider_dots .slider_navigator {
+    background-color: var(--tertiary-clr);
+}
+.protocol.protocol-03 .inner .body .slider_dots .slider_navigator.slick-current.slick-center {
+    background-color: var(--secondary-clr)!important;
+}
+
+
+
+/* COMMENT */
+.comment-outer {
+    background-image: var(--bg-wish);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px 20px 75px 20px;
+}
+.comment-outer .comment-inner .head > h1 {
+    font-family: var(--ff-01);
+    font-size: clamp(40px, 4vw, 75px);
+    line-height: clamp(45px, 4.25vw, 80px);
+    font-weight: 500;
+    margin-bottom: .1em;
+}
+.comment-outer .comment-inner .head > p {
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    font-family: var(--ff-02);
+}
+.comment-outer .comment-inner .head > p,
+.comment-outer .comment-inner .more-comment,
+.comment-form button,
+.comment-form input,
+.comment-form textarea,
+.comment .comment-head p,
+.comment .comment-head p strong,
+.comment .comment-body p {
+    font-family: var(--ff-02);
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+}
+.comment .comment-foot small,
+.comment .comment-foot a {
+    font-family: var(--ff-02);
+    font-size: clamp(13px, 1.8vw, 15px);
+    line-height: clamp(23px, 2.2vw, 25px);
+}
+body.juwita.light .comment-outer .comment-inner .head > h1 {
+    color: var(--secondary-clr);
+}
+body.juwita.light .comment-outer .comment-inner .head > p,
+body.juwita.light .comment-outer .comment-inner .head > p,
+body.juwita.light .comment-form input,
+body.juwita.light .comment-form textarea,
+body.juwita.light .comment .comment-head p,
+body.juwita.light .comment .comment-head p strong,
+body.juwita.light .comment .comment-body p {
+    color: var(--secondary-clr);
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+}
+body.juwita.light .comment .comment-foot small,
+body.juwita.light .comment .comment-foot a {
+    color: var(--secondary-clr);
+    font-size: clamp(13px, 1.8vw, 15px);
+    line-height: clamp(23px, 2.2vw, 25px);
+}
+body.juwita.light .comment-outer button {
+    background: var(--secondary-clr);
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: clamp(26px, 2.4vw, 28px);
+}
+body.juwita.light .comment-outer button:hover {
+    background: var(--secondary-dark-clr);
+}
+
+
+
+/* FOOT WRAPPER */
+.foot-wrapper {
+    background: var(--primary-clr);
+    padding-top: 50px;
+    padding-bottom: 360px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+.foot-wrapper .orn {
+    position: absolute;
+}
+.foot-wrapper .orn.orn-06 {
+    bottom: -340px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 95%;
+    max-width: 1024px;
+    height: 700px;
+    background-image: var(--orn-06);
+    /* background-color: rgba(144, 238, 144, 0.2); */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+@media only screen and (max-width: 820px) {
+    .foot-wrapper {
+        padding-bottom: 240px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .foot-wrapper {
+        padding-bottom: 180px;
+    }
+}
+@media only screen and (max-width: 425px) {
+    .foot-wrapper {
+        padding-bottom: 120px;
+    }
+}
+
+
+
+/* QUOTE */
+.quote-end {
+    /* background-color: lightsalmon; */
+}
+.quote-end .quote-end-inner p {
+    color: var(--white-clr);
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    font-family: var(--ff-02);
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.quote-end .quote-end-inner p strong {
+    font-family: var(--ff-02);
+}
+
+
+
+/* FOOTNOTE */
+.footnote {
+    width: 100%;
+    /* background-color: lightseagreen; */
+}
+.footnote .footnote-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 10px;
+    text-align: center;
+}
+.footnote .footnote-inner h1 {
+    font-size: clamp(40px, 4vw, 75px);
+    line-height: clamp(45px, 4.25vw, 80px);
+    color: var(--white-clr);
+    font-family: var(--ff-01);
+    font-weight: 500;
+}
+.footnote .footnote-inner p {
+    font-size: clamp(18px, 1.75vw, 20px);
+    line-height: clamp(28px, 2vw, 30px);
+    letter-spacing: 4px;
+    color: var(--white-clr);
+    margin-bottom: 1em;
+    font-family: var(--ff-02);
+    text-transform: uppercase;
+}
+.footnote .footnote-inner p sup {
+    font-family: var(--ff-02);
+    font-size: clamp(8px, 1.1vw, 20px);
+}
+body.juwita.light .quote-end .quote-end-inner p,
+body.juwita.light .footnote .footnote-inner h1,
+body.juwita.light .footnote .footnote-inner p {
+    color: var(--secondary-clr);
+}
+
+
+/* FOOTER */
+.footer {
+    background: var(--white-clr);
+}
+.footer .footer-inner p {
+    color: var(--primary-clr);
+    font-family: var(--ff-02);
+    font-size: clamp(15px, 2vw, 18px);
+}
+.footer .footer-inner img {
+    width: clamp(60px, 12.5%, 80px);
+}
+body.juwita.light .footer .footer-inner p {
+    color: var(--secondary-clr);
+}
+
+
+
+
+
+
+
+
+
+
+/* ===========================================
+
+    Responsiveness
+
+=========================================== */
+
+
+/* 1400 */
+@media only screen and (max-width: 1400px) {
+
+    .cover .orn.bg-cover-01 {
+        height: clamp(480px, 80%, 520px);
+    }
+    .cover .orn.bg-cover-02 {
+        width: 60%;
+    }
+
+}
+
+
+/* 1366px */
+@media only screen and (max-width: 1366px) {
+
+    /* Cover */
+    /* .cover .orn.orn-02 {
+        height: min(28%, 250px);
+    }
+    .cover .orn.bg-cover-01 {
+        height: clamp(420px, 80%, 760px);
+    }
+    .cover .orn.bg-cover-02 {
+        height: min(25%, 250px);
+    } */
+
+}
+
+
+
+/* 1240px */
+@media only screen and (max-width: 1240px) {
+
+    /* Cover */
+    .cover .orn.orn-02 {
+        height: min(25%, 250px);
+    }
+    .cover .orn.bg-cover-01 {
+        height: clamp(420px, 80%, 470px);
+    }
+    .cover .orn.bg-cover-02 {
+        width: 70%;
+        height: clamp(150px, 25%, 170px);
+    }
+
+    /* LOVE STORY */
+    .love-story .inner {
+        width: 100%;
+    }
+    .love-story .inner .title {
+        padding: 10px;
+    }
+    .love-story .inner .timeline {
+        margin: 20px auto;
+    }
+    .love-story .inner .timeline .story {
+        padding: 20px;
+    }
+
+}
+
+/* 1124px */
+@media only screen and (max-width: 1124px) {
+
+    /* BRIDE GROOM */
+    .bridegroom .bridegroom-inner .head {
+        width: 100%;
+    }
+
+}
+
+/* Screen size for Desktop 1024 x 768px */
+@media only screen and (max-width: 1024px) {
+
+    /* COVER */
+    .cover .cover-wrapper {
+        width: 100%;
+    }
+    .cover .cover-inner.covers.mobile::before {
+        height: 50%;
+        background-color: transparent;
+        background-image: linear-gradient(to bottom, rgba(var(--rgb-primary-clr),0), rgba(var(--rgb-primary-clr),0.8), rgba(var(--rgb-primary-clr),1));
+    }
+    .cover .cover-inner.covers.mobile .cover-picture {
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+    }
+    .cover .cover-inner > .cover-show .picture-outer img {
+        filter: blur(0px);
+        margin-top: 60px;
+    }
+    .cover .cover-bridegroom {
+        width: 100%;
+    }
+    .cover .orn.orn-02 {
+        height: min(30%, 160px);
+    }
+    .cover .orn.bg-cover-01 {
+        height: clamp(420px, 40%, 520px);
+    }
+    .cover .orn.bg-cover-02 {
+        width: 70%;
+        height: clamp(130px, 25%, 150px);
+    }
+    /* =================================== */
+
+
+    /* EVENT */
+    .event-outer .event-inner .head {
+        padding: 10px;
+    }
+    .event-outer .event-inner .head > .title {
+        width: 100%;
+        padding: 10px;
+    }
+    .event-inner .body {
+        width: 100%;
+    }
+    .event-inner .event {
+        width: 100%;
+    }
+    .event-inner .event > .title::before,
+    .event-inner .event > .title::after {
+        width: 60%;
+    }
+    /* =================================== */
+
+
+}
+
+
+/* 920px */
+@media only screen and (max-width: 920px) {
+
+    .cover .orn.bg-cover-02 {
+        z-index: 2;
+    }
+
+}
+
+
+/* 835 px */
+@media only screen and (max-width: 835px) {
+
+    /* Cover */
+    .cover .orn.orn-02 {
+        height: min(30%, 140px);
+    }
+    .cover .orn.bg-cover-01 {
+        background-image: var(--bg-cover-01);
+        /* height: clamp(360px, 40%, 480px); */
+    }
+    .cover .orn.bg-cover-02 {
+        width: 80%;
+        height: clamp(100px, 25%, 130px);
+    }
+
+    /* Event */
+    .event-inner .event > .title {
+        width: 100%;
+    }
+    .event-inner .event > .title::before,
+    .event-inner .event > .title::after {
+        width: 80%;
+    }
+    .event-outer .event-inner .body .event > .details {
+        width: 100%;
+    }
+
+}
+
+
+
+/* 780px */
+@media only screen and (max-width: 780px) {
+
+    /* Cover */
+    .cover .orn.orn-02 {
+        height: min(25%, 120px);
+    }
+    .cover .orn.bg-cover-02 {
+        width: 100%;
+        height: min(30%, 130px);
+        background-position: top 0 left -60px;
+    }
+    .cover .orn.bg-cover-01 {
+        height: clamp(240px, 40%, 480px);
+    }
+
+    /* Greetings */
+    .greetings > div {
+        padding: 10px;
+    }
+
+
+    /* Love Story */
+    .love-story .inner .timeline .story:nth-child(odd) {
+        flex-direction: column;
+    }
+    .love-story .inner .timeline .story:nth-child(even) {
+        flex-direction: column;
+    }
+    .love-story .inner .timeline .story .picture {
+        width: 100%;
+    }
+    .love-story .inner .timeline .story .content {
+        width: 100%;
+    }
+    .love-story .inner .timeline .story .content .content-inner {
+        padding: 25px 10px;
+    }
+
+
+    /* Event */
+    .event-inner .event .activities .activity {
+        width: 100%;
+    }
+
+
+    /* RSVP */
+    .rsvp-form .head h1::before,
+    .rsvp .rsvp-confirm h1::before,
+    .rsvp .rsvp-full h1::before {
+        right: 95%;
+    }
+    .rsvp-form .head h1::after,
+    .rsvp .rsvp-confirm h1::after,
+    .rsvp .rsvp-full h1::before {
+        left: 95%;
+    }
+
+}
+
+
+/* 680px */
+@media only screen and (max-width: 680px) {
+
+    /* Couple */
+    .bridegroom .bridegroom-inner .body {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .bridegroom .bridegroom-inner .body.bride-first {
+        flex-direction: column-reverse;
+    }
+    .bridegroom .bridegroom-inner .body .bride,
+    .bridegroom .bridegroom-inner .body .groom {
+        width: 100%;
+        margin: 0;
+    }
+    .bridegroom .bridegroom-inner .body .bridegroom-separator {
+        top: 0;
+        left: 0;
+        transform: translate(0,0);
+        position: relative;
+    }
+
+
+    /* SAVE DATE */
+    .save-date .save-date-inner {
+        width: 100%;
+    }
+
+    /* Event */
+    .event-inner .event > .title {
+        width: 100%;
+    }
+    .event-outer .event-inner .body .event > .details {
+        width: 100%;
+    }
+
+    /* Live Streaming */
+    .live-streaming .inner .orn.orn-05 {
+        width: 420px;
+        height: 50px;
+    }
+
+    /* Foot Wrapper */
+    /* .foot-wrapper {
+        padding-bottom: 170px;
+    } */
+
+}
+
+
+/* Screen size for tablet 600 x 960 px */
+@media only screen and (max-width: 600px) {
+
+    /* Cover */
+    .cover .cover-inner.covers .cover-bridegroom {
+        bottom: clamp(40px, 5%, 75px);
+    }
+    .cover .orn.bg-cover-01 {
+        background-image: var(--bg-cover-01);
+        /* height: clamp(240px, 40%, 480px); */
+    }
+    .cover .orn.bg-cover-02 {
+        background-image: var(--bg-cover-02);
+        height: min(27%, 110px);
+    }
+
+
+    /* Bride and Groom */
+    .bridegroom .bridegroom-inner {
+        padding: 45px 10px 65px 10px;
+    }
+    .bridegroom .bridegroom-inner .body {
+        padding: 0;
+    }
+
+
+    /* Save The Date */
+    .save-date .save-date-inner {
+        padding-top: 0;
+        padding-bottom: 20px;
+    }
+
+
+    /* Love Story */
+    .love-story {
+        padding: 20px 10px;
+    }
+    .love-story .inner .timeline .story {
+        padding: 0;
+    }
+
+
+    /* wrapper 01 */
+    .wrapper-01 {
+        background-image: var(--wrapper-01);
+    }
+
+
+    /* Reservation */
+    .rsvp-form .head h1,
+    .rsvp .rsvp-confirm h1 {
+        font-size: 5vw;
+    }
+
+
+    /* Foot Wrapper */
+    /* .foot-wrapper .orn.orn-06 {
+        bottom: -200px;
+        left: 50%;
+        transform: translate(-50%);
+        width: 110%;
+        height: 400px;
+        background-image: var(--orn-06);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    } */
+
+
+}
+
+
+
+/* 480px */
+@media only screen and (max-width: 480px) {
+
+    /* Cover */
+    .cover .cover-bridegroom > div h1 {
+        font-size: clamp(42px, 5.5vw, 80px);
+    }
+    .cover .orn.bg-cover-01 {
+        height: clamp(220px, 37%, 320px);
+    }
+    .cover .orn.bg-cover-02 {
+        height: min(27%, 80px);
+        background-position: top 0 left -20px;
+    }
+
+    /* Save the Date */
+    .save-date .save-date-inner .schedule .countdown {
+        width: 100%;
+    }
+
+    /* Live Streaming */
+    .live-streaming .inner .orn.orn-05 {
+        width: 85%;
+        /* margin: 10px auto 20px auto; */
+    }
+
+}
+
+/* 400 */
+@media only screen and (max-width: 400px) {
+
+    .cover .orn.bg-cover-01 {
+        height: clamp(220px, 34.5%, 320px);
+    }
+
+}
+
+
+/* 380 */
+@media only screen and (max-width: 380px) {
+
+    .cover .orn.bg-cover-01 {
+        height: clamp(245px, 40%, 320px);
+    }
+
+}
+
+
+/* 300px */
+@media only screen and (max-width: 300px) {
+
+    /* Save the Date */
+    .save-date .save-date-inner .schedule .countdown {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
