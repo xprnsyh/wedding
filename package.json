@@ -23,6 +23,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "suggestags": "^1.27.0"
+        "suggestags": "^1.27.0",
+        "sweetalert2": "^11.7.32"
     }
 }

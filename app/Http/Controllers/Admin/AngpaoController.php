@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\LogActivity;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AngpaoRequest;
 use Illuminate\Http\Request;
 use App\Models\Angpao;
-
+use App\Models\Event;
+use App\Models\Order;
 
 class AngpaoController extends Controller
 {
@@ -24,8 +26,13 @@ class AngpaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($event_id)
     {
+        $list_angpao = Angpao::where('event_id', $event_id)->get();
+        
+        return view('admin.event.detail.anngpao', [
+            'list_angpao' => $list_angpao
+        ]);
     }
 
     /**
@@ -82,9 +89,16 @@ class AngpaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editAngpao($invoice)
     {
-        //
+        $order = Order::where('invoice', $invoice)->first();
+        $event = Event::where('order_id', $order->id)->first();
+        $list_angpao = Angpao::where('event_id', $event->id)->get();
+        LogActivity::addToLog('Edit halaman event ' . $event->slug, 'Akses halaman event');
+        return view('admin.event.edit.angpao', [
+            'event' => $event,
+            'list_angpao' => $list_angpao
+        ]);
     }
 
     /**

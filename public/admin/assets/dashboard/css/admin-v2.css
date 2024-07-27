@@ -152,6 +152,43 @@ h4 {
     background: #498aaf;
 }
 
+.btn.btn-primary.green {
+    background: #33ff21;
+    border-color: #33ff21;
+}
+
+.btn.btn-primary.green:active {
+    background: #33ff21 !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-color: #33ff21 !important;
+}
+
+.btn.btn-primary.green:focus {
+    -webkit-box-shadow: 0 0 0 0.1rem rgba(69, 245, 66, 0.5) !important;
+    box-shadow: 0 0 0 0.1rem rgba(69, 245, 66, 0.5) !important;
+}
+
+.btn.btn-primary.green:hover {
+    background: #53e433;
+}
+
+.btn.btn-linear-green {
+    border-radius: 5px;
+    padding: 10.5px 12px;
+    background: linear-gradient(132.17deg, #caffbb 11.81%, #42f542 75.09%);
+    border: 1px solid #4ef542;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #ffffff;
+    font-size: 0.75em;
+    font-family: Roboto;
+}
+
+.btn.btn-linear-green:hover {
+    background: linear-gradient(-132.17deg, #caffbb 11.81%, #42f542 75.09%);
+}
+
 .btn.btn-primary:active {
     background: #f54291 !important;
     -webkit-box-shadow: none;
@@ -204,6 +241,18 @@ table a.action-icon.compass {
 
 table a.action-icon.object-group {
     background: rgba(245, 66, 145, 0.3);
+}
+
+table a.action-icon.copy{
+    background: rgb(252, 252, 83);
+}
+
+table a.action-icon.download{
+    background: #04c40ed5;
+}
+
+table a.action-icon.send{
+    background: rgba(250, 30, 30, 0.439);
 }
 
 table a.action-icon.edit {

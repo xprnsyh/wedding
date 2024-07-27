@@ -84,6 +84,14 @@
                         <span>My Events</span>
                     </div>
                 </a>
+                <a href="{{ route('customer.manual.book') }}" class="menu-link" target="_blank">
+                    <div id="menu-logs" class="menu {{ request()->is('customer/petunjuk*') ? 'active' : '' }}">
+                        <object oa-reusable-svg
+                            data="{{ asset(request()->is('customer/petunjuk*') ? 'admin/assets/dashboard/icons/dashboard/settings-active.svg' : 'admin/assets/dashboard/icons/dashboard/settings.svg') }}"
+                            type="image/svg+xml" class="home-icon" height="25" width="25"></object>
+                        <span>Manual Book</span>
+                    </div>
+                </a>
             </div>
         </div>
     </aside>

@@ -588,10 +588,8 @@
                 <div class="quote-end-inner" data-aos="fade-up" data-aos-duration="1000">
                     <p>
                         "And one of His signs is that He has created for you,spouses from amongst yourselves so that you
-                        might take
-                        comfort in them and He has placed between you, love and mercy. In this there is surely evidence
-                        (of the
-                        truth)
+                        might take comfort in them and He has placed between you, love and mercy. In this there is surely evidence
+                        (of the truth)
                         for the people who carefully think.<br />
                         <br />
                         (Ar-Rum: 21)"

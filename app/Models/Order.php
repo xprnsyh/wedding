@@ -12,7 +12,7 @@ class Order extends Model
         'invoice', 'customer_id',
         'customer_name', 'customer_phone',
         'customer_address', 'status', 'district_id',
-        'subtotal'
+        'subtotal', 'discount_amount'
     ];
 
     public function customer()
@@ -23,5 +23,14 @@ class Order extends Model
     public function event()
     {
         return $this->hasOne(Event::class);
+    }
+    public function orderDetail()
+    {
+        return $this->hasOne(OrderDetail::class);
+    }
+
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
     }
 }

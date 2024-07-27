@@ -8,10 +8,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{ asset('img/primary-icon.png') }}" type="image/x-icon" />
+    <!--<link rel="icon" href="{{ asset('img/primary-icon.png') }}" type="image/x-icon" />-->
+    <meta property="og:image" itemprop="image" content="{{ asset('img/logo-hoofey-meta.png') ?? ''}}">
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />
     <!-- END META SECTION -->
 
     <title>Hoofey - Wedding Invitation Website</title>
+
+     <link rel="icon" href="{{asset('favicon_hoofey.ico')}}" type="image/x-icon"> 
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -24,6 +30,7 @@
 <body>
     @include('layouts.includes._navbarv2')
     @include('layouts.includes._sidebarv2')
+    @include('popper::assets')
 
     <main class="content-wrapper active">
         {{-- Breadcrumb --}}
@@ -49,6 +56,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
     </script>
+    <script src="https://use.fontawesome.com/e912f54b8f.js"></script>
     @yield('add-js')
     <script>
         $(document).ready(function() {

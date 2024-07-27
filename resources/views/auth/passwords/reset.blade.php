@@ -34,7 +34,8 @@
         </div>
         <div class="card">
             <div class="body">
-                <form action="{{ route('password.update') }}" method="POST">
+                @include('layouts.alert')
+                <form action="{{ route('password.reset.submit') }}" method="POST">
                     @csrf
                     <div class="msg">
                         Please enter an email and new password
@@ -47,11 +48,11 @@
                         <div class="form-line">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
                         </div>
-                        @error('email')
+                        <!-- @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                        @enderror
+                        @enderror -->
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">
@@ -60,11 +61,11 @@
                         <div class="form-line">
                             <input id="password" type="password" placeholder="New Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                         </div>
-                        @error('password')
+                        <!-- @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                        @enderror
+                        @enderror -->
 
                     </div>
 

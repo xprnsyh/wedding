@@ -63,8 +63,9 @@
                             <table id="datatables" class="display dt-responsive table table-hover" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Invoice</th>
-                                        <th>Subdomain</th>
+                                    <th>Invoice</th>
+                                        <th>Link-Monitor</th>
+                                        <th>Link-Meja Tamu</th>
                                         <th>Mempelai Pria</th>
                                         <th>Acara Ijab</th>
                                         <th width="130">Opsi</th>
@@ -81,8 +82,25 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="https://hoofey.id/s/{{ $event->id }}"
-                                                    target="_blank">{{ $event->slug }}</a>
+                                                <!-- <a  href="/s/{{ $event->id }}"
+                                                    target="_blank" title="Monitor"><iconify-icon icon="lucide:monitor-play"></iconify-icon></a> -->
+                                                @if ($event->order->orderDetail->product_id == 4)
+                                                    <a  href="/s/{{ $event->id }}/{{ 1 }}"
+                                                        target="_blank" title="Monitor 1"><iconify-icon icon="lucide:monitor-play"></iconify-icon></a>
+                                                    <a  href="/s/{{ $event->id }}/{{ 2 }}"
+                                                        target="_blank" title="Monitor 2" class="m-3"><iconify-icon icon="lucide:monitor-play"></iconify-icon></a>
+                                                @else
+                                                    <a href="#" title="Monitor"><iconify-icon icon="lucide:monitor-play"></iconify-icon></a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($event->order->orderDetail->product_id == 3 || $event->order->orderDetail->product_id == 4)
+                                                    <a href="{{ route('list.guestbook', [ 'slug' => $event->slug, 'id_meja' => 1 ]) }}" target="_blank" title="Meja tamu 1"><iconify-icon icon="guidance:information-desk-people"></iconify-icon></a>
+                                                    <a href="{{ route('list.guestbook', [ 'slug' => $event->slug, 'id_meja' => 2 ]) }}" class="m-3" target="_blank" title="Meja tamu 2"><iconify-icon icon="guidance:information-desk-people"></iconify-icon></a>
+                                                @else
+                                                    <a href="#" title="Meja tamu"><iconify-icon icon="guidance:information-desk-people"></iconify-icon></a>
+                                                @endif
+                                                <!-- <a href="{{ route('list.guestbook', $event->slug) }}" target="_blank" title="Meja tamu"><iconify-icon icon="guidance:information-desk-people"></iconify-icon></a> -->
                                             </td>
                                             <td>{{ $event->nama_lengkap_mempelai_pria }}</td>
                                             <td>{{ $event->tanggal_ijab }}</td>
@@ -229,6 +247,7 @@
     <script src="https://use.fontawesome.com/e912f54b8f.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script>
         $(document).ready(function() {
             $("#datatables").DataTable({

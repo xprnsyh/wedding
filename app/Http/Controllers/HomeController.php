@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
 
     /**
@@ -37,24 +37,26 @@ class HomeController extends Controller
         $users = User::all();
         $customers = Customer::all();
         $orders = Order::where('status', 'PENDING')->get();
-        $invitations = Invite::join('events', 'events.id', '=', 'invites.event_id')
-            ->select('invites.kode_kupon', 'events.nama_panggilan_mempelai_pria', 'events.nama_panggilan_mempelai_wanita', 
-            'events.jam_mulai_ijab', 'events.jam_selesai_ijab', 'events.lokasi_ijab', 'events.jam_mulai_resepsi', 
-            'events.jam_selesai_resepsi', 'events.lokasi_resepsi', 'events.slug', 'events.tanggal_ijab')
-            ->where('invites.guest_id', Auth::id())->with('events')->get();
+        // $invitations = Invite::join('events', 'events.id', '=', 'invites.event_id')
+        //     ->select('invites.kode_qr', 'events.nama_panggilan_mempelai_pria', 'events.nama_panggilan_mempelai_wanita', 
+        //     'events.jam_mulai_ijab', 'events.jam_selesai_ijab', 'events.lokasi_ijab', 'events.jam_mulai_resepsi', 
+        //     'events.jam_selesai_resepsi', 'events.lokasi_resepsi', 'events.slug', 'events.tanggal_ijab')
+        //     ->with('events')
+        //     ->get();
+        $invitations = null;
         $invitations_foradmin = Event::orderBy('tanggal_ijab', 'DESC')->get();
-
         $my_customer = Customer::where('email', Auth::user()->email)->first();
-
-
-        $events = [];
+        $events = null;
         $order_pending = [];
         if ($my_customer != null) {
             $order_pending = Order::where('status', 'PENDING')->where('customer_id', $my_customer->id)->get();
             $events = Event::where('created_by', $my_customer->id)->get();
+            $invitations = Invite::join('events', 'events.id', '=', 'invites.event_id')
+                ->where('events.created_by', $my_customer->id)
+                ->select('invites.*', 'events.*')
+                ->get();
         }
-        $guest_book = GuestBook::where('user_id', Auth::id())->with('event', 'user')->get();
-
+        // $guest_book = GuestBook::where('event_id', $events->id)->get();
         LogActivity::addToLog('', 'Akses halaman dashboard home');
 
         return view('home', [
@@ -64,7 +66,7 @@ class HomeController extends Controller
             'invitations' => $invitations,
             'invitations_foradmin' => $invitations_foradmin,
             'events' => $events,
-            'guest_books' => $guest_book,
+            // 'guest_books' => $guest_book,
             'order_pending' => $order_pending
         ]);
     }

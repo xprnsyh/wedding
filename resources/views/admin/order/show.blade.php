@@ -31,7 +31,7 @@
                                         <i class="material-icons">more_vert</i>
                                     </a>
                                     <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);" target="_blank">
+                                        <li><a href="{{ route('admin.export.invoice.pdf', $order->invoice) }}" target="_blank">
                                                 <i class="material-icons">print</i>
                                                 Print Invoice
                                             </a>
@@ -61,7 +61,7 @@
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <b>Name Customer</b>
-                                        <input type="text" name="customer_name" id="customer_name" class="form-control" value="{{$order->customer->name}}" disabled>
+                                        <input type="text" name="customer_name" id="customer_name" class="form-control" value="{{$order->customer_name}}" disabled>
 
                                     </div>
                                 </div>
@@ -108,8 +108,9 @@
                                 <div class="form-line">
                                     <b>Province</b>
                                     <select name="province_id" id="province_id" class="form-control" disabled>
-                                        @foreach($provinces as $province)
-                                        <option value="{{$province->id}}">{{$province->name}}</option>
+                                        @foreach ($provinces as $province)
+                                            <option value="{{ $province->id }}" {{ ($province->id === $district_id->province_id ) ? 'selected' : '' }}>{{ $province->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -117,19 +118,30 @@
                                 <div class="form-line">
                                     <b>City</b>
                                     <select name="city_id" id="city_id" class="form-control" disabled>
-                                        <option value="">Pilih Kabupaten/Kota</option>
+                                        @if($cities->count() > 0)
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city->id }}" {{ ($city->id === $district_id->city_id) ? 'selected' : '' }}>{{ $city->type }} {{ $city->name }}
+                                                </option>
+                                            @endforeach
+                                        @else
+                                            <option value="" >Pilih Kota</option>
+                                        @endif
                                     </select>
                                 </div>
                                 <br>
                                 <div class="form-line">
                                     <b>District</b>
                                     <select name="district_id" id="district_id" class="form-control" disabled>
+                                        @if($districts->count() > 0)
+                                            @foreach ($districts as $district)
+                                                <option value="{{ $district->id }}" {{ ($district->id === $district_id->id) ? 'selected' : '' }}>{{ $district->name }}
+                                                </option>
+                                            @endforeach
+                                        @else
                                         <option value="">Pilih Kecamatan</option>
+                                        @endif
                                     </select>
                                 </div>
-
-
-
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <b>Address</b>
@@ -138,12 +150,8 @@
                                         <textarea name="customer_address" id="address" cols="30" rows="10" class="form-control no-resize" disabled>{{$order->customer_address}}</textarea>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
-
-
                         <div class="col-sm-12">
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group form-float">
@@ -152,14 +160,11 @@
                                         <select id="product_id" name="product_id" class="form-control show-tick" disabled>
                                             <option value="">None</option>
                                             @foreach ($products as $product)
-                                            <option value="{{ $product->id }}" {{($product->id == $order_detail->product_id) ? 'selected' : ' '}}>{{ $product->name }}</option>
+                                                <option value="{{ $product->id }}" {{($product->id == $order_detail->product_id) ? 'selected' : ' '}}>{{ $product->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-
                                     <br>
-
-
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
@@ -173,19 +178,9 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-
-
-
                     <a href="{{route('admin.edit.order', ['invoice' => $order->invoice])}}" class="btn bg-orange waves-effect">Edit</a>
-
-
                 </div>
-
-
-
             </div>
         </div>
 

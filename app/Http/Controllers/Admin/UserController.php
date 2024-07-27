@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\LogActivity;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\User;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -305,5 +307,49 @@ class UserController extends Controller
         $user->delete($user);
 
         return redirect()->back()->with(['success' => 'Sukses Menghapus']);
+    }
+
+    public function editPassword(Request $request){
+        $user = User::find(Auth::id());
+
+        return view('admin.user.edit', ['user' => $user]);
+    }
+    
+    public function updatePassword(Request $request){
+
+        $this->validate($request, [
+            'old_password' => 'required',
+            'new_password' => 'required|different:old_password',
+            'confirm_new_password' => 'required|same:new_password',
+        ]);
+        $user = User::find(Auth::id());
+        $hashedPassword = Auth::user()->password;
+
+        if ($request->old_password != null && $request->new_password != null) {
+            if (Hash::check($request->old_password, $hashedPassword)) {
+
+                if (!Hash::check($request->new_password, $hashedPassword)) {
+                    $user = Auth::user();
+                    $user->password = bcrypt($request->new_password);
+                    $user->updated_at = now();
+                    $user->save();
+                    $data['success'] = 'Set new password successfully.';
+                    LogActivity::addToLog('Edit Password ' . $user->name, 'Akses Halaman Update Password');
+                    return redirect()->back()->with($data);
+                } else {
+                    $data['error'] = 'New password cannot be the same as old password.';
+                    LogActivity::addToLog('Edit Password ' . $user->name, 'Akses Halaman Update Password');
+                    return redirect()->back()->with($data);
+                }
+            } else {
+                $data['error'] = 'Current password not match.';
+                LogActivity::addToLog('Edit Password ' . $user->name, 'Akses Halaman Update Password');
+                return redirect()->back()->with($data);
+            }
+        } else {
+            $data['error'] = 'Please fill all the field.';
+            LogActivity::addToLog('Edit Password ' . $user->name, 'Akses Halaman Update Password');
+            return redirect()->back()->with($data);
+        }
     }
 }

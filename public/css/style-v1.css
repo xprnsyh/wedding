@@ -373,7 +373,7 @@ section.price .text-card .text-body p {
     margin: 0px;
 }
 
-section.price {
+section.price, section.features {
     margin-top: 100px;
     margin-bottom: 100px;
 }
@@ -437,8 +437,16 @@ section.price .row.price-list h1 span {
     font-weight: 600;
     color: #f54291;
 }
+section.features .row.features-list h1 span {
+    font-weight: 600;
+    color: #f54291;
+}
 
 section.price .row.price-list .text-body p {
+    color: #9d9d9d;
+    font-size: 0.9em;
+}
+section.features .row.features-list .text-body p {
     color: #9d9d9d;
     font-size: 0.9em;
 }

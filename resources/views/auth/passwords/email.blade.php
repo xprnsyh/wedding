@@ -29,11 +29,11 @@
     <div class="fp-box">
         <div class="logo">
             <a href="javascript:void(0);">Forgot<b> Password</b></a>
-
         </div>
         <div class="card">
             <div class="body">
-                <form action="{{ route('password.email') }}" method="POST">
+                @include('layouts.alert')
+                <form action="{{ route('password.forgot.link') }}" method="POST">
                     @csrf
                     <div class="msg">
                         Enter your email address that you used to register. We'll send you a
@@ -46,14 +46,14 @@
                         <div class="form-line">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
                         </div>
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                        <!-- @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror -->
                     </div>
 
-                    <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">RESET PASSWORD</button>
+                    <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">SEND RESET PASSWORD LINK</button>
 
                     <div class="row m-t-20 m-b--5 align-center">
                         <a href="{{route('login')}}">Sign In!</a>

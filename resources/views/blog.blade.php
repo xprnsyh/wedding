@@ -5,7 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     {{-- icon --}}
-    <link rel="shortcut icon" href="{{ asset('img/primary-icon.png') }}">
+    <!--<link rel="shortcut icon" href="{{ asset('img/primary-icon.png') }}">-->
+    <link rel="icon" href="{{asset('favicon_hoofey.ico')}}" type="image/x-icon"> 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
@@ -47,13 +48,16 @@
                         <a class="nav-link" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/price') }}">Price</a>
+                        <a class="nav-link" href="{{ url('/feature') }}">Feature</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/price') }}">Product</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ url('/blog') }}">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/story') }}">Story</a>
+                        <a class="nav-link" href="{{ url('/story') }}">Template</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-secondary" href="{{ route('login') }}">Masuk</a>

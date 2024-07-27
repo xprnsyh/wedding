@@ -17,7 +17,6 @@ class CreateInvitesTable extends Migration
             $table->bigIncrements('id');
             $table->string('kode_kupon')->unique();
             $table->unsignedBigInteger('event_id');
-            $table->unsignedBigInteger('guest_id');
             $table->enum('status',['Diundang','Hadir','Tidak Hadir']);
             $table->boolean('is_confirmed')->default(0);
             $table->boolean('is_invited')->default(0);
@@ -28,9 +27,7 @@ class CreateInvitesTable extends Migration
             ->onDelete('cascade');
 
 
-            $table->foreign('guest_id')
-            ->references('id')->on('users')
-            ->onDelete('cascade');
+            
 
             $table->timestamps();
         });

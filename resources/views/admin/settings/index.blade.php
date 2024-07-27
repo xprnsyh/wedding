@@ -235,6 +235,36 @@
                         </a>
                     </div>
                 </div>
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mt-4">
+                    <div class="card">
+                        <a href="{{ route('admin.index.list_bank') }}">
+                            <div class="card-body menu-settings text-center" style="padding: 32px">
+                                <span class="fa fa-credit-card-alt" style="font-size: 40px"></span>
+                                <h5>List Bank Angpao</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mt-4">
+                    <div class="card">
+                        <a href="{{ route('admin.list.discount') }}">
+                            <div class="card-body menu-settings text-center" style="padding: 32px">
+                                <span class="fa fa-percent" style="font-size: 40px"></span>
+                                <h5>List Discount</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 mt-4">
+                    <div class="card">
+                        <a href="{{ route('admin.index.list_template') }}">
+                            <div class="card-body menu-settings text-center" style="padding: 32px">
+                                <span class="fa fa-envelope-open" style="font-size: 40px"></span>
+                                <h5>List Template</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
         <section class="events event-settings">

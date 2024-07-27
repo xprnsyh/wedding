@@ -41,13 +41,7 @@
                                             {{ $invitations_foradmin ? $invitations_foradmin->count() : 0 }}</p>
                                     </div>
                                     <div class="col-5">
-                                        <div class="
-                                    icon-card
-                                    wrapper
-                                    d-flex
-                                    align-items-center
-                                    justify-content-end
-                                    "
+                                        <div class="icon-card wrapper d-flex align-items-center justify-content-end"
                                             style="height: 100%">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56"
                                                 fill="none">
@@ -158,7 +152,7 @@
                     </div>
                 </div>
             </section>
-            <section class="invitation">
+            <!-- <section class="invitation">
                 <div class="row">
                     <div class="col-12">
                         <h1>Invitation</h1>
@@ -206,7 +200,7 @@
                         @endforeach
                     </div>
                 @endif
-            </section>
+            </section> -->
         </div>
     @endrole
     @role('customer')
@@ -220,7 +214,7 @@
                                 <div class="row">
                                     <div class="col-7">
                                         <h4>Undangan Kamu</h4>
-                                        <p class="big-number">{{ $invitations ? $invitations->count() : 0 }}</p>
+                                        <p class="big-number">{{ $invitations ? ($invitations->count()) : 0 }}</p>
                                     </div>
                                     <div class="col-5">
                                         <div class=" icon-card wrapper d-flex align-items-center justify-content-end"
@@ -332,53 +326,6 @@
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <section class="invitation">
-                <div class="row">
-                    <div class="col-12">
-                        <h1>Invitation</h1>
-                    </div>
-                </div>
-                @if ($invitations->count() > 0)
-                    <div class="row">
-                        @foreach ($invitations as $invitation)
-                            <div class="col-lg-4 col-md-6 col-sm-6 mt-3">
-                                <div class="card">
-                                    <div class="card-img-top text-center" {{-- style="background-size: cover; background-repeat: no-repeat; background-position: center; background: -webkit-gradient(linear, left top, left bottom, color-stop(11%, rgba(0, 0, 0, 0)), to(#000000)), {{ asset('admin/assets/images/events/' . $invitation->order->invoice . '/' . $invitation->logo_req) }}, #ffffff" --}}>
-                                        <p>The Wedding of</p>
-                                        <h3>{{ $invitation->nama_panggilan_mempelai_pria }} &
-                                            {{ $invitation->nama_panggilan_mempelai_wanita }}</h3>
-                                        <p>{{ date_format(new DateTime($invitation->tanggal_ijab), 'd . m . Y') }}</p>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-9 d-flex align-items-center">
-                                                <div class="invitation-text">
-                                                    <h4>The Wedding of
-                                                        {{ $invitation->nama_panggilan_mempelai_pria }} &
-                                                        {{ $invitation->nama_panggilan_mempelai_wanita }}
-                                                    </h4>
-                                                    <p class="card-text text-pink">
-                                                        <a href="{{ route('see.event', ['slug' => $invitation->slug]) }}"
-                                                            style=" color: #f54291;">
-                                                            {{ route('see.event', ['slug' => $invitation->slug]) }}
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="img-barcode-wrapper">
-                                                    {!! QrCode::size(250)->generate($invitation->kode_kupon) !!}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
             </section>
         </div>
     @endrole

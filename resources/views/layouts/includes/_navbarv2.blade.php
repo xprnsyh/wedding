@@ -24,8 +24,10 @@
         <div class="dropdown-menu" aria-labelledby="dropdownUser">
             @role('admin')
                 <a href="{{ route('admin.profile') }}" class="dropdown-item">Profile</a>
+                <a href="{{ route('admin.edit.password') }}" class="dropdown-item">Change Password</a>
             @else
                 <a href="{{ route('customer.profile') }}" class="dropdown-item">Profile</a>
+                <a href="{{ route('customer.edit.password') }}" class="dropdown-item">Change Password</a>
             @endrole
             <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Product;
 
 class BlogController extends Controller
 {
@@ -84,5 +85,12 @@ class BlogController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getProductHome()
+    {
+        $product = Product::with('discount')->get();
+
+        return view('price', ['products' => $product]);
     }
 }

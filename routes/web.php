@@ -1,7 +1,13 @@
 <?php
 
+use App\Events\GuestBookAttending;
+use App\Http\Controllers\Admin\OrderController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\controllers\GuestListController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,7 +19,39 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// use App\Models\Post;
+
+/**
+ * Auth
+ */
+
+
+
+
+
+/**
+ * Forgot Password
+ */
+Route::get('/password/forgot', [ForgotPasswordController::class, 'showForgotPassword'])->name('password.forgot.form');
+Route::post('/password/forgot', [ForgotPasswordController::class, 'sendResetLink'])->name('password.forgot.link');
+Route::get('/password/reset/form/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset.form');
+Route::post('/password/reset/submit', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset.submit');
+
+
+/**
+ * Landing Page
+ */
+
+Route::get('/landingpages', 'GuestController@landingpages');
+
+Route::view('/price', 'price');
+Route::get('/story', 'GuestController@listEvent');
+Route::get('/blog', 'BlogController@index')->name('index.blog');
+Route::get('/blog/{slug}', 'BlogController@show')->name('show.blog');
+Route::get('/syarat-dan-ketentuan', 'GuestController@termofuse')->name('termofuse');
+Route::get('/kebijakan-privasi', 'GuestController@privacypolicy')->name('privacypolicy');
+
+Route::get('/about', 'AboutController@index');
+
 
 Route::get('/', 'GuestController@welcome');
 
@@ -26,34 +64,18 @@ Route::get('/order/show/{invoice}', 'OrderPageController@show')->name('show.orde
 Route::get('/paymentpage/create', 'PaymentPageController@create')->name('create.payment');
 Route::post('/paymentpage/store', 'PaymentPageController@store')->name('store.payment');
 
-Route::get('/about', function () {
-    return view('about');
-});
-Route::view('/price', 'price');
+
+Route::get('/price', 'BlogController@getProductHome')->name('price');
+
+Route::view('/feature', 'feature');
 Route::get('/story', 'GuestController@listEvent');
 Route::get('/blog', 'BlogController@index')->name('index.blog');
 Route::get('/blog/{slug}', 'BlogController@show')->name('show.blog');
 Route::get('/register', 'RegisterController@showRegistrationForm')->name('register');
-Route::get('/template/choco', function () {
-    return view('template-1');
-});
-
-Route::get('/template/pink', function () {
-    return view('template-2');
-});
-
-Route::get('/template/blue', function () {
-    return view('template-3');
-});
-
-Route::get('/template/grey', function () {
-    return view('template-4');
-});
-
-
-Route::get('/landingpages', 'GuestController@landingpages');
+Auth::routes(['verify' => true]);
 
 Auth::routes();
+Route::post('/register/user', [RegisterController::class, 'createUser'])->name('verify.user');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -65,11 +87,71 @@ Route::post('/payment/{invoice}/confirmed', 'Customer\PaymentController@confirme
 
 Route::get('/{slug?}', 'GuestController@view')->name('see.event');
 Route::get('{slug?}/event/builder', 'GuestController@basiceventpage')->name('event-builder');
-Route::get('/{slug?}/guestbook', 'GuestController@guestbook')->name('see.guestbook');
+Route::get('/{slug?}/guestbook/{id_monitor?}', 'GuestController@guestbook')->name('see.guestbook');
 Route::get('/{slug?}/thankyou', 'GuestController@thankyou')->name('see.thankyou');
-Route::get('/s/{id}', 'GuestController@redirect');
-Route::post('/attending/{id}', 'GuestController@attending')->name('attending');
+Route::get('/s/{id}/{id_monitor?}', 'GuestController@redirect');
+Route::get('/{slug?}/guestbook/list/{id_meja?}', 'GuestListController@indexGuestBook')->name('list.guestbook');
+Route::get('/guestbook/list/group/{id?}', 'GuestListController@indexListGroup')->name('list.group.guestbook');
+// Route::post('/attending/{id}', 'GuestController@attending')->name('attending');
+
+/**
+ * Meja Tamu Attending
+ */
+
+Route::post('/guestbook/attending', 'GuestListController@attending')->name('guest.attending');
+Route::post('/guestbook/attending/group', 'GuestListController@attendingGroup')->name('guest.attending.group');
+Route::post('/attending/manual', 'GuestListController@attendingManual')->name('guest.attending.manual');
+Route::post('/{slug?}/guestbook/new', 'GuestListController@newGuestBookManual')->name('new.guestbook');
+
+
+/**
+ * Undangan Wish
+ */
 Route::post('/wishes/{id}', 'GuestController@wishes')->name('wishes');
+
+/**
+ * Text Section
+ */
+Route::post('/text-section/quote/save', 'TextSectionController@storeQuote')->name('textSection.quote.store');
+Route::post('/text-section/title/save', 'TextSectionController@storeTitle')->name('textSection.title.store');
+/**
+ * Template Message
+ */
+
+Route::post('/template-message/save', 'TemplateMessageController@store')->name('template.message.store');
+
+/**
+ * Guest List
+ */
+Route::post('/{slug?}/add/guest', 'GuestListController@addGuest')->name('create.guest');
+Route::get('/{id?}/edit/guest', 'GuestListController@editGuest')->name('edit.guest');
+Route::post('/{id?}/update/guest', 'GuestListController@updateGuest')->name('update.guest');
+Route::get('/{slug?}/delete/{id?}', 'GuestListController@deleteGuest')->name('delete.guest.list');
+Route::get('/{slug?}/delete/selected', 'GuestListController@deleteCheck')->name('delete.guest');
+
+
+Route::get('/{slug?}/send_link_wa', 'GuestlistController@sendLinkWa')->name('send.link.wa');
+
+
+/**
+ * Import Export
+ */
+Route::post('/import/guest-list', 'GuestListController@import')->name('import.guest.list');
+Route::get('/sample/guest-list', 'GuestListController@sample')->name('sample.guest.list');
+Route::get('export-qrkode/{id?}', 'GuestListController@exportPdf')->name('export.pdf');
+
+Route::get('/guestbook/attending/{id}', 'GuestListController@exportGuestBookAttending')->name('guestbook.attending.pdf');
+
+
+
+/**
+ * Template
+ */
+
+Route::get('/template/choco', 'TemplateController@choco');
+Route::get('/template/pink', 'TemplateController@pink');
+Route::get('/template/blue', 'TemplateController@blue');
+Route::get('/template/grey', 'TemplateController@grey');
 
 Route::get('/demo/gold', 'GuestController@demoGold')->name('demo.gold');
 Route::get('/demo/soft', 'GuestController@demoSoft')->name('demo.soft');
@@ -92,7 +174,10 @@ Route::get('/demo/v7', 'GuestController@demoV7')->name('demo.v7');
 
 
 
-
+/**
+ * Callback-flip
+ */
+Route::post('callback-flip/status', 'OrderController@callbackFlip');
 
 
 /**
@@ -114,6 +199,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('role:adm
     Route::get('/user/{id}/delete', 'UserController@destroy')->name('delete.user');
     Route::get('/profile', 'UserController@profile')->name('profile');
     Route::post('/profile/update', 'UserController@updateProfile')->name('update.profile');
+    Route::get('password/edit', 'UserController@editPassword')->name('edit.password');
+    Route::post('/password/update', 'UserController@updatePassword')->name('update.password');
 
     /**
      * CRUD Customer
@@ -207,17 +294,43 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('role:adm
     Route::get('/events', 'EventController@index')->name('list.event');
     Route::get('/events/create', 'EventController@create')->name('create.event');
     Route::post('/events/store', 'EventController@store')->name('store.event');
-    Route::post('/events/{id}/photo/store', 'EventController@storePhoto')->name('store.photo');
     Route::get('/events/{invoice}/edit', 'EventController@edit')->name('edit.event');
+    
+
     Route::post('/events/{id}/update', 'EventController@update')->name('update.event');
     Route::get('/events/{id}/delete', 'EventController@destroy')->name('delete.event');
-    Route::get('/photo/{id}/delete', 'EventController@destroyPhotoEvent')->name('delete.photo.event');
     Route::get('/events/{invoice}/show', 'EventController@show')->name('show.event');
+    //
     Route::get('/events/pdf/{invoice}', 'EventController@createPDF')->name('pdf.event');
     Route::get('/photo/{id}/avatar/wanita', 'EventController@deletePhotoWanita')->name('delete.photo.wanita');
     Route::get('/photo/{id}/avatar/pria', 'EventController@deletePhotoPria')->name('delete.photo.pria');
     Route::get('events/builder/{slug}', 'EventController@buildEvent')->name('event.build');
     Route::post('events/builder/{slug}/store', 'EventController@storeEventPage')->name('event.build.store');
+
+    /**
+     * CRUD Photo Event
+     */
+    Route::get('/events/{invoice}/edit/photos', 'EventController@editPhotos')->name('edit.photos');
+    Route::post('/events/{event_id}/photo/store', 'EventController@storePhoto')->name('store.photos');
+    Route::get('/photo/{id}/delete', 'EventController@destroyPhotoEvent')->name('delete.photo.event');
+
+    // Wedding Greating
+    Route::get('/events/{invoice}/edit/weddinggreetings', 'GuestBookController@editGreeting')->name('edit.greetings');
+    
+    // Text Message
+    Route::get('/events/{invoice}/edit/text-section', 'TextController@editTextSection')->name('edit.text');
+    Route::post('/events/{event_id}/text-section/quote/store', 'TextController@storeQuote')->name('textSection.quote.store');
+    Route::post('/events/{event_id}/text-section/title/store', 'TextController@storeTitle')->name('textSection.title.store');
+    // Template Message
+    Route::get('/events/{invoice}/edit/templatemessage', 'TextController@editMessage')->name('edit.templatemessage');
+    Route::post('/evnets/{event_id}/text-section/tempalte/store', 'TextController@storeTemplate')->name('textSection.template.store');
+    
+    // GuestBook
+    Route::get('/events/{invoice}/edit/guestbooks', 'GuestBookController@editGuestBook')->name('edit.guestbooks');
+
+    // SendLink
+    Route::get('/events/{invoice}/edit/sendlink', 'GuestBookController@editSendLink')->name('edit.sendlink');
+    
 
     /**
      * CRUD Post
@@ -242,16 +355,54 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('role:adm
     /**
      * CRUD Angpao
      */
-
+    Route::get('/events/{invoice}/edit/angpao', 'AngpaoController@editAngpao')->name('edit.angpao');
+    // Route::get('angpao/{event_id}', 'AngpaoController@index')->name('index.angpao');
     Route::post('angpao/store', 'AngpaoController@store')->name('store.angpao');
     Route::post('angpao/{id}/update', 'AngpaoController@update')->name('update.angpao');
     Route::get('angpao/{id}/delete', 'AngpaoController@destroy')->name('delete.angpao');
 
+    /**
+     * List Bank Angpao
+     */
+
+    Route::get('/list-bank-angpao', 'ListBankAngpaoController@index')->name('index.list_bank');
+    Route::post('/list-bank-angpao/store', 'ListBankAngpaoController@store')->name('store.list_bank');
+    Route::get('/list-bank-angpao/{id}/edit', 'ListBankAngpaoController@edit')->name('edit.list_bank');
+    Route::post('/list-bank-angpao/{id}/update', 'ListBankAngpaoController@update')->name('update.list_bank');
+    Route::get('/list-bank-angpao/{id}/delete', 'ListBankAngpaoController@destroy')->name('delete.list_bank');
+
+    /**
+     * Discount
+     */
+
+    Route::get('/discount', 'DiscountController@index')->name('list.discount');
+    Route::post('/discount/create', 'DiscountController@store')->name('create.discount');
+    Route::get('/discount/get/{id}', 'DiscountController@getDiscountById');
+    Route::post('/discount/{id}/edit', 'DiscountController@update')->name('edit.discount');
+    Route::get('/discount/{id}/delete', 'DiscountController@destroy')->name('delete.discount');
+    Route::get('/discount/change/status/{id}', 'DiscountController@changeStatus');
+
+    /**
+     * Template List
+     */
+
+    Route::get('/list-template', 'TemplateListController@index')->name('index.list_template');
+    Route::post('/list-template/store', 'TemplateListController@store')->name('store.list_template');
+    Route::get('/list-template/{id}/edit', 'TemplateListController@edit')->name('edit.list_template');
+    Route::post('/list-template/{id}/update', 'TemplateListController@update')->name('update.list_template');
+    Route::get('/list-template/{id}/delete', 'TemplateListController@destroy')->name('delete.list_template');
+    Route::get('/list-template/change/status/{id}', 'TemplateListController@changeStatus');
 
     /**
      * Guest Book
      */
     Route::get('/ucapan/{id}/delete', 'EventController@deleteGuestBook')->name('delete.ucapan');
+
+
+    /**
+     * Export
+     */
+    Route::get('/export/invoice/{invoice?}', 'OrderController@exportInvoice')->name('export.invoice.pdf');
 });
 
 /**
@@ -264,6 +415,8 @@ Route::namespace('Customer')->prefix('customer')->name('customer.')->middleware(
      */
     Route::get('/profile', 'UserController@profile')->name('profile');
     Route::post('/profile/update', 'UserController@updateProfile')->name('update.profile');
+    Route::get('password/edit', 'UserController@editPassword')->name('edit.password');
+    Route::post('/password/update', 'UserController@updatePassword')->name('update.password');
     /**
      * CRUD Orders
      */
@@ -284,21 +437,34 @@ Route::namespace('Customer')->prefix('customer')->name('customer.')->middleware(
     Route::get('/events/create', 'EventController@create')->name('create.event');
     Route::post('/events/store', 'EventController@store')->name('store.event');
     Route::post('/events/{id}/photo/store', 'EventController@storePhoto')->name('store.photo');
+
     Route::get('/events/{invoice}/edit', 'EventController@edit')->name('edit.event');
+    Route::get('/events/{invoice}/edit/text-section', 'EventController@editTextSection')->name('edit.event.text');
+    Route::get('/events/{invoice}/edit/photos', 'EventController@editPhotos')->name('edit.event.photos');
+    Route::get('/events/{invoice}/edit/guestbooks', 'EventController@editGuestBook')->name('edit.event.guestbooks');
+    Route::get('/events/{invoice}/edit/templatemessage', 'EventController@editMessage')->name('edit.event.templatemessage');
+    Route::get('/events/{invoice}/edit/sendlink', 'EventController@editSendLink')->name('edit.event.sendlink');
+    Route::get('/events/{invoice}/edit/angpao', 'EventController@editAngpao')->name('edit.event.angpao');
+    Route::get('/events/{invoice}/edit/weddinggreetings', 'EventController@editGreeting')->name('edit.event.greetings');
+
     Route::post('/events/{id}/update', 'EventController@update')->name('update.event');
     Route::get('/events/{id}/delete', 'EventController@destroy')->name('delete.event');
     Route::get('/photo/{id}/delete', 'EventController@destroyPhotoEvent')->name('delete.photo.event');
     Route::get('/events/{invoice}/show', 'EventController@show')->name('show.event');
-    Route::post('/invite/event/{id}', 'EventController@add')->name('add.guest');
-    Route::post('/write/guestbook', 'EventController@writeGuestBook')->name('write.guestbook');
+    // Route::post('/invite/event/{id}', 'EventController@add')->name('add.guest');
+    // Route::post('/write/guestbook', 'EventController@writeGuestBook')->name('write.guestbook');
     Route::get('/events/pdf/{invoice}', 'EventController@createPDF')->name('pdf.event');
     Route::get('events/builder/{slug}/', 'EventController@buildEvent')->name('event.build');
     Route::post('events/builder/{slug}/store', 'EventController@storeEventPage')->name('event.build.store');
+    /////
+    Route::get('/event/{event_id}/guestbook', 'EventController@indexGuestbook')->name('index.guestbook');
+    Route::get('/event/{event_id}/sendlink', 'EventController@indexSendLink')->name('index.sendlink');
+    Route::get('/event/{event_id}/weeding-greetings', 'EventController@indexWeddingGreetings')->name('index.wedding.greetings');
 
     /**
      * CRUD Angpao
      */
-
+    Route::get('angpao/{event_id}', 'AngpaoController@index')->name('index.angpao');
     Route::post('angpao/store', 'AngpaoController@store')->name('store.angpao');
     Route::post('angpao/{id}/update', 'AngpaoController@update')->name('update.angpao');
     Route::get('angpao/{id}/delete', 'AngpaoController@destroy')->name('delete.angpao');
@@ -307,4 +473,16 @@ Route::namespace('Customer')->prefix('customer')->name('customer.')->middleware(
      * Guest Book
      */
     Route::get('/ucapan/{id}/delete', 'EventController@deleteGuestBook')->name('delete.ucapan');
+
+    /**
+     * Import Export
+     */
+
+    Route::get('/export/invoice/{invoice?}', 'OrderController@exportInvoice')->name('export.invoice.pdf');
+    Route::post('/upload/bukti-transfer', 'OrderController@uploadBuktiTransfer')->name('bukti.transfer');
+    /**
+     * Petunjuk Penggunaan
+     */
+
+    Route::get('/petunjuk', 'ManualBookController@index')->name('manual.book');
 });

@@ -6,8 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Undangan Pernikahan, Undangan pernikahan online, website undangan">
+    <meta property="og:image" itemprop="image" content="{{ asset('img/logo-hoofey-meta.png') ?? ''}}">
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />
     {{-- icon --}}
-    <link rel="shortcut icon" href="{{ asset('img/primary-icon.png') }}">
+    <!--<link rel="shortcut icon" href="{{ asset('img/primary-icon.png') }}">-->
+    <link rel="icon" href="{{asset('favicon_hoofey.ico')}}" type="image/x-icon"> 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
@@ -49,13 +54,16 @@
                         <a class="nav-link" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/price') }}">Price</a>
+                        <a class="nav-link" href="{{ url('/feature') }}">Feature</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/price') }}">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/blog') }}">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/story') }}">Story</a>
+                        <a class="nav-link" href="{{ url('/story') }}">Template</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-secondary" href="{{ route('login') }}">Masuk</a>
@@ -215,7 +223,7 @@
                         </div>
                         <div class="text-other-features">
                             <p>
-                                Tamu dapat melakukan konfirmasi kedatangan (RSVP), memberi doa
+                                Tamu dapat memberi doa
                                 atau ucapan yang semua akan tercatat secara online.
                             </p>
                         </div>
@@ -237,14 +245,8 @@
                         <div class="text-other-features">
                             <p>
                                 Tidak perlu repot lagi menulis di buku tamu, semua akan
-                                tercatat dilokasi secara online dengan menggunakan smartphone
-                                Android atau Iphone di penerima tamu.
+                                tercatat dilokasi secara online dengan melakukan scan QR Code pada undangan.
                             </p>
-                        </div>
-                        <div class="apps-store mt-4">
-                            <img src="{{ asset('img/store-android.png') }}" style="width: auto"
-                                alt="GooglePlay Store" />
-                            <img src="{{ asset('img/store-ios.png') }}" style="width: auto" alt="Apps Store" />
                         </div>
                     </div>
                 </div>
@@ -261,7 +263,7 @@
                         <div class="text-other-features">
                             <p>
                                 Sesuaikan desain website dengan konsep pernikahanmu pilih
-                                warna, gaya, foto, semua bisa dilakukan secara online.
+                                warna, gaya, foto, semua bisa dilakukan.
                             </p>
                         </div>
                     </div>

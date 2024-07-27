@@ -1,6 +1,6 @@
 /* Nanbar */
 .navbar{
- background-color: #8BC34A !important;
+ background-color: #c34a9d !important;
 }
 
 .navbar-toggler{
@@ -37,6 +37,11 @@
 
 .navbar-nav .nav-link:hover{
  color: #FFFF00 !important;
+}
+
+.button-color{
+  background-color: #c34a9d;
+  color: #fff;
 }
 
 /* Jumbutorn */

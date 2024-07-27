@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" href="{{asset('favicon_hoofey.ico')}}" type="image/x-icon"> 
 
     <!-- Bootstrap CSS -->
     {{-- icon --}}
@@ -13,6 +14,11 @@
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ asset('css/style-v1.css') }}" />
     <title>Price - Don't Worry be Hoofey</title>
+    <style>
+        .striketrough{
+            text-decoration: line-through;
+        }
+    </style>
 </head>
 
 <body>
@@ -48,14 +54,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/') }}">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/feature') }}">Feature</a>
+                    </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ url('/price') }}">Price</a>
+                        <a class="nav-link" href="{{ url('/price') }}">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/blog') }}">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/story') }}">Story</a>
+                        <a class="nav-link" href="{{ url('/story') }}">Template</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-secondary" href="{{ route('login') }}">Masuk</a>
@@ -77,41 +86,58 @@
                     </div>
                     <div class="text-body text-center mt-4">
                         <p>
-                            Semua paket sudah mendapatkan halaman website, manajemen tamu,
-                            RSVP, komentar, dan buku tamu digital!
+                            Semua paket sudah mendapatkan undangan digital, undangan dengan nama tamu,
+                            music, dan ucapan pribadi!
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="row price-list">
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 col-12 mt-3">
+            <div class="row price-list  justify-content-center">
+                @foreach ($products as $product)
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-12 mt-3">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-3 col-md-2 col-sm-12">
-                                    <div class="icon-card">
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="icon-card" style="text-align: center;">
                                         <img src="{{ asset('img/icons/website.svg') }}" alt="" />
                                     </div>
                                 </div>
-                                <div class="col-lg-9 col-md-10 col-sm-12 col-12 p-0">
-                                    <div class="text-card">
-                                        <div class="text-body mb-2">
-                                            <p>Basic</p>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-12 p-0" style="text-align: center;">
+                                    <div class="text-card m-0">
+                                        <div class="text-body" >
+                                            <h3>{{ $product->name }}</h3>
                                         </div>
-                                        <div class="text-heading mb-3">
-                                            <h3>Rp. 747.000</h3>
-                                        </div>
+                                        @if($product->discount()->where('is_active',true)->count() > 0)
+                                            @if($product->discount->discount_type == 'Presentase')
+                                                <?php
+                                                    $harga_awal = $product->price;
+                                                    $discount = $product->discount->amount;
+                                                    $discount = ($discount/100) * $harga_awal;
+                                                    $harga_akhir = ($harga_awal - $discount);
+                                                ?>
+                                                <p class="striketrough">Rp. {{ number_format($product->price) }}</p>
+                                                <h3>Rp. {{number_format($harga_akhir)}}</h3>
+                                            @else
+                                                <?php
+                                                    $harga_awal = $product->price;
+                                                    $discount = $product->discount->amount;
+                                                    $harga_akhir = ($harga_awal - $discount);
+                                                ?>
+                                                <p class="striketrough">Rp. {{ number_format($product->price) }}</p>
+                                                <h3>Rp. {{number_format($harga_akhir)}}</p>
+                                            @endif
+                                        @else
+                                            <div class="text-heading mb-3">
+                                                <h3>Rp. {{ number_format($product->price) }}</h3>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-12 text-card">
                                     <div class="text-body text-center">
-                                        <p>Buku Tamu Digital</p>
-                                        <p>Unlimited Tamu</p>
-                                        <p>Website Selalu Aktif</p>
-                                        <p class="secondary">Kirim Undangan Otomatis</p>
-                                        <p class="secondary">Eksport Data Tamu</p>
-                                        <p class="secondary">Live Streaming</p>
-                                        <a href="{{ route('create.order') }}"
+                                        {!! $product->description !!}
+                                        <a href="{{ route('login') }}"
                                             class="btn btn-pink-primary text-white mt-3">Pesan
                                             Sekarang</a>
                                     </div>
@@ -120,77 +146,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 col-12 mt-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-2 col-sm-12">
-                                    <div class="icon-card">
-                                        <img src="{{ asset('img/icons/website-white.svg') }}" alt="" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-9 col-md-10 col-sm-12 col-12 p-0">
-                                    <div class="text-card">
-                                        <div class="text-body mb-2">
-                                            <p>Pro</p>
-                                        </div>
-                                        <div class="text-heading mb-3">
-                                            <h3>Rp. 1.497.000</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 text-card">
-                                    <div class="text-body text-center">
-                                        <p>Buku Tamu Digital</p>
-                                        <p>Unlimited Tamu</p>
-                                        <p>Website Selalu Aktif</p>
-                                        <p>Kirim Undangan Otomatis</p>
-                                        <p class="secondary">Eksport Data Tamu</p>
-                                        <p class="secondary">Live Streaming</p>
-                                        <a href="{{ route('create.order') }}" class="btn btn-pink-primary mt-3">Pesan
-                                            Sekarang</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 col-12 mt-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-2 col-sm-12">
-                                    <div class="icon-card">
-                                        <img src="{{ asset('img/icons/website.svg') }}" alt="" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-9 col-md-10 col-sm-12 col-12 p-0">
-                                    <div class="text-card">
-                                        <div class="text-body mb-2">
-                                            <p>Premium</p>
-                                        </div>
-                                        <div class="text-heading mb-3">
-                                            <h3>Rp. 2.997.000</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 text-card">
-                                    <div class="text-body text-center">
-                                        <p>Buku Tamu Digital</p>
-                                        <p>Unlimited Tamu</p>
-                                        <p>Website Selalu Aktif</p>
-                                        <p>Kirim Undangan Otomatis</p>
-                                        <p>Eksport Data Tamu</p>
-                                        <p>Live Streaming</p>
-                                        <a href="{{ route('create.order') }}"
-                                            class="btn btn-pink-primary text-white mt-3">Pesan
-                                            Sekarang</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

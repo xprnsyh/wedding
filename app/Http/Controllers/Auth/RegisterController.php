@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\EmailVerification;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Config;
+use Illuminate\Support\Facades\Mail;
+use URL;
 
 class RegisterController extends Controller
 {
@@ -44,13 +50,14 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
+        
         $email = request()->email;
         $user = User::where('email', $email)->first();
         // dd($user);
         if ($user !== null) {
-            return view('welcome')->withErrors('Email sudah terdaftar, silahkan login!');
+            return view('home')->withErrors('Email sudah terdaftar, silahkan login!');
         } else {
-            return view('auth.register', compact('email'));
+            return view('auth.register',compact('email'));
         }
     }
 
@@ -66,7 +73,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users','email_address'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password_confirmation' => ['required', 'string', 'min:8']
+            'password_confirmation' => ['required', 'string', 'min:8'],
+            'phone' => ['required'],
         ]);
     }
 
@@ -82,11 +90,53 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'address' => $data['address'],
+            'phone' => $data['phone']
         ]);
         $role_customer = Role::where('name', 'customer')->first();
         $user->assignRole($role_customer->name);
 
 
         return $user;
+    }
+
+    public function createUser(Request $request)
+    {
+        
+
+        $this->validate($request, [
+            'name' => 'required',
+            'username' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'password_confirmation' => 'required|same:password',
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        $role_customer = Role::where('name', 'customer')->first();
+        $user->assignRole($role_customer->name);
+
+        $verifyUrl = URL::temporarySignedRoute('verification.verify',
+            \Illuminate\Support\Carbon::now()->addMinutes(\Illuminate\Support\Facades\Config::get('auth.verification.expire', 60)),
+            [
+                'id' => $user->getKey(),
+                'hash' => sha1($user->getEmailForVerification()),
+            ]
+        );
+        
+        $send_mail = new EmailVerification($verifyUrl,$user);
+        Mail::send($send_mail);
+            
+        
+        return view('auth.verify', ['user' => $user])->with(['success' => 'Berhasil membuat akun baru']);
+
     }
 }

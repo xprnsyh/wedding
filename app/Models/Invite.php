@@ -8,17 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Invite extends Model
 {
     protected $fillable = [
-        'kode_kupon', 'event_id', 'guest_id',
+        'name','address','no_hp','klasifikasi',
+        'kode_qr', 'event_id', 'rand_code','tipe',
         'status', 'is_confirmed', 'is_invited',
         'attended_at'
     ];
-    public function guests()
-    {
-        return $this->belongsToMany(User::class,'invites','id','guest_id');
-    }
+    // public function guests()
+    // {
+    //     return $this->belongsToMany(User::class,'invites','id','guest_id');
+    // }
 
     public function events()
     {
-        return $this->belongsToMany(Event::class,'invites','id');
+        return $this->belongsTo(Event::class);
     }
+
+    public function inviteGroup()
+    {
+        return $this->hasMany(InviteGroup::class);   
+    }
+    
 }

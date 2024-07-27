@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\GuestBook;
 use App\User;
 use App\Models\Audio;
+use PhpParser\Node\Expr\FuncCall;
 
 class Event extends Model
 {
@@ -19,7 +20,8 @@ class Event extends Model
         'jam_mulai_ijab', 'jam_mulai_resepsi',
         'jam_selesai_ijab', 'jam_selesai_resepsi',
         'lokasi_ijab', 'lokasi_resepsi',
-        'gm_ijab','gm_resepsi','created_by','link_youtube','yt_title','yt_desc','logo_req','audio_id'
+        'gm_ijab','gm_resepsi','created_by','link_youtube','yt_title','yt_desc','logo_req','audio_id',
+        'monitor'
     ];
 
 
@@ -34,12 +36,16 @@ class Event extends Model
     }
     public function guests()
     {
-        return $this->belongsToMany(User::class,'guest_books','event_id','user_id')->withPivot('text','user_id');
+        return $this->hasMany(GuestBook::class,'event_id', 'id');
     }
     public function invite()
     {
-        return $this->belongsToMany(User::class,'invites','event_id','guest_id')->withPivot('kode_kupon','status','is_confirmed','is_invited');
+        return $this->hasMany(Invite::class);
     }
+    // public function invite()
+    // {
+    //     return $this->belongsToMany(User::class,'invites','event_id')->withPivot('kode_kupon','status','is_confirmed','is_invited');
+    // }
     public function customer()
     {
         return $this->belongsTo(Customer::class,'created_by');
@@ -53,5 +59,20 @@ class Event extends Model
     public function angpao()
     {
         return $this->hasMany(Angpao::class, 'event_id', 'id');
+    }
+
+    public function inviteGroup()
+    {
+        return $this->hasMany(InviteGroup::class);    
+    }
+    
+    public function templateMessage()
+    {
+        return $this->hasOne(TemplateMessage::class);
+    }
+
+    public function textSection()
+    {
+        return $this->hasOne(TextSection::class);        
     }
 }

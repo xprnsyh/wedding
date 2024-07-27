@@ -25,17 +25,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                <li class="nav-item">
                         <a class="nav-link" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/price') }}">Price</a>
+                        <a class="nav-link" href="{{ url('/feature') }}">Feature</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/price') }}">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/blog') }}">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/story') }}">Story</a>
+                        <a class="nav-link" href="{{ url('/story') }}">Template</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-secondary" href="{{ route('login') }}">Masuk</a>
@@ -45,25 +48,21 @@
         </div>
     </nav>
 
+    
     <section class="login">
+        @include('layouts.alert')
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-lg-11 col-md-12">
                     <div class="row justify-content-center">
-                        <div
-                            class="
-                  col-md-12
-                  mb-5
-                  d-lg-none d-md-none
-                  hidden-img
-                  d-sm-flex d-xs-flex
-                  justify-content-center
-                ">
+                        <div class="col-md-12 mb-5 d-lg-none d-md-none
+                                hidden-img d-sm-flex d-xs-flex justify-content-center">
                             <div class="img-wrapper text-center">
                                 <img src="{{ asset('img/review2.png') }}" alt="" />
                             </div>
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-md-5">
                             <div class="text-heading">
@@ -96,7 +95,7 @@
                             </form>
                             <div class="msg mt-3" style="text-align: center;">
                                 <h6>Don't have an account? <a href="{{ route('register') }}">Sign Up</a></h6>
-                                <h6><a href="{{ route('password.request') }}">Forgot Password?</a></h6>
+                                <h6><a href="{{ route('password.forgot.form') }}">Forgot Password?</a></h6>
                             </div>
                         </div>
                         <div class="d-none d-sm-none col-md-7 d-md-flex justify-content-end">

@@ -23,8 +23,13 @@ class AngpaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($event_id)
     {
+        $list_angpao = Angpao::where('event_id', $event_id)->get();
+        
+        return view('admin.event.detail.anngpao', [
+            'list_angpao' => $list_angpao
+        ]);
     }
 
     /**

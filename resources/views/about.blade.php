@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/startup-materialize.min.css') }}">
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="{{asset('favicon_hoofey.ico')}}" type="image/x-icon"> 
 </head>
 
 <body>

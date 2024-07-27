@@ -22,6 +22,7 @@ class BankController extends Controller
     }
     public function getBankById($id) {
         $bank = Bank::where('id', $id)->first();
+        
         return response($bank, 200);
     }
     public function store(BankRequest $request) {

@@ -15,8 +15,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use PDF;
+use Image;
 use SebastianBergmann\Environment\Console;
 use App\Helpers\LogActivity;
+use App\Models\Invite;
+use App\Models\TemplateList;
+use App\Models\TemplateMessage;
 
 class EventController extends Controller
 {
@@ -56,9 +60,11 @@ class EventController extends Controller
         $orders = Order::where('status', 'SUCCESS')->orderBy('created_at', 'ASC')->get();
         LogActivity::addToLog('', 'Akses halaman membuat event');
         $audio = Audio::all();
+        $list_templates = TemplateList::all();
         return view('admin.event.create', [
             'orders' => $orders,
-            'audio' => $audio
+            'audio' => $audio,
+            'list_templates' => $list_templates
         ]);
     }
 
@@ -88,10 +94,11 @@ class EventController extends Controller
             'jam_selesai_resepsi' => 'required',
             'lokasi_ijab' => 'required',
             'lokasi_resepsi' => 'required',
-            'avatar_pria' => 'file|mimes:jpg,png,jpeg|max:2000',
-            'avatar_wanita' => 'file|mimes:jpg,png,jpeg|max:2000',
-            'link_youtube' => 'required',
-            'gm_ijab' => 'required'
+            'avatar_pria' => 'image|file|mimes:jpg,png,jpeg|max:10000',
+            'avatar_wanita' => 'image|file|mimes:jpg,png,jpeg|max:10000',
+            'gm_ijab' => 'required|url',
+            'gm_resepsi' => 'required|url',
+            'logo' => 'image|file|mimes:jpg,png,jpeg|max:10000'
         ]);
         $order = Order::find($request->order_id);
         $customer = Customer::where('id', $order->customer_id)->first();
@@ -104,37 +111,59 @@ class EventController extends Controller
         } else {
             if ($request->hasFile('logo')) {
                 $logo = $request->file('logo');
-                $extension = $logo->getClientOriginalExtension();
-                $filename = Str::slug($request->name) . '_' . time() . '.' . $extension;
+                $foldercheck = public_path() . '/admin/assets/images/events/' . $order->invoice;
+                $filename = Str::slug($request->name) . '_' . time() . '.' . 'WebP';
+                if (!is_dir($foldercheck)) {
+                    mkdir($foldercheck,0777,true);
+                }
                 if (File::exists($logo)) {
-                    $logo->move('admin/assets/images/events/' . $order->invoice . '/', $filename);
+                    $img = Image::make($logo);
+                    $img->resize(380, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $img->save('admin/assets/images/events/'. $order->invoice . '/' . $filename, 80, 'WebP');
                     File::delete($logo);
                     LogActivity::addToLog('Upload logo', 'Akses halaman event');
                 }
             } else {
                 $filename = '';
             }
-            if ($request->hasFile('avatar_pria')) {
-                $avatar_pria = $request->file('avatar_pria');
-                $extension = $avatar_pria->getClientOriginalExtension();
-                $file_avatar_pria = Str::slug($request->nama_lengkap_mempelai_pria) . '_' . time() . '.' . $extension;
-                if (File::exists($avatar_pria)) {
-                    $avatar_pria->move('admin/assets/images/pria/' . $order->invoice . '/', $file_avatar_pria);
-                    File::delete($avatar_pria);
-                    LogActivity::addToLog('Upload avatar pria', 'Akses halaman event');
+            if ($request->image_pria != null) {
+                
+                $avatar_pria = $request->image_pria;
+                $foldercheck = public_path() . '/admin/assets/images/pria/'. $order->invoice;
+                if (!is_dir($foldercheck)) {
+                    mkdir($foldercheck,0777,true);
                 }
+
+                list($type, $avatar_pria) = explode(';', $avatar_pria);
+                list(, $avatar_pria)      = explode(',', $avatar_pria);
+                $avatar_pria = base64_decode($avatar_pria);
+                $avatar_pria = Image::make($avatar_pria);
+
+                // $extension = $request->avatar_pria->getClientOriginalExtension();
+                $file_avatar_pria = Str::slug($request->nama_lengkap_mempelai_pria) . '_' . time() . '.' . 'WebP';
+                $path = public_path() . '/admin/assets/images/pria/' . $order->invoice . '/'.$file_avatar_pria;
+                // file_put_contents($path, $avatar_pria);
+                $avatar_pria->save('admin/assets/images/pria/'. $order->invoice . '/' . $file_avatar_pria, 80, 'WebP');
             } else {
                 $file_avatar_pria = '';
             }
-            if ($request->hasFile('avatar_wanita')) {
-                $avatar_wanita = $request->file('avatar_wanita');
-                $extension = $avatar_wanita->getClientOriginalExtension();
-                $file_avatar_wanita = Str::slug($request->nama_lengkap_mempelai_wanita) . '_' . time() . '.' . $extension;
-                if (File::exists($avatar_wanita)) {
-                    $avatar_wanita->move('admin/assets/images/wanita/' . $order->invoice . '/', $file_avatar_wanita);
-                    File::delete($avatar_wanita);
-                    LogActivity::addToLog('Upload avatar wanita', 'Akses halaman event');
+            if ($request->image_wanita != null) {
+                $avatar_wanita = $request->image_wanita;
+                $foldercheck = public_path() . '/admin/assets/images/wanita/'. $order->invoice;
+                if (!is_dir($foldercheck)) {
+                    mkdir($foldercheck,0777,true);
                 }
+                list($type, $avatar_wanita) = explode(';', $avatar_wanita);
+                list(, $avatar_wanita)      = explode(',', $avatar_wanita);
+                $avatar_wanita = base64_decode($avatar_wanita);
+                $avatar_wanita = Image::make($avatar_wanita);
+                // $extension = $request->avatar_pria->getClientOriginalExtension();
+                $file_avatar_wanita = Str::slug($request->nama_lengkap_mempelai_wanita) . '_' . time() . '.' . 'WebP';
+                $path = public_path() . '/admin/assets/images/wanita/' . $order->invoice . '/'.$file_avatar_wanita;
+                // file_put_contents($path, $avatar_pria);
+                $avatar_wanita->save('admin/assets/images/wanita/'. $order->invoice . '/' . $file_avatar_wanita, 80, 'WebP');
             } else {
                 $file_avatar_wanita = '';
             }
@@ -159,6 +188,7 @@ class EventController extends Controller
                 'lokasi_ijab' => $request->lokasi_ijab,
                 'lokasi_resepsi' => $request->lokasi_resepsi,
                 'gm_ijab' => $request->gm_ijab,
+                'gm_resepsi' => $request->gm_resepsi,
                 'link_youtube' => $request->link_youtube,
                 'yt_title' => $request->yt_title,
                 'yt_desc' => $request->yt_desc,
@@ -167,6 +197,7 @@ class EventController extends Controller
                 'avatar_wanita' => $file_avatar_wanita,
                 'created_by' => $customer->id,
                 'audio_id' => $request->audio_id,
+                'monitor' => $request->monitor,
             ]);
             $event_id = DB::table('events')->select('id')->where('order_id', $request->order_id)->first();
 
@@ -303,19 +334,38 @@ class EventController extends Controller
         //
         $order = Order::where('invoice', $invoice)->first();
         $orders = Order::all();
-        $event = Event::where('order_id', $order->id)->with('photos', 'guests')->first();
+        $event = Event::where('order_id', $order->id)->with('photos', 'invite')->first();
         $data_guestbook = GuestBook::where('event_id', $event->id)
-        ->with('user')
         ->get();
         $data_audio = Audio::orderBy('name', 'ASC')->get();
+        $list_templates = TemplateList::all();
         LogActivity::addToLog('Edit halaman event ' . $event->slug, 'Akses halaman event');
-        return view('admin.event.edit', [
+        return view('admin.event.edit.data', [
             'event' => $event,
             'orders' => $orders,
-            'data_audio' => $data_audio, 
-            'data_guestbook' => $data_guestbook
+            'data_audio' => $data_audio,
+            'data_guestbook' => $data_guestbook,
+            'list_templates' => $list_templates,
         ]);
     }
+    
+    // EDIT yg BARU untuk tab data
+
+    // public function edit($invoice)
+    // {
+    //     $order = Order::where('invoice', $invoice)->first();
+    //     $orders = Order::all();
+    //     $event = Event::where('order_id', $order->id)->first();
+    //     $data_audio = Audio::orderBy('name', 'ASC')->get();
+    //     $list_templates = TemplateList::all();
+    //     LogActivity::addToLog('Edit halaman event ' . $event->slug, 'Akses halaman event');
+    //     return view('admin.event.edit', [
+    //         'event' => $event,
+    //         'orders' => $orders,
+    //         'data_audio' => $data_audio,
+    //         'list_templates' => $list_templates,
+    //     ]);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -326,24 +376,50 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $this->validate($request, [
-            'code_event' => 'required|unique:events,code_event,' . $id,
+            'order_id' => 'required',
+            'template' => 'required',
+            'nama_panggilan_mempelai_pria' => 'required',
+            'nama_panggilan_mempelai_wanita' => 'required',
+            'nama_lengkap_mempelai_pria' => 'required',
+            'nama_lengkap_mempelai_wanita' => 'required',
+            'bio_mempelai_pria' => 'required',
+            'bio_mempelai_wanita' => 'required',
+            'tanggal_ijab' => 'required',
+            'tanggal_resepsi' => 'required',
+            'jam_mulai_ijab' => 'required',
+            'jam_mulai_resepsi' => 'required',
+            'jam_selesai_ijab' => 'required',
+            'jam_selesai_resepsi' => 'required',
+            'lokasi_ijab' => 'required',
+            'lokasi_resepsi' => 'required',
+            'avatar_pria' => 'image|file|mimes:jpg,png,jpeg|max:10000',
+            'avatar_wanita' => 'image|file|mimes:jpg,png,jpeg|max:10000',
+            'gm_ijab' => 'required|url',
+            'gm_resepsi' => 'required|url',
+            'logo' => 'image|file|mimes:jpg,png,jpeg|max:10000'
         ]);
+
         $event = Event::find($id);
 
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $extension = $logo->getClientOriginalExtension();
-            $filename = Str::slug($request->name) . '_' . time() . '.' . $extension;
+            $foldercheck = public_path() . '/admin/assets/images/events/' . $event->order->invoice;
+            $filename = Str::slug($request->name) . '_' . time() . '.' . 'WebP';
+            if (!is_dir($foldercheck)) {
+                mkdir($foldercheck,0777,true);
+            }
             if (File::exists($logo)) {
-                $logo->move('admin/assets/images/events/' . $event->order->invoice . '/', $filename);
+                $img = Image::make($logo);
+                $img->resize(380, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $img->save('admin/assets/images/events/'. $event->order->invoice . '/' . $filename, 80, 'WebP');
                 File::delete($logo);
                 LogActivity::addToLog('Update logo ' . $event->slug, 'Akses halaman event');
             }
-
             $event->update([
-                'code_event' => $event->code_event,
+                // 'code_event' => $event->code_event,
                 'slug' => $event->slug,
                 'template' => $request->template,
                 'link_livestreaming' => $request->link_livestreaming,
@@ -362,11 +438,13 @@ class EventController extends Controller
                 'lokasi_ijab' => $request->lokasi_ijab,
                 'lokasi_resepsi' => $request->lokasi_resepsi,
                 'gm_ijab' => $request->gm_ijab,
+                'gm_resepsi' => $request->gm_resepsi,
                 'link_youtube' => $request->link_youtube,
                 'yt_title' => $request->yt_title,
                 'yt_desc' => $request->yt_desc,
                 'logo_req' => $filename,
                 'audio_id' => $request->audio_id,
+                'monitor' => $request->monitor,
             ]);
             LogActivity::addToLog('Update halaman event ' . $event->slug, 'Akses halaman event');
         } else {
@@ -390,47 +468,77 @@ class EventController extends Controller
                 'lokasi_ijab' => $request->lokasi_ijab,
                 'lokasi_resepsi' => $request->lokasi_resepsi,
                 'gm_ijab' => $request->gm_ijab,
+                'gm_resepsi' => $request->gm_resepsi,
                 'link_youtube' => $request->link_youtube,
                 'yt_title' => $request->yt_title,
                 'yt_desc' => $request->yt_desc,
                 'audio_id' => $request->audio_id,
+                'monitor' => $request->monitor,
             ]);
             LogActivity::addToLog('Update halaman event ' . $event->slug, 'Akses halaman event');
         }
-        DB::table('videos_section')->where('event_id', $id)->update([
-            'iframe_videos' => $request->link_youtube,
-        ]);
-        DB::table('maps_section')->where('event_id', $id)->update([
-            'iframe_maps' => $request->gm_ijab,
-        ]);
 
-        if ($request->hasFile('avatar_pria')) {
-            $avatar_pria = $request->file('avatar_pria');
-            $extension = $avatar_pria->getClientOriginalExtension();
-            $file_avatar_pria = Str::slug($request->nama_lengkap_mempelai_pria) . '_' . '.' . $extension;
-            if (File::exists($avatar_pria)) {
-                $avatar_pria->move('admin/assets/images/pria/' . $event->order->invoice . '/', $file_avatar_pria);
-                File::delete($avatar_pria);
-                LogActivity::addToLog('Update avatar pria ' . $event->slug, 'Akses halaman event');
+        // DB::table('videos_section')->where('event_id', $id)->update([
+        //     'iframe_videos' => $request->link_youtube,
+        // ]);
+        // DB::table('maps_section')->where('event_id', $id)->update([
+        //     'iframe_maps' => $request->gm_ijab,
+        // ]);
+
+        if ($request->image_pria != null) {
+            $imageexist = $event->avatar_pria;
+            $foldercheck = public_path() . '/admin/assets/images/pria/'. $event->order->invoice;
+            if (!is_dir($foldercheck)) {
+                mkdir($foldercheck,0777,true);
             }
+            if ($imageexist != null) {
+                $existpath = public_path() . '/admin/assets/images/pria/' . $event->order->invoice . '/'.$imageexist;
+                unlink($existpath);
+            }
+            
+            $avatar_pria = $request->image_pria;
+            list($type, $avatar_pria) = explode(';', $avatar_pria);
+            list(, $avatar_pria)      = explode(',', $avatar_pria);
+            $avatar_pria = base64_decode($avatar_pria);
+            $avatar_pria = Image::make($avatar_pria);
+
+            $extension = $request->avatar_pria->getClientOriginalExtension();
+            $file_avatar_pria = Str::slug($request->nama_lengkap_mempelai_pria) . '_' . time() . '.' . 'WebP';
+            $path = public_path() . '/admin/assets/images/pria/' . $event->order->invoice . '/'.$file_avatar_pria;
+            // file_put_contents($path, $avatar_pria);
+            $avatar_pria->save('admin/assets/images/pria/'. $event->order->invoice . '/' . $file_avatar_pria, 80, 'WebP');
+
             $event->update([
                 'avatar_pria' => $file_avatar_pria
             ]);
         }
 
-        if ($request->hasFile('avatar_wanita')) {
-            $avatar_wanita = $request->file('avatar_wanita');
-            $extension = $avatar_wanita->getClientOriginalExtension();
-            $file_avatar_wanita = Str::slug($request->nama_lengkap_mempelai_wanita) . '_' . '.' . $extension;
-            if (File::exists($avatar_wanita)) {
-                $avatar_wanita->move('admin/assets/images/wanita/' . $event->order->invoice . '/', $file_avatar_wanita);
-                File::delete($avatar_wanita);
-                LogActivity::addToLog('Update avatar wanita ' . $event->slug, 'Akses halaman event');
+        if ($request->image_wanita != null) {
+            $imageexist = $event->avatar_wanita;
+            $foldercheck = public_path() . '/admin/assets/images/wanita/'. $event->order->invoice;
+            if (!is_dir($foldercheck)) {
+                mkdir($foldercheck,0777,true);
             }
+            if ($imageexist != null) {
+                $existpath = public_path() . '/admin/assets/images/wanita/' . $event->order->invoice . '/'.$imageexist;
+                unlink($existpath);
+            }
+            $avatar_wanita = $request->image_pria;
+            list($type, $avatar_wanita) = explode(';', $avatar_wanita);
+            list(, $avatar_wanita)      = explode(',', $avatar_wanita);
+            $avatar_wanita = base64_decode($avatar_wanita);
+            $avatar_wanita = Image::make($avatar_wanita);
+            // $extension = $request->avatar_pria->getClientOriginalExtension();
+            $file_avatar_wanita = Str::slug($request->nama_lengkap_mempelai_wanita) . '_' . time() . '.' . 'WebP';
+            $path = public_path() . '/admin/assets/images/wanita/' . $event->order->invoice . '/'.$file_avatar_wanita;
+            // file_put_contents($path, $avatar_pria);
+            $avatar_wanita->save('admin/assets/images/wanita/'. $event->order->invoice . '/' . $file_avatar_wanita, 80, 'WebP');
+
             $event->update([
                 'avatar_wanita' => $file_avatar_wanita
             ]);
         }
+        
         LogActivity::addToLog('Berhasil update event ' . $event->slug, 'Akses halaman event');
         return redirect()->back()->with(['success' => 'Berhasil diupdate']);
     }
@@ -448,97 +556,6 @@ class EventController extends Controller
         $event->delete($event);
 
         return redirect()->back()->with(['success' => 'Berhasil dihapus']);
-    }
-
-
-    public function storePhoto(PhotoEventRequest $request, $id)
-    {
-        $this->validate($request, [
-            'name' => 'required|string',
-            'caption' => 'required',
-            'date' => 'required',
-            'photo' => 'required|max:2500|image|mimes:png,jpg'
-        ]);
-
-        try {
-            $event = Event::find($id);
-
-            if ($request->hasFile('photo')) {
-                $photo = $request->file('photo');
-                $extension = $photo->getClientOriginalExtension();
-                if ($extension != 'jpg' || $extension != 'png') {
-                    LogActivity::addToLog('Gagal upload foto pernikahan '. $event->slug,'Upload foto pernikahan');
-                    return redirect()->back()->with([
-                        'error' => 'Periksa file kembali.'
-                    ]);
-                }
-                $filename = Str::slug($request->name) . '_' . time() . '.' . $extension;
-                if (File::exists($photo)) {
-                    $photo->move('admin/assets/images/events/' . $event->order->invoice . '/', $filename);
-                    File::delete($photo);
-                    LogActivity::addToLog('Upload foto pernikahan '. $event->slug,'Upload foto pernikahan');
-                }
-                PhotoEvent::create([
-                    'date' => $request->date,
-                    'name' => $request->name,
-                    'caption' => $request->caption,
-                    'event_id' => $event->id,
-                    'path' => 'admin/assets/images/events/' . $event->order->invoice . '/' . $filename
-                ]);
-                return redirect()->back()->with(['success' => 'Berhasil menambah gambar baru']);
-            } else {
-                LogActivity::addToLog('Tidak ada file gambar','Upload foto pernikahan');
-                return redirect()->back()->with(['error' => 'Tidak ada file gambar']);
-            }
-        } catch (\Throwable $th) {
-            LogActivity::addToLog('Error: '. $th->getMessage(),'Gagal upload foto pernikahan');
-            return redirect()->back()->with([
-                'error' => $th->getMessage()
-            ]);
-        }
-
-        // if ($request->hasFile('photo')) {
-        //     $photo = $request->file('photo');
-        //     $extension = $photo->getClientOriginalExtension();
-        //     $filename = Str::slug($request->name) . '_' . time() . '.' . $extension;
-        //     if (File::exists($photo)) {
-        //         $photo->move('admin/assets/images/events/' . $event->order->invoice . '/', $filename);
-        //         File::delete($photo);
-        //     }
-        //     PhotoEvent::create([
-        //         'date' => $request->date,
-        //         'name' => $request->name,
-        //         'caption' => $request->caption,
-        //         'event_id' => $event->id,
-        //         'path' => 'admin/assets/images/events/' . $event->order->invoice . '/' . $filename
-        //     ]);
-
-        // } else {
-        //     return redirect()->back()->with(['error' => 'Tidak ada file gambar']);
-        // }
-    }
-
-    public function destroyPhotoEvent($id)
-    {
-        $photo = PhotoEvent::find($id);
-        if ($photo->path != null) {
-            if (File::exists($photo->path)) {
-                File::delete($photo->path);
-            }
-        }
-        $photo->delete($photo);
-
-        return redirect()->back()->with(['success' => 'Sukses berhasil dihapus']);
-    }
-
-    public function createPDF($invoice)
-    {
-        $order = Order::where('invoice', $invoice)->first();
-        $event = Event::where('order_id', $order->id)->with('guests')->first();
-        view()->share('event', $event);
-        $pdf = PDF::loadview('admin.event.pdf', $event)->setPaper('A4', 'potrait');
-
-        return $pdf->stream();
     }
 
     public function deletePhotoWanita($id)
@@ -589,6 +606,93 @@ class EventController extends Controller
         }
     }
 
+    //Photo Event
+
+    public function editPhotos($invoice)
+    {
+        $order = Order::where('invoice', $invoice)->first();
+        $event = Event::where('order_id', $order->id)->first();
+        $photos = PhotoEvent::where('event_id', $event->id)->get();
+        LogActivity::addToLog('Edit halaman photo ' . $event->id, 'Akses halaman event');
+        return view('admin.event.edit.photo', [
+            'event' => $event,
+            'photos' => $photos
+        ]);
+    }
+
+    public function storePhoto(Request $request, $id)
+    {
+        $event = Event::find($id);
+        $photo_galleries = $request->file('images');
+        if (count($photo_galleries) > 0) {
+            foreach ($photo_galleries as $i => $photo) {
+                $extension = $photo->getClientOriginalExtension();
+                $filenameimg = $i . '-' . Str::slug($event->order->customer_name) . '_' . time() . '.' . 'WebP';
+                $foldercheck = public_path() . '/admin/assets/images/events/'. $event->order->invoice;
+                if (!is_dir($foldercheck)) {
+                    mkdir($foldercheck,0777,true);
+                }
+                if (File::exists($photo)) {
+                    $img = Image::make($photo);
+                    $img->resize(1200, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $img->save('admin/assets/images/events/'. $event->order->invoice . '/' . $filenameimg, 80, 'WebP');
+                    // $photo->move('admin/assets/images/events/' . $event->order->invoice . '/', $filenameimg);
+                    File::delete($photo);
+                }
+                DB::table('photo_events')->insert([
+                    'event_id' => $id,
+                    'date' => now(),
+                    'name' => $event->nama_panggilan_mempelai_pria . '_' . $event->nama_panggilan_mempelai_wanita,
+                    'caption' => 'no caption',
+                    'path' => 'admin/assets/images/events/' . $event->order->invoice . '/' . $filenameimg
+                ]);
+            }
+            return redirect()->back()->with(['success' => 'Berhasil menambah gambar baru']);
+        } else {
+            return redirect()->back()->with(['error' => 'Tidak ada file gambar']);
+        }
+    }
+
+    public function destroyPhotoEvent($id)
+    {
+        $photo = PhotoEvent::find($id);
+        if ($photo->path != null) {
+            if (File::exists($photo->path)) {
+                File::delete($photo->path);
+            }
+        }
+        $photo->delete($photo);
+
+        return redirect()->back()->with(['success' => 'Sukses berhasil dihapus']);
+    }
+
+    // Wedding Greatings
+
+    public function indexWeddingGreetings($event_id)
+    {
+        $list_wedding_greetings =  GuestBook::where('event_id', $event_id)->get();
+
+        return view('admin.event.detail.weeding-greetings', [
+            'list_wedding_greetings' => $list_wedding_greetings
+        ]);
+    }
+
+    //-----------------------------------------------------------//
+
+    public function createPDF($invoice)
+    {
+        $order = Order::where('invoice', $invoice)->first();
+        $event = Event::where('order_id', $order->id)->with('guests')->first();
+        view()->share('event', $event);
+        $pdf = PDF::loadview('admin.event.pdf', $event)->setPaper('A4', 'potrait');
+
+        return $pdf->stream();
+    }
+
+    
+    //----------------------------------------------------------------------------------------------------------------------//
     public function buildEvent($slug)
     {
         // dd(auth()->user()->roles[0]->id);
@@ -673,7 +777,7 @@ class EventController extends Controller
 
     function _heroStore($request, $heroField, $event, $event_id)
     {
-        // cek color 
+        // cek color
         if ($request->hero_color_teks_atas == '#49542b' || $request->hero_color_teks_atas == null) {
             if ($heroField !== null) {
                 $hero_teks_color_atas = $heroField->color_teks_atas;
@@ -769,7 +873,7 @@ class EventController extends Controller
     }
     function _invitationStore($request, $invitationField, $event, $event_id)
     {
-        // cek color 
+        // cek color
 
         if ($request->invitation_color_teks_atas == '#49542b' || $request->invitation_color_teks_tengah == null) {
             if ($invitationField !== null) {
@@ -870,7 +974,7 @@ class EventController extends Controller
     }
     function _countdownStore($request, $countdownField, $event, $event_id)
     {
-        // cek color 
+        // cek color
         if ($request->countdown_color_teks_atas == '#49542b' || $request->countdown_color_teks_atas == null) {
             if ($countdownField !== null) {
                 $countdown_teks_color_atas = $countdownField->color_teks_atas;
@@ -964,7 +1068,7 @@ class EventController extends Controller
     }
     function _mapsStore($request, $mapsField, $event, $event_id)
     {
-        // cek color 
+        // cek color
         if ($request->maps_color_teks_atas == '#49542b' || $request->maps_color_teks_atas == null) {
             if ($mapsField !== null) {
                 $maps_teks_color_atas = $mapsField->color_teks_atas;
@@ -1055,7 +1159,7 @@ class EventController extends Controller
     }
     function _streamingStore($request, $streamingField, $event, $event_id)
     {
-        // cek color 
+        // cek color
         if ($request->streaming_color_teks_atas == '#49542b' || $request->streaming_color_teks_atas == null) {
             if ($streamingField !== null) {
                 $streaming_teks_color_atas = $streamingField->color_teks_atas;
@@ -1144,7 +1248,7 @@ class EventController extends Controller
     function _galleryStore($request, $galleryField, $event, $event_id)
     {
 
-        // cek color 
+        // cek color
         if ($request->gallery_color_teks_atas == '#49542b' || $request->gallery_color_teks_atas == null) {
             if ($galleryField !== null) {
                 $gallery_teks_color_atas = $galleryField->color_teks_atas;
@@ -1164,7 +1268,7 @@ class EventController extends Controller
             $gallery_teks_color_bawah = $request->gallery_color_teks_bawah;
         }
         // end cek color
-        // upload image 
+        // upload image
         if ($request->hasFile('gallery_background')) {
             if ($request->gallery_background_fix == $request->gallery_background->getClientOriginalName()) {
                 $photo = $request->file('gallery_background');
@@ -1250,7 +1354,7 @@ class EventController extends Controller
 
     function _videosStore($request, $videosField, $event, $event_id)
     {
-        // cek color 
+        // cek color
         if ($request->videos_color_teks_atas == '#49542b' || $request->videos_color_teks_atas == null) {
             if ($videosField !== null) {
                 $videos_teks_color_atas = $videosField->color_teks_atas;
@@ -1341,7 +1445,7 @@ class EventController extends Controller
     }
     function _eventStore($request, $eventField, $event, $event_id)
     {
-        // cek color 
+        // cek color
         if ($request->event_color_teks_atas == '#49542b' || $request->event_color_teks_atas == null) {
             if ($eventField !== null) {
                 $event_teks_color_atas = $eventField->color_teks_atas;
@@ -1427,7 +1531,7 @@ class EventController extends Controller
     }
     function commentStore($request, $commentField, $event, $event_id)
     {
-        // cek color 
+        // cek color
         if ($request->comment_color_teks_atas == '#49542b' || $request->comment_color_teks_atas == null) {
             if ($commentField !== null) {
                 $comment_teks_color_atas = $commentField->color_teks_atas;
@@ -1513,7 +1617,7 @@ class EventController extends Controller
     }
     function footerStore($request, $footerField, $event, $event_id)
     {
-        // cek color 
+        // cek color
         if ($request->footer_color_teks_atas == '#49542b' || $request->footer_color_teks_atas == null) {
             if ($footerField !== null) {
                 $footer_teks_color_atas = $footerField->color_teks_atas;
@@ -1614,4 +1718,6 @@ class EventController extends Controller
             ]);
         }
     }
+    
+
 }

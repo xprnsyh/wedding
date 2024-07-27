@@ -1,4 +1,14 @@
 @extends('layouts.adminv2')
+@section('css-add')
+<head>
+
+    <style>
+        .striketrough{
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+@endsection
 @section('breadcrumb')
     <div>
         <div class="col-12 p-0">
@@ -52,7 +62,9 @@
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <label for="CustomerPhone">Phone Number</label>
+                                            <div class="group">
+                                                <label class="form-label required">No.HP</label>
+                                            </div>
                                             <input type="text" name="customer_phone" class="form-control"
                                                 placeholder="Please fill here..."
                                                 value="{{ old('customer_phone') ? old('customer_phone') : $user->phone }}">
@@ -86,7 +98,7 @@
                                         <div class="form-group">
                                             <label for="City">City</label>
                                             <select name="city_id" class="form-control" id="city_id">
-                                                <option value="">Pilih Kota</option>
+                                                <option value="">Pilih Kabupaten/Kota</option>
                                             </select>
                                         </div>
                                     </div>
@@ -120,22 +132,34 @@
                                                 <div class="card-body card-price text-center {{ old('product') == $product->id ? 'active' : false }}"
                                                     id="{{ $product->id }}">
                                                     <h5>{{ $product->name }}</h5>
-                                                    <p>{{ $product->price }}</p>
+                                                    
+                                                    @if($product->discount()->where('is_active',true)->count() > 0)
+                                                        @if($product->discount->discount_type == 'Presentase')
+                                                            <?php
+                                                                $harga_awal = $product->price;
+                                                                $discount = $product->discount->amount;
+                                                                $discount = ($discount/100) * $harga_awal;
+                                                                $harga_akhir = ($harga_awal - $discount);
+                                                            ?>
+                                                            <p class="striketrough">RP {{ number_format($product->price) }}</p>
+                                                            <p>RP {{number_format($harga_akhir)}}</p>
+                                                        @else
+                                                            <?php
+                                                                $harga_awal = $product->price;
+                                                                $discount = $product->discount->amount;
+                                                                $harga_akhir = ($harga_awal - $discount);
+                                                            ?>
+                                                            <p class="striketrough">RP {{ number_format($product->price) }}</p>
+                                                            <p>RP {{number_format($harga_akhir)}}</p>
+                                                        @endif
+                                                    @else
+                                                        <p>Rp {{ number_format($product->price) }}</p>
+                                                    @endif
+                                                    
                                                 </div>
                                             </div>
                                         </div>
                                     @endforeach
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="CustomerName">Pembayaran</label>
-                                            <select name="pembayaran" class="form-control" id="">
-                                                <option value="Select" disabled>Select</option>
-                                                <option value="Manual">Manual</option>
-                                            </select>
-                                        </div>
-                                    </div>
                                 </div>
                         </div>
                     </div>
@@ -151,30 +175,15 @@
                                     <p class="form-text-secondary">Paket Undangan <span class="float-right"
                                             id="subtotal">Rp. 0</span>
                                     </p>
-                                    <p class="form-text-secondary">Ongkir X Banner <span class="float-right">Rp.
-                                            20,000</span></p>
+                                    <p class="form-text-secondary">Discount <span class="float-right"
+                                            id="discount">Rp. 0</span>
+                                    </p>
                                 </div>
                                 <div style="padding: 16px 0px">
                                     <h2 class="form-subtitle float-left">Total</h2>
                                     <h2 class="form-subtitle float-right" id="total">Rp. 0</h2>
                                 </div>
-                                <div class="d-block transfer-pembayaran" style="margin-top: 24px">
-                                    <h2 class="form-subtitle mb-1">Transfer pembayaran</h2>
-                                    @isset($banks)
-                                        @foreach ($banks as $bank)
-                                            <div class="row mt-3">
-                                                <div class="col-md-4 col-sm-4 col-4">
-                                                    <img src="{{ asset('admin/assets/images/banks/' . $bank->logo_bank) }}"
-                                                        style="width: 100%" alt="" srcset="" />
-                                                </div>
-                                                <div class="col-md-8 col-sm-8 col-8">
-                                                    <p>{{ $bank->bank_name }} ({{ $bank->name }})</p>
-                                                    <b>{{ $bank->account_number }}</b>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endisset
-                                </div>
+                                <h5 class="form-text-secondary m-3">*Link Pembayaran akan dikirim melalui email.</h5>
                                 <div class="mt-4">
                                     <button type="submit" class="btn btn-block btn-primary">
                                         Order Now
@@ -306,6 +315,7 @@
 @section('add-js')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/e912f54b8f.js"></script>
 
     <script>
         $(".card-price").click(function() {
@@ -322,10 +332,13 @@
                 data: {
                     product_id: $(this).attr('id')
                 },
-                success: function(html) {
-                    const total = formatRupiah(html.data + 20000, 'Rp. ');
-                    var subtotal = formatRupiah(html.data, 'Rp. ');
+                success: function(data) {
+                    var subtotal = formatRupiah(data.price, 'Rp. ');
+                    var discount = formatRupiah(data.discount, 'Rp. ');
+                    var total = data.price - data.discount;
+                    total = formatRupiah(total, 'Rp. ');
                     $('#subtotal').html(subtotal)
+                    $('#discount').html(discount)
                     $('#total').html(total)
                 },
                 error: function() {
@@ -372,7 +385,7 @@
                     $('#city_id').empty()
                     $('#city_id').append('<option value="">Pilih Kabupaten/Kota</option>')
                     $.each(html.data, function(key, item) {
-                        $('#city_id').append('<option value="' + item.id + '">' + item.name +
+                        $('#city_id').append('<option value="' + item.id + '">' + item.type + ' '+ item.name +
                             '</option>')
                     })
                 }
@@ -404,6 +417,8 @@
             const newAddress = addressBefore + ", " + $('#district_id option:selected').text()
             $('#address').html(newAddress)
         })
+
+
         /* Fungsi formatRupiah */
         function formatRupiah(angka, prefix) {
             var number_string = angka.toString().replace(/[^,\d]/g, ""),

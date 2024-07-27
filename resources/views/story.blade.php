@@ -5,7 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     {{-- icon --}}
-    <link rel="shortcut icon" href="{{ asset('img/primary-icon.png') }}">
+    <!--<link rel="shortcut icon" href="{{ asset('img/primary-icon.png') }}">-->
+    <link rel="icon" href="{{asset('favicon_hoofey.ico')}}" type="image/x-icon"> 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
@@ -47,13 +48,16 @@
                         <a class="nav-link" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/price') }}">Price</a>
+                        <a class="nav-link" href="{{ url('/feature') }}">Feature</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/price') }}">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/blog') }}">Blog</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ url('/story') }}">Story</a>
+                        <a class="nav-link" href="{{ url('/story') }}">Template</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-secondary" href="{{ route('login') }}">Masuk</a>
@@ -68,19 +72,19 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-heading">
-                        <h1>Story</h1>
+                        <h1>Template</h1>
                     </div>
                 </div>
             </div>
             <div class="row">
-                @if ($events->count() > 0)
-                    @foreach ($events as $event)
+                @if ($list_templates->count() > 0)
+                    @foreach ($list_templates as $template)
                         <div class="col-lg-4 col-md-6 col-6">
-                            <a href="{{ route('see.event', ['slug' => $event->slug]) }}">
+                            <a href="{{ route('see.event', ['slug' => $template->name ]) }}">
                                 <div class="card">
-                                    @if($event->logo_req != null)
+                                    @if($template->logo_template != null)
                                         <img class="card-img-top"
-                                            src="{{ asset('admin/assets/images/events/' . $event->order->invoice . '/' . $event->logo_req) }}"
+                                            src="{{ asset('admin/assets/images/list_template/' . $template->logo_template) }}"
                                             alt="Card image cap"
                                             style="height: 200px; object-fit: cover; object-position: center;" />
                                     @else
@@ -90,11 +94,7 @@
                                     @endif
 
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $event->nama_panggilan_mempelai_pria }} &
-                                            {{ $event->nama_panggilan_mempelai_wanita }}</h5>
-                                        <p class="card-text">
-                                            {{ \Carbon\Carbon::parse($event->tanggal_resepsi)->format('M d, Y') }}
-                                        </p>
+                                        <h5 class="card-title">Template {{ $template->name }}</h5>
                                     </div>
                                 </div>
                             </a>
@@ -103,7 +103,7 @@
                 @else
                     <div class="col-lg-12">
                         <div class="alert alert-info">
-                            There's no posts
+                            There's no template
                         </div>
                     </div>
                 @endif

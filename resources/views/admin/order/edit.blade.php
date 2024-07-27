@@ -2,6 +2,12 @@
 @section('css-add')
     {{-- Datatables --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css" />
+
+    <style>
+    .striketrough{
+        text-decoration: line-through;
+    }
+</style>
 @endsection
 @section('breadcrumb')
     <div>
@@ -57,7 +63,9 @@
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <label for="CustomerPhone">Phone Number</label>
+                                            <div class="group">
+                                                <label class="form-label required">No.HP</label>
+                                            </div>
                                             <input type="text" name="customer_phone" class="form-control"
                                                 placeholder="Please fill here..."
                                                 value="{{ old('customer_phone') ? old('customer_phone') : $order->customer_phone }}">
@@ -80,7 +88,7 @@
                                             <label for="Province">Province</label>
                                             <select name="province_id" id="province_id" class="form-control">
                                                 @foreach ($provinces as $province)
-                                                    <option value="{{ $province->id }}">{{ $province->name }}
+                                                    <option value="{{ $province->id }}" {{ ($province->id === $district_id->province_id ) ? 'selected' : '' }}>{{ $province->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -90,7 +98,14 @@
                                         <div class="form-group">
                                             <label for="City">City</label>
                                             <select name="city_id" class="form-control" id="city_id">
-                                                <option value="">Pilih Kota</option>
+                                                @if($cities->count() > 0)
+                                                    @foreach ($cities as $city)
+                                                        <option value="{{ $city->id }}" {{ ($city->id === $district_id->city_id) ? 'selected' : '' }}>{{ $city->type }} {{ $city->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                <option value="" >Pilih Kota</option>
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
@@ -98,7 +113,14 @@
                                         <div class="form-group">
                                             <label for="District">District</label>
                                             <select name="district_id" class="form-control" id="district_id">
+                                                @if($districts->count() > 0)
+                                                    @foreach ($districts as $district)
+                                                        <option value="{{ $district->id }}" {{ ($district->id === $district_id->id) ? 'selected' : '' }}>{{ $district->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
                                                 <option value="">Pilih Kecamatan</option>
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
@@ -122,10 +144,33 @@
                                     @foreach ($products as $product)
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-6 mt-3">
                                             <div class="card">
-                                                <div class="card-body card-price text-center {{ (old('product') == $product->id ? 'active' : $product->id == $order_detail->product_id) ? ' active' : false }}"
+                                                <div class="card-body card-price text-center {{ old('product') == $product->id ? 'active' : false }}"
                                                     id="{{ $product->id }}">
                                                     <h5>{{ $product->name }}</h5>
-                                                    <p>{{ $product->price }}</p>
+                                                    
+                                                    @if($product->discount()->where('is_active',true)->count() > 0)
+                                                        @if($product->discount->discount_type == 'Presentase')
+                                                            <?php
+                                                                $harga_awal = $product->price;
+                                                                $discount = $product->discount->amount;
+                                                                $discount = ($discount/100) * $harga_awal;
+                                                                $harga_akhir = ($harga_awal - $discount);
+                                                            ?>
+                                                            <p class="striketrough">RP {{ $product->price }}</p>
+                                                            <p>RP {{$harga_akhir}}</p>
+                                                        @else
+                                                            <?php
+                                                                $harga_awal = $product->price;
+                                                                $discount = $product->discount->amount;
+                                                                $harga_akhir = ($harga_awal - $discount);
+                                                            ?>
+                                                            <p class="striketrough">RP {{ $product->price }}</p>
+                                                            <p>RP {{$harga_akhir}}</p>
+                                                        @endif
+                                                    @else
+                                                        <p>{{ $product->price }}</p>
+                                                    @endif
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -155,17 +200,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="CustomerName">Pembayaran</label>
-                                            <select name="pembayaran" class="form-control" id="">
-                                                <option value="Select" disabled>Select</option>
-                                                <option value="Manual" selected>Manual</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
                         </div>
                     </div>
                 </div>
@@ -181,33 +215,21 @@
                                             id="subtotal">Rp.
                                             {{ $order->subtotal ? number_format($order->subtotal, 0, ',', '.') : '0' }}</span>
                                     </p>
-                                    <p class="form-text-secondary">Ongkir X Banner <span class="float-right">Rp.
-                                            20,000</span></p>
+                                    <p class="form-text-secondary">Discount <span class="float-right"
+                                            id="discount">Rp.
+                                            </span>
+                                    </p>
+                                    <!-- <p class="form-text-secondary">Ongkir X Banner <span class="float-right">Rp.
+                                            20,000</span></p> -->
                                 </div>
                                 <div style="padding: 16px 0px">
                                     <h2 class="form-subtitle float-left">Total</h2>
                                     <h2 class="form-subtitle float-right" id="total">
                                         Rp.
-                                        {{ $order->subtotal ? number_format($order->subtotal + 20000, 0, ',', '.') : '0' }}
+                                        {{ $order->subtotal ? number_format($order->subtotal, 0, ',', '.') : '0' }}
                                     </h2>
                                 </div>
-                                <div class="d-block transfer-pembayaran" style="margin-top: 24px">
-                                    <h2 class="form-subtitle mb-1">Transfer pembayaran</h2>
-                                    @isset($banks)
-                                        @foreach ($banks as $bank)
-                                            <div class="row mt-3">
-                                                <div class="col-md-4 col-sm-4 col-4">
-                                                    <img src="{{ asset('admin/assets/images/banks/' . $bank->logo_bank) }}"
-                                                        style="width: 100%" alt="" srcset="" />
-                                                </div>
-                                                <div class="col-md-8 col-sm-8 col-8">
-                                                    <p>{{ $bank->bank_name }} ({{ $bank->name }})</p>
-                                                    <b>{{ $bank->account_number }}</b>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endisset
-                                </div>
+                                <h5 class="form-text-secondary m-3">*Link Pembayaran akan dikirim melalui email.</h5>
                                 <div class="mt-4">
                                     <button type="submit" class="btn btn-block btn-primary">
                                         Update
@@ -385,10 +407,13 @@
                 data: {
                     product_id: $(this).attr('id')
                 },
-                success: function(html) {
-                    const total = formatRupiah(html.data + 20000, 'Rp. ');
-                    var subtotal = formatRupiah(html.data, 'Rp. ');
+                success: function(data) {
+                    var subtotal = formatRupiah(data.price, 'Rp. ');
+                    var discount = formatRupiah(data.discount, 'Rp. ');
+                    var total = data.price - data.discount;
+                    total = formatRupiah(total, 'Rp. ');
                     $('#subtotal').html(subtotal)
+                    $('#discount').html(discount)
                     $('#total').html(total)
                 },
                 error: function() {
@@ -435,7 +460,7 @@
                     $('#city_id').empty()
                     $('#city_id').append('<option value="">Pilih Kabupaten/Kota</option>')
                     $.each(html.data, function(key, item) {
-                        $('#city_id').append('<option value="' + item.id + '">' + item.name +
+                        $('#city_id').append('<option value="' + item.id + '">' + item.type + ' ' + item.name +
                             '</option>')
                     })
                 }

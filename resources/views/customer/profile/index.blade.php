@@ -23,7 +23,7 @@
                             @csrf
                             <div class="form-group mt-0">
                                 <label for="Nama">Nama</label>
-                                <input type="text" name="name" value="{{ $user->name }}" class="form-control">
+                                <input type="text" name="name" value="{{ $user->name }}" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="Email">Email</label>
@@ -32,11 +32,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="Username">Username</label>
-                                <input type="text" name="username" value="{{ $user->username }}" class="form-control">
+                                <input type="text" name="username" value="{{ $user->username }}" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="Address">Address</label>
-                                <input type="text" name="address" value="{{ $user->address }}" class="form-control">
+                                <input type="text" name="address" value="{{ $user->address }}" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="Bio">Bio</label>
@@ -44,7 +44,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="Phone">Phone</label>
-                                <input type="text" name="phone" value="{{ $user->phone }}" class="form-control">
+                                <input type="text" name="phone" value="{{ $user->phone }}" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="Avatar">Avatar</label>

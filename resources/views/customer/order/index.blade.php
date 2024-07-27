@@ -78,9 +78,15 @@
                                         <tr>
                                             <td>{{ $order->created_at }}</td>
                                             <td>
-                                                <a href="{{ route('admin.show.order', ['invoice' => $order->invoice]) }}">
-                                                    {{ $order->invoice }}
-                                                </a>
+                                                @if($order->status != 'SUCCESS')
+                                                    <a href="#">
+                                                        {{ $order->invoice }}
+                                                    </a>
+                                                @else
+                                                    <a href="#">
+                                                        {{ $order->invoice }}
+                                                    </a>
+                                                @endif
                                             </td>
                                             <td>{{ $order->customer_name }}</td>
                                             <td>{{ $order->customer->email }}</td>
@@ -112,9 +118,72 @@
                                             <td>Rp {{ number_format($order->subtotal, 2) }}</td>
                                             <td>
                                                 <a href="https://api.whatsapp.com/send?phone=6281220801118"
-                                                    class="action-icon edit">
+                                                    class="action-icon edit mb-3" title="chat">
                                                     <i class="fa fa-commenting-o"></i>
                                                 </a>
+                                                <a href="{{ route('customer.export.invoice.pdf', $order->invoice) }}" target="_blank"
+                                                    class="action-icon object-group mb-3" title="invoice">
+                                                    <span class="iconify" data-icon="iconamoon:invoice"></span>
+                                                </a>
+
+                                                <!-- Upload Bukti -->
+                                                {{--<a href="#" class="action-icon download mb-3" title="upload bukti transfer"
+                                                    data-toggle="modal" data-target="#modalUploadBuktiTransfer{{ $order->id }}">
+                                                    <span class="iconify" data-icon="ic:outline-cloud-upload"></span>
+                                                </a>
+
+                                                <div class="modal fade" id="modalUploadBuktiTransfer{{ $order->id }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="editInvitationTextLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <form
+                                                            action="{{ route('customer.bukti.trasnfer') }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="editInvitationTextLabel">Upload Bukti Transfer
+                                                                    </h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <label>Nama Bank</label>
+                                                                        <input type="text" name="nama_bank"
+                                                                            class="form-control"
+                                                                            value="{{ $angpao->nama_bank }}"
+                                                                            required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>No Rekening</label>
+                                                                        <input type="text" name="no_rekening"
+                                                                            class="form-control"
+                                                                            value="{{ $angpao->no_rekening }}"
+                                                                            required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Nama Penerima</label>
+                                                                        <input type="text" name="nama_penerima"
+                                                                            class="form-control"
+                                                                            value="{{ $angpao->nama_penerima }}"
+                                                                            required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button"
+                                                                        class="btn btn-text-primary"
+                                                                        data-dismiss="modal">Tutup</button>
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary">Simpan</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>--}}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -126,97 +195,99 @@
             </div>
         </section>
     </div>
-    {{-- <div class="container-fluid">
-    <div class="page-title">
-        <h3><i class="material-icons">add_shopping_cart</i> Pesanan Saya</h3>
-    </div>
-    <div class="row clearfix">
-        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="header">
-                    <div class="row clearfix">
-                        <div class="col-xs-12 col-sm-6">
-                            <h4>Pesanan Saya</h4>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 align-right">
 
-                            <a href="{{route('customer.create.order')}}" class="btn btn-info waves-effect">
-                                <i class="material-icons">add</i>
-                                <span>New Order</span>
-                            </a>
+    {{-- <div class="container-fluid">
+        <div class="page-title">
+            <h3><i class="material-icons">add_shopping_cart</i> Pesanan Saya</h3>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <div class="row clearfix">
+                            <div class="col-xs-12 col-sm-6">
+                                <h4>Pesanan Saya</h4>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 align-right">
+
+                                <a href="{{route('customer.create.order')}}" class="btn btn-info waves-effect">
+                                    <i class="material-icons">add</i>
+                                    <span>New Order</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="body">
-                @include('layouts.alert')
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover js-basic-example ">
-                            <thead>
-                                <tr>
-                                    <th>Tanggal</th>
-                                    <th>Invoice #</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>Status</th>
-                                    <th>Subtotal</th>
-                                    <th width="130">Opsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($orders as $order)
-                                <tr>
-                                    <td>{{$order->created_at}}</td>
-                                    <td>
-                                        {{$order->invoice}}
-                                    </td>
-                                    <td>{{$order->customer_name}}</td>
-                                    <td>{{$order->customer->email}}</td>
-                                    <td>{{$order->customer_phone}}</td>
-                                    <td>{{$order->customer_address}}</td>
-                                    <td>
-                                        @switch($order->status)
-                                            @case('PENDING')
-                                            <span class="badge bg-orange">{{$order->status}}</span>
-                                            @break
-                                            @case('CONFIRMED')
-                                            <span class="badge bg-blue">{{$order->status}}</span>
-                                            @break
-                                            @case('PROCESS')
-                                            <span class="badge bg-yellow">{{$order->status}}</span>
-                                            @break
-                                            @case('SUCCESS')
-                                            <span class="badge bg-green">{{$order->status}}</span>
-                                            @break
-                                            @default
-                                            <span class="badge bg-red">{{$order->status}}</span>
+                    <div class="body">
+                    @include('layouts.alert')
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover js-basic-example ">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Invoice #</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Address</th>
+                                        <th>Status</th>
+                                        <th>Subtotal</th>
+                                        <th width="130">Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($orders as $order)
+                                    <tr>
+                                        <td>{{$order->created_at}}</td>
+                                        <td>
+                                            {{$order->invoice}}
+                                        </td>
+                                        <td>{{$order->customer_name}}</td>
+                                        <td>{{$order->customer->email}}</td>
+                                        <td>{{$order->customer_phone}}</td>
+                                        <td>{{$order->customer_address}}</td>
+                                        <td>
+                                            @switch($order->status)
+                                                @case('PENDING')
+                                                <span class="badge bg-orange">{{$order->status}}</span>
+                                                @break
+                                                @case('CONFIRMED')
+                                                <span class="badge bg-blue">{{$order->status}}</span>
+                                                @break
+                                                @case('PROCESS')
+                                                <span class="badge bg-yellow">{{$order->status}}</span>
+                                                @break
+                                                @case('SUCCESS')
+                                                <span class="badge bg-green">{{$order->status}}</span>
+                                                @break
+                                                @default
+                                                <span class="badge bg-red">{{$order->status}}</span>
 
-                                        @endswitch
-                                    </td>
-                                    <td>Rp {{number_format($order->subtotal,2)}}</td>
-                                    <td>
-                                        <a href="https://api.whatsapp.com/send?phone=6281220801118" target="_blank" class="btn bg-green btn-circle waves-effect waves-circle waves-float">
-                                            <i class="material-icons">chat</i> 
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                            @endswitch
+                                        </td>
+                                        <td>Rp {{number_format($order->subtotal,2)}}</td>
+                                        <td>
+                                            <a href="https://api.whatsapp.com/send?phone=6281220801118" target="_blank" class="btn bg-green btn-circle waves-effect waves-circle waves-float">
+                                                <i class="material-icons">chat</i> 
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div> --}}
+    </div> --}}
 @endsection
 @section('add-js')
 
     <script src="https://use.fontawesome.com/e912f54b8f.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
     <script>
         $(document).ready(function() {
             $("#datatables").DataTable({

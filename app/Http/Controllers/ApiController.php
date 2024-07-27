@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\City;
 use App\District;
+use App\Models\Discount;
 use App\Models\Product;
 use App\Province;
 
@@ -63,10 +64,29 @@ class ApiController extends Controller
     public function getProductPrice(Request $request)
     {
         $product = Product::find($request->product_id);
-
+        $discount = Discount::where('product_id', $product->id)
+            ->where('is_active', true)->first();
+        $harga_akhir = 0;
+        $discounts = 0;
+        
+        if ($discount != null) {
+            if ($discount->discount_type == "Presentase") {
+                $harga_awal = $product->price;
+                $discounts = ($discount->amount / 100) * $harga_awal;
+                $harga_akhir = $harga_awal - $discounts;
+    
+            } else {
+                $harga_awal = $product->price;
+                $discounts = $discount->amount;
+                $harga_akhir = $harga_awal - $discounts;
+            }
+        }
+        
         return response()->json([
             'status' => 'success',
-            'data' => $product->price
+            'price' => $product->price,
+            'discount' => $discounts,
+            'harga_akhir' => $harga_akhir,
         ]);
     }
 

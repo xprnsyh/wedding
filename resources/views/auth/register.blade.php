@@ -25,17 +25,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                <li class="nav-item">
                         <a class="nav-link" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/price') }}">Price</a>
+                        <a class="nav-link" href="{{ url('/feature') }}">Feature</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/price') }}">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/blog') }}">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/story') }}">Story</a>
+                        <a class="nav-link" href="{{ url('/story') }}">Template</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-secondary" href="{{ route('login') }}">Masuk</a>
@@ -50,15 +53,7 @@
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-lg-11 col-md-12">
                     <div class="row justify-content-center">
-                        <div
-                            class="
-                  col-md-12
-                  mb-5
-                  d-lg-none d-md-none
-                  hidden-img
-                  d-sm-flex d-xs-flex
-                  justify-content-center
-                ">
+                        <div class="col-md-12 mb-5 d-lg-none d-md-none hidden-img d-sm-flex d-xs-flex justify-content-center">
                             <div class="img-wrapper text-center">
                                 <img src="{{ asset('img/review2.png') }}" alt="" />
                             </div>
@@ -71,14 +66,23 @@
                                     Don't <span>Worry</span>, <br />Be <span>Hoofey</span>
                                 </h1>
                             </div>
-                            <form action="{{ route('register') }}" method="post">
+                            <form action="{{ route('verify.user') }}" method="post">
                                 @csrf
 
+                                <div class="form-group">
+                                    <label for="Name">Username</label>
+                                    <input class="form-control {{ $errors->first('username') ? 'is-invalid' : '' }}"
+                                        type="text" name="username" placeholder="Your Username" autocomplete="username"
+                                        value="{{ old('username') ? old('username') : false }}" required />
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('username') }}
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="Name">Your Name</label>
                                     <input class="form-control {{ $errors->first('name') ? 'is-invalid' : '' }}"
                                         type="text" name="name" placeholder="Your Name" autocomplete="name"
-                                        value="{{ old('name') ? old('name') : false }}" />
+                                        value="{{ old('name') ? old('name') : false }}" required/>
                                     <div class="invalid-feedback">
                                         {{ $errors->first('name') }}
                                     </div>
@@ -88,15 +92,24 @@
                                     <input class="form-control {{ $errors->first('email') ? 'is-invalid' : '' }}"
                                         type="text" name="email" placeholder="Your email address"
                                         value="{{ $email ? $email : false }}" autocomplete="email"
-                                        value="{{ old('email') ? old('email') : false }}" />
+                                        value="{{ old('email') ? old('email') : false }}" required />
                                     <div class="invalid-feedback">
                                         {{ $errors->first('email') }}
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="Phone">Phone Number</label>
+                                    <input class="form-control" type="text" name="phone" placeholder="08512...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address">Address</label>
+                                    <input class="form-control" type="text" name="address" placeholder="Jl.mangga no.2 Kec.. Kel..">
+
+                                </div>
+                                <div class="form-group">
                                     <label for="password">Password</label>
                                     <input class="form-control {{ $errors->first('password') ? 'is-invalid' : '' }}"
-                                        type="password" name="password" placeholder="Your password" />
+                                        type="password" name="password" placeholder="Your password" required />
                                     <div class="invalid-feedback">
                                         {{ $errors->first('password') }}
                                     </div>
@@ -104,19 +117,19 @@
                                 <div class="form-group">
                                     <label for="password">Password Confirmation</label>
                                     <input class="form-control" type="password" name="password_confirmation"
-                                        placeholder="Your password" />
+                                        placeholder="Your password" required />
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" name="agree" id="agree" class="form-check-input" />
-                                    <label for="agree">By creating an account you agree to the <a href="#">terms of
-                                            use</a> and our <a href="#">privacy policy</a></label>
+                                    <input type="checkbox" name="agree" id="agree" class="form-check-input agreement" />
+                                    <label for="agree">Dengan ini saya setuju dengan <a href="{{ route('termofuse')}}">syarat dan ketentuan</a> 
+                                        serta <a href="{{route('privacypolicy')}}">kebijakan privasi</a> kami.</label>
                                 </div>
-                                <button type="submit" class=" btn btn-block btn-pink-primary text-center text-white">
+                                <button type="submit" disabled id="btn_submit" class="btn btn-block btn-pink-primary text-center text-white submit_btn">
                                     Daftar
                                 </button>
                             </form>
                             <div class="msg mt-3" style="text-align: center">
-                                <h6>Already have an account? <a href="{{ route('login') }}">Log in</a></h6>
+                                <h6>Sudah punya akun? <a href="{{ route('login') }}">Masuk</a></h6>
                             </div>
                         </div>
                         <div class="d-none d-sm-none col-md-7 d-md-flex justify-content-end">
@@ -139,6 +152,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
     </script>
+    <script>
+
+        $('#agree').change(function() {
+            $('#btn_submit').prop("disabled", !this.checked);
+        });
+
+    </script>
+
 </body>
 
 </html>

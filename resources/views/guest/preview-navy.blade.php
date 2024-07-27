@@ -278,25 +278,13 @@
                     <div class="text-01" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="500">
                         {{ $event->nama_panggilan_mempelai_wanita }} & {{ $event->nama_panggilan_mempelai_pria }}
                     </div>
-                    @if (app('request')->input('invite'))
+                    @if($invite->name)
+                    
                         <div class="text-02" data-aos="fade-up" data-aos-duration="700" data-aos-delay="700">
                             Turut mengundang Bapak/Ibu/Saudara/i
                         </div>
                         <div class="text-01" data-aos="fade-up" data-aos-duration="700" data-aos-delay="700">
-                            {{ app('request')->input('invite') }}
-                        </div>
-                    @else
-                        <div class="text-02" data-aos="fade-up" data-aos-duration="700" data-aos-delay="700">
-                            Sesuai dengan Instruksi Menteri Dalam Negeri Nomor 39 Tahun 2021 khusunya terkait dengan
-                            pembatasan kapasitas pada resepsi pernikahan, maka tanpa mengurangi rasa hormat dengan ini
-                            kami memberitahukan bahwa acara hanya dihadiri oleh keluarga dan kerabat terdekat.
-                        </div>
-                        <div class="text-02" data-aos="fade-up" data-aos-duration="700" data-aos-delay="700"
-                            style="margin-top: 15px;">
-                        </div>
-                        <div class="text-02" data-aos="fade-up" data-aos-duration="700" data-aos-delay="700">
-                            Namun kami berharap agar sedianya Bapak/Ibu/Saudara/i berkenan memberikan restu dan doa baik
-                            kepada kami.
+                            {{ $invite->name }}
                         </div>
                     @endif
                 </div>
@@ -350,9 +338,6 @@
                             {{ $event->nama_panggilan_mempelai_pria }}
                         </h1>
                     </div>
-                    <div data-aos="fade-up" data-aos-duration="1000">
-                        <a href="#rsvp">RSVP</a>
-                    </div>
                 </div>
             </div>
 
@@ -365,11 +350,11 @@
     </section>
 
     <!-- GREETINGS -->
-    @if (app('request')->input('invite'))
+    @if ($invite->name)
         <section class="greetings">
             <div>
                 <p data-aos="fade-left" data-aos-duration="1000">Hi!</p>
-                <h1 data-aos="zoom-out-up" data-aos-duration="1000">{{ app('request')->input('invite') }}</h1>
+                <h1 data-aos="zoom-out-up" data-aos-duration="1000">{{ $invite->name }}</h1>
                 <p data-aos="fade-right" data-aos-duration="1000">you're invited to our wedding ceremony</p>
             </div>
         </section>
@@ -560,7 +545,7 @@
                                 @endif
                             </div>
                         </div>
-                        @if (app('request')->input('invite'))
+                        @if ($invite->name)
                             <div class="activity">
                                 <div class="title">
                                     <img class="orn orn-party"
@@ -600,30 +585,37 @@
         </div>
     </section>
 
+    <!-- QR CODE -->
+    <section class="qr-code">
+        <div class="body">
+            <div class="card">
+                <div class="headerpink">
+                    <div class="card-body text-center">
+                        <h3>QR Code</h3>
+                        @if(isset($invite->kode_qr))
+                        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->merge('/public/img/primary-icon.png', .3)->errorCorrection('H')->size(300)->generate($invite->kode_qr)) !!} ">
+                        
+                        <!-- {!! QrCode::format('png')->merge('/public/img/primary-icon.png', .3)->errorCorrection('H')->gradient(255, 0, 0, 0, 0, 255, 'diagonal')->size(300)->generate($invite->kode_qr) !!} -->
+                        @endif
+                        <p>simpan QR Code ini untuk ditunjukkan pada saat isi buku tamu</p>
+                    </div>
+                    <div class="card-body text-center">
+                    @if(isset($invite->kode_qr))
+                        
+                        <a href="data:image/png;base64, {!! base64_encode(QrCode::format('png')->merge('/public/img/primary-icon.png', .3)->errorCorrection('H')->size(300)->generate($invite->kode_qr)) !!}" class="qr mt-3" download="">Download</a>
+                        <!-- <a href="{{ route('export.pdf', $invite->id) }}" class="mt-3">Download QR KODE</a> -->
+                        
+                    @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- RESERVATION -->
     <div class="wrapper-01">
         <!-- RESERVATION -->
-        @if (app('request')->input('invite'))
-            <section class="rsvp" id="rsvp">
-                <div class="rsvp-inner come">
-                    <div class="rsvp-confirm">
-                        <h1>RSVP</h1>
-                        <form action="{{ route('attending', ['id' => $event->id]) }}" autocomplete="off"
-                            method="POST" class="comment-form" style="margin-top: 20px;">
-                            @csrf
-                            <div class="form-group">
-                                <input type="text" name="name" class="form-control" value="" placeholder="Nama Anda"
-                                    required>
-                                <input type="email" name="email" class="form-control" value=""
-                                    placeholder="Email Anda" required>
-                            </div>
-                            <button type="submit" class="change-confirmation" data-aos="fade-up"
-                                data-aos-duration="1000" class="send-comment">I'm Attending</button>
-                        </form>
-                    </div>
-                </div>
-            </section>
-        @endif
+        <!--  -->
         <!-- LIVE STREAMING -->
         @if (isset($event->link_livestreaming))
             <section class="live-streaming">
@@ -663,7 +655,7 @@
                 @empty
                 @endforelse
                 {{-- <h5 data-aos="fade-up" data-aos-duration="1000">Konfirmasi Kado Pernikahan</h5> --}}
-                <a href="https://api.whatsapp.com/send?phone={{ $event->order->customer_phone }}&text=Hai {{ $event->nama_panggilan_mempelai_pria }}, aku udah transfer nih ke {{ $angpao->nama_bank ?? '' }} atas nama {{ $angpao->nama_penerima ?? '' }}. Selamat yah!"
+                <a href="https://api.whatsapp.com/send?phone=62{{ $event->order->customer_phone }}&text=Hai {{ $event->nama_panggilan_mempelai_pria }}, aku udah transfer nih ke {{ $angpao->nama_bank ?? '' }} atas nama {{ $angpao->nama_penerima ?? '' }}. Selamat yah!"
                     data-aos="fade-up" data-aos-duration="1000" id="confirm_kado" target="_blank"
                     class="btn btn-primary">Konfirmasi</a>
 

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Helpers\LogActivity;
+use App\Models\TemplateList;
 
 class GuestController extends Controller
 {
@@ -31,233 +32,333 @@ class GuestController extends Controller
             'blogs' => $blogs
         ]);
     }
-    public function view($slug)
-    {
+
+    public function view(Request $request, $slug)
+    {   
         $event = Event::where('slug', $slug)->with('audio')->first();
-        $data_guestbook = GuestBook::where('event_id', $event->id)->get();
 
-        $photo_event = PhotoEvent::where('event_id', $event->id)->get()->toArray();
+        if ($event == null) {
+            $list_templates = TemplateList::where('name', '=', $slug)->first();
+            if ($list_templates == null) {
+                return redirect()->route('home');
+            }
+            $event = Event::where('code_event', '87TzAWhJx')->with('audio')->first();
+            $photo_event = PhotoEvent::where('event_id', $event->id)->get()->toArray();
+            $data_guestbook = GuestBook::where('event_id', $event->id)->get();
+            
+            return view($list_templates->route,[
+                'event' => $event,
+                'data_guestbook' => $data_guestbook,
+                'photo_event' => $photo_event,
+            ]);
 
-        $kalimat = 'Lihat undangan pernikahan ' . $event->nama_lengkap_mempelai_wanita . ' & ' . $event->nama_lengkap_mempelai_pria;
-        LogActivity::addToLog($kalimat, 'Lihat Undangan');
+        } else {
+            $photo_event = PhotoEvent::where('event_id', $event->id)->get()->toArray();
+            $data_guestbook = GuestBook::where('event_id', $event->id)->get();
 
-        switch ($event->template) {
-            case 'Gold':
-                return view('guest.preview-gold', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Soft':
-                return view('guest.preview-soft', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Prime':
-                return view('guest.preview-prime', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Silver':
-                return view('guest.preview-silver', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Chocolate':
-                return view('guest.preview-choco', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Pink':
-                return view('guest.preview-pink', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Crystal':
-                return view('guest.preview-crystal', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Grey':
-                return view('guest.preview-grey', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Bronze':
-                return view('guest.preview-bronze', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Blue':
-                return view('guest.preview-blue', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
+            if ($request['invite']== null) {
 
-                // v1-v5
-            case 'Camel':
-                return view('guest.preview-camel', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Ruby':
-                return view('guest.preview-ruby', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Goldy':
-                return view('guest.preview-goldy', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Navy':
-                return view('guest.preview-navy', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Natural':
-                return view('guest.preview-natural', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'jawa':
-                return view('guest.preview-jawa', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
+                $list_templates = TemplateList::where('name',$event->template)->first();
 
-                // Basic
-            case 'Basic':
-                return view('guest.preview-basic', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-                // regular
-            case 'Regular':
-                return view('guest.preview-regular', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
-                break;
-            case 'Custom':
-                $hero = DB::table('hero_section')->where('event_id', $event->id)->first();
-                $invitation = DB::table('invitation_section')->where('event_id', $event->id)->first();
-                $gallery = DB::table('gallery_section')->where('event_id', $event->id)->first();
-                $countdown = DB::table('countdown_section')->where('event_id', $event->id)->first();
-                $maps = DB::table('maps_section')->where('event_id', $event->id)->first();
-                $streaming = DB::table('streaming_section')->where('event_id', $event->id)->first();
-                $videos = DB::table('videos_section')->where('event_id', $event->id)->first();
-                $_event = DB::table('event_section')->where('event_id', $event->id)->first();
-                $comment = DB::table('comment_section')->where('event_id', $event->id)->first();
-                $footer = DB::table('footer_section')->where('event_id', $event->id)->first();
-                if ($hero !== null && $hero->background !== null) {
-                    $this->_cekJenisBackground($hero, $slug, $event);
-                }
-                if ($invitation !== null && $invitation->background !== null) {
-                    $this->_cekJenisBackground($invitation, $slug, $event);
-                }
-                if ($gallery !== null && $gallery->background !== null) {
-                    $this->_cekJenisBackground($gallery, $slug, $event);
-                }
-                if ($countdown !== null && $countdown->background !== null) {
-                    $this->_cekJenisBackground($countdown, $slug, $event);
-                }
-                if ($maps !== null && $maps->background !== null) {
-                    $this->_cekJenisBackground($maps, $slug, $event);
-                }
-                if ($streaming !== null && $streaming->background !== null) {
-                    $this->_cekJenisBackground($streaming, $slug, $event);
-                }
-                if ($videos !== null && $videos->background !== null) {
-                    $this->_cekJenisBackground($videos, $slug, $event);
-                }
-                if ($_event !== null && $_event->background !== null) {
-                    $this->_cekJenisBackground($_event, $slug, $event);
-                }
-                if ($comment !== null && $comment->background !== null) {
-                    $this->_cekJenisBackground($comment, $slug, $event);
-                }
-                if ($footer !== null && $footer->background !== null) {
-                    $this->_cekJenisBackground($footer, $slug, $event);
-                }
-
-                return view('event-builder-page', [
+                return view($list_templates->route, [
                     'event' => $event,
                     'data_guestbook' => $data_guestbook,
                     'photo_event' => $photo_event,
-                    'hero' => $hero,
-                    'invitation' => $invitation,
-                    'gallery' => $gallery,
-                    'countdown' => $countdown,
-                    'maps' => $maps,
-                    'streaming' => $streaming,
-                    'videos' => $videos,
-                    '_event' => $_event,
-                    'comment' => $comment,
-                    'footer' => $footer,
                 ]);
-                break;
-            default:
-                return view('guest.preview-gold', [
-                    'event' => $event,
-                    'data_guestbook' => $data_guestbook,
-                    'photo_event' => $photo_event
-                ]);
+            }else {
+                $data = explode(':',$request['invite']);
+                if ($data[0] == 'A' || $data[0] == 'a') {
+
+                    $invite = Invite::where('rand_code',$data[0])
+                    ->where('event_id', $event->id)
+                    // ->where('name',$data[1])
+                    ->first();
+
+                    if ($invite == null) {
+                        $kode = "aD|". Str::random(15) ."|hOOfey|".$event->id;
+
+                        DB::beginTransaction();
+
+                        $invite = Invite::create([
+                            'name' => $data[1],
+                            'address' => 'link',
+                            'kode_qr' => $kode,
+                            'event_id' => $event->id,
+                            'rand_code' => $data[0],
+                            'is_confirmed' => 0,
+                            'is_invited' => 1,
+                        ]);
+
+                        DB::commit();
+                    }
+                } else {
+                    $invite = Invite::where('rand_code',$data[0])
+                    ->where('event_id',$event->id)
+                    // ->where('name',$data[1])
+                    ->first();
+                }
+            }
+
+            
+            
+
+            $kalimat = 'Lihat undangan pernikahan ' . $event->nama_lengkap_mempelai_wanita . ' & ' . $event->nama_lengkap_mempelai_pria;
+            LogActivity::addToLog($kalimat, 'Lihat Undangan');
+
+            $list_templates = TemplateList::where('name',$event->template)->first();
+
+            return view($list_templates->route, [
+                'event' => $event,
+                'data_guestbook' => $data_guestbook,
+                'photo_event' => $photo_event,
+                'invite' => $invite
+            ]);
+
+            // switch ($event->template) {
+            //     case 'Gold':
+            //         return view('guest.preview-gold', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Soft':
+            //         return view('guest.preview-soft', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Prime':
+            //         return view('guest.preview-prime', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Silver':
+            //         return view('guest.preview-silver', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Chocolate':
+            //         return view('guest.preview-choco', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Pink':
+            //         return view('guest.preview-pink', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Crystal':
+            //         return view('guest.preview-crystal', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Grey':
+            //         return view('guest.preview-grey', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Bronze':
+            //         return view('guest.preview-bronze', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Blue':
+            //         return view('guest.preview-blue', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+
+            //         // v1-v5
+            //     case 'Camel':
+            //         return view('guest.preview-camel', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Ruby':
+            //         return view('guest.preview-ruby', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Goldy':
+            //         return view('guest.preview-goldy', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Navy':
+            //         return view('guest.preview-navy', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event,
+            //             'invite' => $invite
+            //         ]);
+            //         break;
+            //     case 'Minang':
+            //         return view('guest.preview-minang', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event,
+            //             'invite' => $invite
+            //         ]);
+            //         break;
+            //     case 'Natural':
+            //         return view('guest.preview-natural', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'jawa':
+            //         return view('guest.preview-jawa', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+
+            //         // Basic
+            //     case 'Basic':
+            //         return view('guest.preview-basic', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //         // regular
+            //     case 'Regular':
+            //         return view('guest.preview-regular', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+            //         break;
+            //     case 'Minang':
+            //         return view('guest.preview-minang', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event,
+            //             'invite' => $invite
+            //         ]);
+            //         break; 
+            //     case 'Custom':
+            //         $hero = DB::table('hero_section')->where('event_id', $event->id)->first();
+            //         $invitation = DB::table('invitation_section')->where('event_id', $event->id)->first();
+            //         $gallery = DB::table('gallery_section')->where('event_id', $event->id)->first();
+            //         $countdown = DB::table('countdown_section')->where('event_id', $event->id)->first();
+            //         $maps = DB::table('maps_section')->where('event_id', $event->id)->first();
+            //         $streaming = DB::table('streaming_section')->where('event_id', $event->id)->first();
+            //         $videos = DB::table('videos_section')->where('event_id', $event->id)->first();
+            //         $_event = DB::table('event_section')->where('event_id', $event->id)->first();
+            //         $comment = DB::table('comment_section')->where('event_id', $event->id)->first();
+            //         $footer = DB::table('footer_section')->where('event_id', $event->id)->first();
+            //         if ($hero !== null && $hero->background !== null) {
+            //             $this->_cekJenisBackground($hero, $slug, $event);
+            //         }
+            //         if ($invitation !== null && $invitation->background !== null) {
+            //             $this->_cekJenisBackground($invitation, $slug, $event);
+            //         }
+            //         if ($gallery !== null && $gallery->background !== null) {
+            //             $this->_cekJenisBackground($gallery, $slug, $event);
+            //         }
+            //         if ($countdown !== null && $countdown->background !== null) {
+            //             $this->_cekJenisBackground($countdown, $slug, $event);
+            //         }
+            //         if ($maps !== null && $maps->background !== null) {
+            //             $this->_cekJenisBackground($maps, $slug, $event);
+            //         }
+            //         if ($streaming !== null && $streaming->background !== null) {
+            //             $this->_cekJenisBackground($streaming, $slug, $event);
+            //         }
+            //         if ($videos !== null && $videos->background !== null) {
+            //             $this->_cekJenisBackground($videos, $slug, $event);
+            //         }
+            //         if ($_event !== null && $_event->background !== null) {
+            //             $this->_cekJenisBackground($_event, $slug, $event);
+            //         }
+            //         if ($comment !== null && $comment->background !== null) {
+            //             $this->_cekJenisBackground($comment, $slug, $event);
+            //         }
+            //         if ($footer !== null && $footer->background !== null) {
+            //             $this->_cekJenisBackground($footer, $slug, $event);
+            //         }
+
+            //         return view('event-builder-page', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event,
+            //             'hero' => $hero,
+            //             'invitation' => $invitation,
+            //             'gallery' => $gallery,
+            //             'countdown' => $countdown,
+            //             'maps' => $maps,
+            //             'streaming' => $streaming,
+            //             'videos' => $videos,
+            //             '_event' => $_event,
+            //             'comment' => $comment,
+            //             'footer' => $footer,
+            //         ]);
+            //         break;
+            //     default:
+            //         return view('guest.preview-gold', [
+            //             'event' => $event,
+            //             'data_guestbook' => $data_guestbook,
+            //             'photo_event' => $photo_event
+            //         ]);
+                
+            // }
         }
     }
 
-    public function redirect($id)
+    public function redirect($id,$id_monitor)
     {
         $event = Event::find($id);
 
         return redirect()->route('see.guestbook', [
-            'slug' => $event->slug
+            'slug' => $event->slug,
+            'id_monitor' => $id_monitor
         ]);
     }
 
 
-    public function guestbook($slug)
+    public function guestbook($slug, $id_monitor)
     {
         $event = Event::where('slug', $slug)->first();
         $data_guestbook = GuestBook::where('event_id', $event->id)->get();
+        $data_photo = PhotoEvent::where('event_id', $event->id)->get();
+        if ($event->link_youtube != null) {
+            $event->link_youtube = substr($event->link_youtube,17);
+            $event->link_youtube = strchr($event->link_youtube,"?",true);
+        }
+        
 
-        return view('guest.guestbook', [
+        return view('guest.guestbook-1', [
             'data_guestbook' => $data_guestbook,
-            'event' => $event
+            'event' => $event,
+            'data_photo' => $data_photo,
+            'id_monitor' => $id_monitor
         ]);
     }
 
@@ -328,8 +429,10 @@ class GuestController extends Controller
     public function listEvent()
     {
         $events = Event::with('order')->get();
+        $list_templates = TemplateList::where('is_active',true)->get();
+        
         return view('story', [
-            'events' => $events
+            'list_templates' => $list_templates
         ]);
     }
 
@@ -432,151 +535,185 @@ class GuestController extends Controller
         return view('guest.demo-17');
     }
 
-    public function attending(Request $request, $id)
-    {
-        $this->validate($request, [
-            'email' => 'required|email|email_address',
-            'name' => 'required'
-        ]);
-        $role_customer = Role::where('name', 'customer')->first();
-        $user = User::where('email', $request->email)->first();
-        $invite = null;
+    // public function attending(Request $request, $id)
+    // {
+    //     $this->validate($request, [
+    //         'email' => 'required|email|email_address',
+    //         'name' => 'required'
+    //     ]);
+    //     $role_customer = Role::where('name', 'customer')->first();
+    //     $user = User::where('email', $request->email)->first();
+    //     $invite = null;
 
-        // jika user tidak ada
-        if ($user == null) {
-            // membuat user baru
-            $password = Str::random(8);
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => bcrypt($password)
-            ]);
-            $user->assignRole($role_customer->name);
-            $user->notify(new UserCreated($request->name, $request->email, $password));
-            $kalimat = $user->name . ' register';
-            LogActivity::addToLog($kalimat, 'Register via undangan');
-            $invite = Invite::where('event_id', $id)->where('guest_id', $user->id)->get();
+    //     // jika user tidak ada
+    //     if ($user == null) {
+    //         // membuat user baru
+    //         $password = Str::random(8);
+    //         $user = User::create([
+    //             'name' => $request->name,
+    //             'email' => $request->email,
+    //             'password' => bcrypt($password)
+    //         ]);
+    //         $user->assignRole($role_customer->name);
+    //         $user->notify(new UserCreated($request->name, $request->email, $password));
+    //         $kalimat = $user->name . ' register';
+    //         LogActivity::addToLog($kalimat, 'Register via undangan');
+    //         $invite = Invite::where('event_id', $id)->where('guest_id', $user->id)->get();
 
-            if ($invite->count() > 0) {
-                return redirect()->back()->with([
-                    'error' => 'Anda sudah dalam daftar RSVP!'
-                ]);
-            } else {
-                $new_invite = Invite::create([
-                    'kode_kupon' => Str::random(7),
-                    'event_id' => $id,
-                    'guest_id' => $user->id,
-                    'is_invited' => 1,
-                    'is_confirmed' => 0,
-                ]);
-                $event = Event::find($id);
-                $user->notify(new UserInvited($event));
-                $kalimat = $user->name . ' diundang ke pernikahan ' . $event->nama_lengkap_mempelai_wanita . ' & ' . $event->nama_lengkap_mempelai_pria;
-                LogActivity::addToLog($kalimat, 'Undangan');
-                return redirect()->back()->with([
-                    'success' => 'Thank you for your attending'
-                ]);
-            }
-        } else {
+    //         if ($invite->count() > 0) {
+    //             return redirect()->back()->with([
+    //                 'error' => 'Anda sudah dalam daftar RSVP!'
+    //             ]);
+    //         } else {
+    //             $new_invite = Invite::create([
+    //                 'kode_kupon' => Str::random(7),
+    //                 'event_id' => $id,
+    //                 'guest_id' => $user->id,
+    //                 'is_invited' => 1,
+    //                 'is_confirmed' => 0,
+    //             ]);
+    //             $event = Event::find($id);
+    //             $user->notify(new UserInvited($event));
+    //             $kalimat = $user->name . ' diundang ke pernikahan ' . $event->nama_lengkap_mempelai_wanita . ' & ' . $event->nama_lengkap_mempelai_pria;
+    //             LogActivity::addToLog($kalimat, 'Undangan');
+    //             return redirect()->back()->with([
+    //                 'success' => 'Thank you for your attending'
+    //             ]);
+    //         }
+    //     } else {
 
-            $invite = Invite::where('event_id', $id)->where('guest_id', $user->id)->get();
+    //         $invite = Invite::where('event_id', $id)->where('guest_id', $user->id)->get();
 
-            if ($invite->count() > 0) {
-                return redirect()->back()->with([
-                    'error' => 'Anda sudah dalam daftar RSVP!'
-                ]);
-            } else {
+    //         if ($invite->count() > 0) {
+    //             return redirect()->back()->with([
+    //                 'error' => 'Anda sudah dalam daftar RSVP!'
+    //             ]);
+    //         } else {
 
-                $new_invite = Invite::create([
-                    'kode_kupon' => Str::random(7),
-                    'event_id' => $id,
-                    'guest_id' => $user->id,
-                    'is_invited' => 1,
-                    'is_confirmed' => 0,
-                ]);
-                $event = Event::find($id);
-                $user->notify(new UserInvited($event));
-                $kalimat = $user->name . ' diundang ke pernikahan' . $event->nama_lengkap_mempelai_wanita . ' & ' . $event->nama_lengkap_mempelai_pria;
-                LogActivity::addToLog($kalimat, 'Undangan');
-                return redirect()->back()->with([
-                    'success' => 'Thank you for your attending'
-                ]);
-            }
-        }
-    }
+    //             $new_invite = Invite::create([
+    //                 'kode_kupon' => Str::random(7),
+    //                 'event_id' => $id,
+    //                 'guest_id' => $user->id,
+    //                 'is_invited' => 1,
+    //                 'is_confirmed' => 0,
+    //             ]);
+    //             $event = Event::find($id);
+    //             $user->notify(new UserInvited($event));
+    //             $kalimat = $user->name . ' diundang ke pernikahan' . $event->nama_lengkap_mempelai_wanita . ' & ' . $event->nama_lengkap_mempelai_pria;
+    //             LogActivity::addToLog($kalimat, 'Undangan');
+    //             return redirect()->back()->with([
+    //                 'success' => 'Thank you for your attending'
+    //             ]);
+    //         }
+    //     }
+    // }
 
     public function wishes(Request $request, $id)
     {
         $this->validate($request, [
-            'email' => 'required|email|email_address',
+            'email' => 'required|email',
             'name' => 'required',
             'text' => 'required'
         ]);
 
-        $role_customer = Role::where('name', 'customer')->first();
-        $user = User::where('email', $request->email)->first();
-        $guest_book = null;
+        // $role_customer = Role::where('name', 'customer')->first();
+        // $user = User::where('email', $request->email)->first();
+        // $guest_book = null;
 
         // jika user tidak ada
-        if ($user == null) {
-            // membuat user baru
-            $password = Str::random(8);
-            $user = User::create([
+        // if ($user == null) {
+        //     // membuat user baru
+        //     $password = Str::random(8);
+        //     $user = User::create([
+        //         'name' => $request->name,
+        //         'email' => $request->email,
+        //         'password' => bcrypt($password)
+        //     ]);
+        //     $user->assignRole($role_customer->name);
+        //     $user->notify(new UserCreated($request->name, $request->email, $password));
+        //     $kalimat = $user->name . ' register';
+        //     LogActivity::addToLog($kalimat, 'Register via undangan');
+        //     $guest_book = GuestBook::where('event_id', $id)->where('user_id', $user->id)->get();
+
+        //     if ($guest_book->count() > 0) {
+        //         return redirect()->back()->with([
+        //             'error' => 'Anda sudah mengucapkan...'
+        //         ]);
+        //     } else {
+        //         $new_guest_book = GuestBook::create([
+        //             'event_id' => $id,
+        //             'user_id' => $user->id,
+        //             'text' => $request->text,
+        //         ]);
+
+        //         $kalimat = $user->name . ' mengucapkan '. $request->text;
+        //         LogActivity::addToLog($kalimat, 'Mengucapkan via undangan');
+
+        //         return redirect()->back()->with([
+        //             'success' => 'Terima kasih...'
+        //         ]);
+        //     }
+        // } else {
+
+        //     $invite = GuestBook::where('event_id', $id)->where('user_id', $user->id)->get();
+
+        //     if ($invite->count() > 0) {
+        //         return redirect()->back()->with([
+        //             'error' => 'Anda sudah mengucapkan...'
+        //         ]);
+        //     } else {
+
+        //         $new_guest_book = GuestBook::create([
+        //             'event_id' => $id,
+        //             'user_id' => $user->id,
+        //             'text' => $request->text,
+        //         ]);
+        //         $kalimat = $user->name . ' mengucapkan '. $request->text;
+        //         LogActivity::addToLog($kalimat, 'Mengucapkan via undangan');
+
+        //         return redirect()->back()->with([
+        //             'success' => 'Terima kasih...'
+        //         ]);
+        //     }
+        // }
+        
+        $check_guest_book = GuestBook::where('email', $request->email)
+            ->get();
+        
+        if ($check_guest_book->count() > 0) {
+            return redirect()->back()->with([
+                'error' => 'Anda sudah mengucapkan...'
+            ]);
+        } else {
+            $new_guest_book = GuestBook::create([
+                'event_id' => $id,
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => bcrypt($password)
+                'text' => $request->text,
             ]);
-            $user->assignRole($role_customer->name);
-            $user->notify(new UserCreated($request->name, $request->email, $password));
-            $kalimat = $user->name . ' register';
-            LogActivity::addToLog($kalimat, 'Register via undangan');
-            $guest_book = GuestBook::where('event_id', $id)->where('user_id', $user->id)->get();
-
-            if ($guest_book->count() > 0) {
-                return redirect()->back()->with([
-                    'error' => 'Anda sudah mengucapkan...'
-                ]);
-            } else {
-                $new_guest_book = GuestBook::create([
-                    'event_id' => $id,
-                    'user_id' => $user->id,
-                    'text' => $request->text,
-                ]);
-
-                $kalimat = $user->name . ' mengucapkan '. $request->text;
-                LogActivity::addToLog($kalimat, 'Mengucapkan via undangan');
-
-                return redirect()->back()->with([
-                    'success' => 'Terima kasih...'
-                ]);
-            }
-        } else {
-
-            $invite = GuestBook::where('event_id', $id)->where('user_id', $user->id)->get();
-
-            if ($invite->count() > 0) {
-                return redirect()->back()->with([
-                    'error' => 'Anda sudah mengucapkan...'
-                ]);
-            } else {
-
-                $new_guest_book = GuestBook::create([
-                    'event_id' => $id,
-                    'user_id' => $user->id,
-                    'text' => $request->text,
-                ]);
-                $kalimat = $user->name . ' mengucapkan '. $request->text;
-                LogActivity::addToLog($kalimat, 'Mengucapkan via undangan');
-
-                return redirect()->back()->with([
-                    'success' => 'Terima kasih...'
-                ]);
-            }
         }
+
+        $kalimat = $request->name . ' mengucapkan '. $request->text;
+        LogActivity::addToLog($kalimat, 'Mengucapkan via undangan');
+
+        return redirect()->back()->with([
+            'success' => 'Terima kasih...'
+        ]);
+            
     }
 
     public function landingpages()
     {
         return view('guest.landingpages');
+    }
+
+    public function termofuse()
+    {
+        return view('termconditions');
+    }
+
+    public function privacypolicy()
+    {
+        return view('privacypolicy');
     }
 }

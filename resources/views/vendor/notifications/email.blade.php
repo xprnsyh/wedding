@@ -6,11 +6,12 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Hello!')
+    Hello {{$user->name}} !
 @endif
 @endif
 
 {{-- Intro Lines --}}
+You’re almost ready to start enjoying Hoofey,
 @foreach ($introLines as $line)
 {{ $line }}
 
