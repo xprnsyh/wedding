@@ -1,0 +1,242 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'PT Sans', sans-serif;
+    background: url('../img/bg.jpg')repeat;
+    line-height: 1.7em;
+    font-size: 16px;
+    color: color('green');
+    @media screen and(max-width: $breakpoint--sm){
+        font-size: 14px;
+    }
+    &.boxed{
+        header, section, footer{
+            width: 1200px;
+            max-width: 100%;
+            margin: 0 auto;
+            @include box-shadow(5px 0 100px -5px transparentize(color('dusk'),.6));
+            .container{
+                width: 90%;
+            }
+        }
+        section{
+            background: url('../img/bg.jpg')repeat;
+        }
+    }
+}
+header{
+    padding: 50px 0 100px;
+    .header--photo{
+        width: 100%;
+        height: 600px;
+        padding: 15px;
+        border: 2px solid transparentize($color: color('gold'), $amount: .6);
+        @media screen and(max-width: $breakpoint--md){
+            height: 400px;
+        }
+        @media screen and(max-width: $breakpoint--sm){
+            padding: 10px;
+            height: 250px;
+        }
+        img{
+            width: 100%;
+            height: 565px;
+            @extend .fit-center;
+            @media screen and(max-width: $breakpoint--md){
+                height: 365px;
+            }
+            @media screen and(max-width: $breakpoint--sm){
+                height: 225px;
+            }
+        }
+    }
+}
+section{
+    padding: 80px 0;
+}
+.container{
+    width: 1100px;
+    @media screen and(max-width: $breakpoint--lg){ 
+        max-width: 95%!important;
+    }
+}
+
+#top-nav{
+    background-color: color('white');
+    padding: 20px 0;
+    position: fixed;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    @include box-shadow(0 15px 50px transparentize(color('black'),.97));
+    @include transition(top 0.3s);
+    .share{
+        position: relative;
+        padding: 5px 15px;
+        display: inline-block;
+        font-size: 12px;
+        border: 1px solid transparentize(color('dusk'),.5);
+        cursor: pointer;
+        .separator{
+            width: 0;
+            display: inline-block;
+            @include transition(width .5s ease);
+            &.toggled{
+                width: 60px;
+                @include transition(width .5s ease);
+            }
+        }
+        .share-social{
+            display: none;
+            position: absolute;
+            top: 3px;
+            right: 15px;
+            a{
+                opacity: .6;
+                @extend .fade;
+                &:hover{
+                    opacity: 1;
+                    text-decoration: none;
+                }
+                img{
+                    margin-left: 3px;
+                    height: 20px!important;
+                }
+            }
+        }
+    }
+}
+
+#invite{
+    padding-bottom: 0;
+    color: color('white');
+    background: color('gold') url('../img/invite-bg.jpg')no-repeat;
+    background-size: cover;
+    .invite--title{
+        text-align: center;
+        display: inline-block;
+        margin: 0 auto;
+        position: relative;
+        &:before, &:after{
+            content: '';
+            width: 171px;
+            height: 25px;
+            background: url('../img/ornament-start.png');
+            position: absolute;
+            top: 60px;
+            @media screen and(max-width: $breakpoint--md){
+                display: none;
+            }
+        }
+        &:before{
+            left: -230px;
+        }
+        &:after{
+            right: -230px;
+            transform: rotate(180deg);
+        }
+    }
+    .date{
+        position: relative;
+        margin-top: -20px;
+        bottom: -80px;
+        padding: 60px 100px;
+        background-color: color('white');
+        color: color('dusk');
+        @include box-shadow(0 25px 60px transparentize(color('black'),.95));
+        @media screen and(max-width: $breakpoint--sm){
+            padding: 50px 50px 30px;
+        }
+        &:before, &:after{
+            content: '';
+            top: 30px;
+            background-color: color('gold');
+            @include circle(20px);
+            position: absolute;
+        }
+        &:before{
+            left: 30px;
+        }
+        &:after{
+            right: 30px;
+        }
+    }
+}
+
+#gallery{
+    padding-top: 130px;
+    .event--icon{
+        height: 50px;
+        @media screen and(max-width: $breakpoint--sm) {
+            height: 30px;
+        }
+    }
+    .gallery--separator{
+        width: 400px;
+        max-width: 90%;
+        margin: 80px auto;
+        @media screen and(max-width: $breakpoint--xs){
+            margin: 50px auto;
+        }
+    }
+    .story{
+        margin-bottom: 100px;
+        @media screen and(max-width: $breakpoint--md) {
+            margin-bottom: 50px;
+        }
+        &:last-child{
+            margin-bottom: 0;
+        }
+        .story--photo{
+            padding: 15px;
+            background-color: color('white');
+            @include box-shadow(0 25px 60px transparentize(color('black'),.9));
+            @media screen and(max-width: $breakpoint--md) {
+                padding: 10px;
+            }
+            @media screen and(max-width: $breakpoint--sm) {
+                margin-bottom: 30px;
+            }
+            img{
+                height: 280px;
+                width: 100%;
+                @extend .fit-center;
+            }
+        }
+        .story--text{
+            padding-left: 30px;
+            &.left{
+                padding-right: 30px;
+            }
+        }
+    }
+}
+
+#rsvp{
+    padding-bottom: 0;
+    color: color('white');
+    background: color('gold') url('../img/rsvp-bg.jpg')no-repeat;
+    background-size: cover;
+    .maps{
+        position: relative;
+        bottom: -80px;
+        height: 450px;
+        margin-top: -30px;
+        @include box-shadow(0 25px 60px transparentize(color('black'),.9));
+        @media screen and(max-width: $breakpoint--sm){
+            height: 350px;
+        }
+        @media screen and(max-width: $breakpoint--xs){
+            height: 300px;
+        }
+        iframe{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+footer{
+    padding: 120px 0 30px;
+}

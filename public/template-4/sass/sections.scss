@@ -1,0 +1,141 @@
+header{
+    padding: 150px 0 0px;
+    color: color('white');
+    background: color('yellow') url('../img/header-bg.jpg')no-repeat;
+    background-size: cover;
+    @media screen and(max-width: 480px){
+        padding-top: 100px;
+    }
+    h1{
+        font-size: 42px;
+        font-weight: 700;
+        text-shadow: 2px 2px 0 transparentize($color: #000000, $amount: .85);
+        @media screen and(max-width: 768px){
+            font-size: 30px;
+        }
+        @media screen and(max-width: 567px){
+            font-size: 25px;
+        }
+        @media screen and(max-width: 480px){
+            font-size: 20px;
+        }
+    }
+    p{
+        font-size: $base-font-size + 2;
+        font-weight: 400;
+        text-shadow: 1px 1px 0 transparentize($color: #000000, $amount: .9);
+        @media screen and(max-width: 480px){
+            font-size: $base-font-size;
+        }
+    }
+}
+
+.subscribe{
+    top: -30px;
+    padding: 60px 40px;
+    position: relative;
+    background-color: color('white');
+    @include border-radius(10px);
+    @include box-shadow(0 20px 40px transparentize(color('dusk'),.8));
+    @media screen and(max-width: 768px){
+        padding: 30px;
+    }
+    @media screen and(max-width: 567px){
+        top: -20px;
+    }
+}
+
+#description{
+    h1{
+        font-weight: 600;
+    }
+    a{
+        display: inline;
+    }
+    .btn--demo{
+        font-weight: 500;
+        padding: 10px 20px;
+        font-weight: 500!important;
+        color: color('white');
+        background-color: color('yellow');
+        @include border-radius(3px);
+        &:hover{
+            @include box-shadow(0 15px 30px transparentize(color('yellow'),.3));
+        }
+        img{
+            width: 12px;
+        }
+    }
+    .product--box{
+        @media screen and(max-width: 567px){
+            width: 180px;
+            margin-bottom: 30px;
+        }
+    }
+}
+
+#features{
+    @include box-shadow(inset 0 5px 70px -5px transparentize(color('dusk'),.7));
+    .label{
+        display: inline;
+        padding: 8px 15px;
+        color: color('white');
+        background-color: color('yellow');
+        font-weight: 500;
+        font-size: $base-font-size - 1;
+        @include border-radius(50px);
+    }
+    .feature{
+        margin-bottom: 50px;
+        .feature--icon{
+            font-size: 45px;
+            color: color('yellow');
+            @media screen and(max-width: 480px){
+                font-size: 30px;
+            }
+        }
+        .feature--title{
+            font-size: $base-font-size + 2;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+    }
+}
+
+.testimonial{
+    padding: 30px;
+    border: 2px solid color('yellow');
+    @include border-radius(5px);
+    @media screen and(max-width: 768px){
+        margin-bottom: 20px;
+    }
+    .testi--photo{
+        @include border-radius(5px);
+    }
+    .testi--name{
+        font-weight: 500;
+        margin-bottom: -3px;
+    }
+    span{
+        font-size: $base-font-size - 2;
+    }
+    .say{
+        margin-top: 20px;
+        font-size: $base-font-size - 1;
+    }
+}
+
+footer{
+    padding: 20px 0;
+    background-color: color('darkwhite');
+    font-size: $base-font-size - 1;
+    font-weight: 400;
+    .share{
+        img{
+            height: 12px;
+            &:hover{
+                opacity: .5;
+            }
+        }
+    }
+}

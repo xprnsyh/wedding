@@ -1,0 +1,221 @@
+/* Nanbar */
+.navbar{
+ background-color: #c34a9d !important;
+}
+
+.navbar-toggler{
+ padding: .25rem .75rem;
+ font-size: 1.25rem;
+ line-height: 1;
+ border-radius: .25rem;
+}
+
+.navbar a{
+ color: #fff;
+}
+
+.navbar-brand {
+ font-family: 'Roboto', sans-serif;
+ font-size: 25px;
+}
+
+.nav-link{
+ font-family: 'Roboto', sans-serif;
+ margin-right: 25px;
+}
+
+.page-title {
+ float: left;
+ width: 100%;
+ padding: 5px 1px;
+ margin-top: -15px;
+}
+.page-title h3 {
+ float: left;
+ line-height: 30px;
+}
+
+.navbar-nav .nav-link:hover{
+ color: #FFFF00 !important;
+}
+
+.button-color{
+  background-color: #c34a9d;
+  color: #fff;
+}
+
+/* Jumbutorn */
+.jumbotron{
+ background-image: url("../images/background-image.png");
+ background-size: cover;
+ height: 350px;
+}
+
+.jumbotron .display-4{
+ padding-left: 50px;
+ padding-top: 50px;
+ font-family: 'Roboto', sans-serif;
+ font-weight: 300;
+ font-size: 40px;
+ color: #6BA428;
+ text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.jumbotron .lead{
+ padding-left: 50px;
+ font-family: 'Roboto', sans-serif;
+ font-weight: 200;
+ font-size: 15px;
+ color: #6BA428;
+ text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.jumbotron a{
+ margin-left: 50px;
+}
+
+/* Info Panel*/
+.info-panel{
+ padding: 20px;
+}
+
+
+.info-panel img{
+ width: 50px;
+ margin-right: 30px;
+ margin-bottom: 10px;
+}
+
+.info-panel h2{
+ font-family: 'Roboto', sans-serif;
+}
+
+.info-panel h2{
+ margin: auto;
+ margin-bottom: 45px;
+}
+
+
+/* Info Panel Abu Abu*/
+.info-panel-abuabu{
+ background-color: #F5F5F5;
+ margin-top: 50px;
+ padding-top: 30px;
+ padding-bottom: 20px;
+}
+
+.info-panel-abuabu h2{
+ margin-bottom: 30px;
+}
+
+.info-panel-abuabu img{
+ width: 350px;
+}
+
+.post-berita{
+ font-size: 11px;
+ margin-top: 10px;
+ margin-bottom: 20px;
+}
+
+.info-panel .perangkat{
+  height: 120px;
+  width: 120px;
+}
+
+.info-panel .card{
+ margin-bottom: 20px;
+}
+
+
+.survey .card-body{
+ background-color: #6BA428;
+ color: #fff;
+ border-radius: 10px;
+ margin-bottom: 10px;
+}
+
+.pengaduan .card-body{
+ background-color: #fff;
+ border-radius: 10px;
+ margin-bottom: 10px;
+}
+
+.google-play{
+ margin-top: 40px;
+  width: 200px !important;
+
+}
+
+.footer{
+ padding-top: 30px;
+}
+
+
+/* Utility */
+.tombol{
+ text-transform: uppercase;
+ border-radius: 50px;
+ font-family: 'Roboto', sans-serif;
+ font-size: 15px;
+}
+
+
+/*  DESKTOP VERSION */
+@media (min-width: 992px) {
+
+ .navbar a{
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+ }
+
+ .nav-link:hover::after{
+  content: '';
+  display: block;
+  border-bottom: 3px solid #FFFF00;
+  width: 50%;
+  margin: auto;
+  padding-bottom: 5px;
+  margin-bottom: -8px;
+ }
+
+ /* Jumbutorn */
+ .jumbotron{
+  background-image: url("../images/background-image.png");
+  background-size: cover;
+  height: 510px;
+ }
+
+ .tombol{
+  text-transform: uppercase;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  margin :auto;
+ }
+
+ .jumbotron .display-4{
+  padding-left: 50px;
+  padding-top: 80px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 60px;
+  color: #6BA428;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+ }
+
+ .jumbotron .lead{
+  padding-left: 50px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  font-size: 25px;
+  color: #6BA428;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+ }
+
+ .info-panel h2{
+  font-family: 'Roboto', sans-serif;
+ }
+
+
+}

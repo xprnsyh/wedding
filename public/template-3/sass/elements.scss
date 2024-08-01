@@ -1,0 +1,70 @@
+body{
+    background-color: color('white');
+    color: color('dusk');
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: $base-font-size;
+    line-height: 1.7em;
+    @media screen and(max-width: 480px){
+        font-size: $base-font-size - 2;
+    }
+    &.boxed{
+        background-color: darken(color('medwhite'),7);
+        header, section, nav, footer{
+            width: 1200px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+    }
+}
+
+a{
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+img{
+    max-width: 100%
+}
+
+.navbar{
+    background: transparent;
+    padding: 15px 0;
+    color: color('white');
+    @include transition(0.3s all ease);
+    &.nav--yellow{
+        background-color: color('yellow');
+        @include transition(0.3s all ease);
+    }
+    .btn--buy{
+        padding: 5px 15px;
+        color: color('white');
+        background-color: transparent;
+        font-size: $base-font-size - 2;
+        border: 2px solid color('white');
+        @include border-radius(50px);
+        &:hover{
+            color: color('yellow');
+            background-color: color('white');
+        }
+    }
+}
+
+section{
+    padding: 70px 0;
+    @media screen and(max-width: 480px){
+        padding: 40px 0;
+    }
+    &.sm{
+        padding: 50px 0;
+    }
+    &.no-padding{
+        padding: 0;
+    }
+}
+
+.container{
+    width: 1100px;
+    max-width: 97%;
+}
